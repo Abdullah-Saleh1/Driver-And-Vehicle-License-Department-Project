@@ -29,6 +29,6 @@ Below are some preview screenshots of the application interfaces:
 
 ### 👥 Manage People Screen
 
-<img width="716" height="340" alt="image" src="https://github.com/user-attachments/assets/6c6b2c96-00fa-4e57-adbf-d374a01edb07" />
+<img width="959" height="539" alt="image" src="https://github.com/user-attachments/assets/6c6b2c96-00fa-4e57-adbf-d374a01edb07" />
 
 
