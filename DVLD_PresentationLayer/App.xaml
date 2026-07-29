@@ -1,0 +1,916 @@
+﻿<Application x:Class="DVLD_PresentationLayer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <!--     StartupUri="Login/winLogin.xaml"-->
+
+    <Application.Resources>
+        <FontFamily x:Key="FontAwesome">/Fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
+
+        <!--<Color x:Key="ColorPrimaryDark">#0F172A</Color>
+        <Color x:Key="ColorSecondaryDark">#1E293B</Color>
+        <Color x:Key="ColorComponents">#334155</Color>
+        <Color x:Key="ColorHover">#222222</Color>
+        <Color x:Key="ColorTransparentHover">#00222222</Color>
+        <Color x:Key="ColorAccent">#38BDF8</Color>
+        <Color x:Key="ColorTextMain">#F8FAFC</Color>
+        <Color x:Key="ColorTextMuted">#94A3B8</Color>
+
+        <Color x:Key="ColorButtonNormal">#000</Color>
+        <Color x:Key="ColorButtonHover">#333</Color>
+        <Color x:Key="ColorButtonPressed">#111</Color>
+        <Color x:Key="ColorButtonDisabled">#1E1E2F</Color>
+
+        <SolidColorBrush x:Key="BrushPrimaryDark" Color="{StaticResource ColorPrimaryDark}"/>
+        <SolidColorBrush x:Key="BrushSecondaryDark" Color="{StaticResource ColorSecondaryDark}"/>
+        <SolidColorBrush x:Key="BrushComponents" Color="{StaticResource ColorComponents}"/>
+        <SolidColorBrush x:Key="BrushAccent" Color="{StaticResource ColorAccent}"/>
+        <SolidColorBrush x:Key="BrushTextMain" Color="{StaticResource ColorTextMain}"/>
+        <SolidColorBrush x:Key="BrushTextMuted" Color="{StaticResource ColorTextMuted}"/>
+        <SolidColorBrush x:Key="BrushInitialTransparent" Color="{StaticResource ColorTransparentHover}"/>
+
+        <SolidColorBrush x:Key="BrushButtonNormal" Color="{StaticResource ColorButtonNormal}"/>
+        <SolidColorBrush x:Key="BrushButtonDisabled" Color="{StaticResource ColorButtonDisabled}"/>-->
+
+
+        <!-- ========================= -->
+        <!-- BACKGROUND COLORS -->
+        <!-- ========================= -->
+
+        <!-- خلفية البرنامج -->
+        <Color x:Key="ColorPrimary">#F8FAFC</Color>
+
+        <!-- الكروت والنافبار -->
+        <Color x:Key="ColorSecondary">#FFFFFF</Color>
+
+        <!-- ========================= -->
+        <!-- BORDERS & COMPONENTS -->
+        <!-- ========================= -->
+
+        <Color x:Key="ColorComponents">#E5E7EB</Color>
+
+        <!-- ========================= -->
+        <!-- HOVER EFFECTS -->
+        <!-- ========================= -->
+
+        <Color x:Key="ColorHover">#E8F5E9</Color>
+
+        <Color x:Key="ColorTransparentHover">White</Color>
+
+        <!-- ========================= -->
+        <!-- ACCENT COLORS -->
+        <!-- ========================= -->
+
+        <!-- اللون الأساسي (الأخضر الملكي) -->
+        <Color x:Key="ColorAccent">#006C35</Color>
+
+        <Color x:Key="ColorAccentLight">#10B981</Color>
+
+        <!-- ========================= -->
+        <!-- TEXT COLORS -->
+        <!-- ========================= -->
+
+        <Color x:Key="ColorTextMain">#1F2937</Color>
+
+        <Color x:Key="ColorTextMuted">#6B7280</Color>
+
+        <!-- ========================= -->
+        <!-- BUTTON COLORS -->
+        <!-- ========================= -->
+
+        <Color x:Key="ColorButtonNormal">#006C35</Color>
+
+        <Color x:Key="ColorButtonHover">#005429</Color>
+
+        <Color x:Key="ColorButtonPressed">#003D1E</Color>
+
+        <Color x:Key="ColorButtonDisabled">#D1D5DB</Color>
+
+        <!-- ========================= -->
+        <!-- STATUS COLORS -->
+        <!-- ========================= -->
+
+        <Color x:Key="ColorSuccess">#16A34A</Color>
+        <Color x:Key="ColorWarning">#F59E0B</Color>
+        <Color x:Key="ColorDanger">#DC2626</Color>
+
+        <!-- ========================= -->
+        <!-- BACKGROUND COLORS -->
+        <!-- ========================= -->
+
+        <!-- لون خلفية البرنامج بالكامل --><!--
+        <Color x:Key="ColorPrimary">#EEF9FB</Color>
+
+        --><!-- لون الـ Navbar والكروت والـ Panels --><!--
+        <Color x:Key="ColorSecondary">#FFFFFF</Color>
+
+
+
+        --><!-- ========================= -->
+        <!-- BORDERS & COMPONENTS -->
+        <!-- ========================= -->
+
+        <!-- لون الحدود والفواصل بين العناصر --><!--
+        <Color x:Key="ColorComponents">#E2E8F0</Color>
+
+
+
+        --><!-- ========================= -->
+        <!-- HOVER EFFECTS -->
+        <!-- ========================= -->
+
+        <!-- لون بيظهر لما الماوس يقف فوق زرار أو عنصر --><!--
+        <Color x:Key="ColorHover">#EEF3FE</Color>
+
+        --><!-- نفس فكرة الـ Hover لكن شفاف (للـ Animations والـ Overlays) --><!--
+        <Color x:Key="ColorTransparentHover">White</Color>
+        
+        
+
+
+
+        --><!-- ========================= -->
+        <!-- ACCENT COLORS -->
+        <!-- ========================= -->
+
+        <!-- اللون الأساسي للمشروع (اللون اللي بيدي شخصية للتطبيق) --><!--
+        <Color x:Key="ColorAccent">#2563EB</Color>
+
+        --><!-- نسخة أفتح من الـ Accent --><!--
+        <Color x:Key="ColorAccentLight">#60A5FA</Color>
+
+
+
+        --><!-- ========================= -->
+        <!-- TEXT COLORS -->
+        <!-- ========================= -->
+
+        <!-- لون النصوص الرئيسية --><!--
+        <Color x:Key="ColorTextMain">#0f172a</Color>
+
+        --><!-- لون النصوص الثانوية والوصف --><!--
+        <Color x:Key="ColorTextMuted">#64748B</Color>
+
+
+
+        --><!-- ========================= -->
+        <!-- BUTTON COLORS -->
+        <!-- ========================= -->
+
+        <!-- لون الزرار الطبيعي --><!--
+        <Color x:Key="ColorButtonNormal">#2563EB</Color>
+
+        --><!-- لون الزرار لما الماوس يقف عليه --><!--
+        <Color x:Key="ColorButtonHover">#1D4ED8</Color>
+
+        --><!-- لون الزرار أثناء الضغط عليه --><!--
+        <Color x:Key="ColorButtonPressed">#1E40AF</Color>
+
+        --><!-- لون الزرار لو Disabled --><!--
+        <Color x:Key="ColorButtonDisabled">#CBD5E1</Color>
+        
+
+        --><!-- ========================= -->
+        <!-- STATUS COLORS (لحالة الرخصة / المخالفات) -->
+        <!-- ========================= -->
+
+        <!-- رخصة سارية / تمت الموافقة --><!--
+        <Color x:Key="ColorSuccess">#16A34A</Color>
+
+        --><!-- قريبة الانتهاء / تحتاج تنبيه --><!--
+        <Color x:Key="ColorWarning">#F59E0B</Color>
+
+        --><!-- منتهية / موقوفة / مخالفة --><!--
+        <Color x:Key="ColorDanger">#DC2626</Color>-->
+
+
+
+        <!-- ========================= -->
+        <!-- BRUSHES -->
+        <!-- ========================= -->
+
+        <SolidColorBrush x:Key="BrushPrimary" Color="{StaticResource ColorPrimary}"/>
+
+        <SolidColorBrush x:Key="BrushSecondary" Color="{StaticResource ColorSecondary}"/>
+
+        <SolidColorBrush x:Key="BrushComponents" Color="{StaticResource ColorComponents}"/>
+
+        <SolidColorBrush x:Key="BrushHover" Color="{StaticResource ColorHover}"/>
+
+        <SolidColorBrush x:Key="BrushAccent" Color="{StaticResource ColorAccent}"/>
+
+        <SolidColorBrush x:Key="BrushAccentLight" Color="{StaticResource ColorAccentLight}"/>
+
+        <SolidColorBrush x:Key="BrushTextMain" Color="{StaticResource ColorTextMain}"/>
+
+        <SolidColorBrush x:Key="BrushTextMuted" Color="{StaticResource ColorTextMuted}"/>
+
+        <SolidColorBrush x:Key="BrushInitialTransparent" Color="{StaticResource ColorTransparentHover}"/>
+
+        <SolidColorBrush x:Key="BrushButtonNormal" Color="{StaticResource ColorButtonNormal}"/>
+
+        <SolidColorBrush x:Key="BrushButtonDisabled" Color="{StaticResource ColorButtonDisabled}"/>
+
+        <SolidColorBrush x:Key="BrushSuccess" Color="{StaticResource ColorSuccess}"/>
+        <SolidColorBrush x:Key="BrushWarning" Color="{StaticResource ColorWarning}"/>
+        <SolidColorBrush x:Key="BrushDanger" Color="{StaticResource ColorDanger}"/>
+
+
+
+
+        <Style x:Key="ModernTopButtonStyle" TargetType="Button">
+
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="Transparent"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource ColorTextMain}"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Padding" Value="18,0"/>
+            <Setter Property="Margin" Value="2,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="Button">
+
+                        <Grid>
+
+                            <Border x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="10"
+                            Padding="{TemplateBinding Padding}"
+                            RenderTransformOrigin="0.5,0.5">
+
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="ButtonScale" ScaleX="1" ScaleY="1"/>
+                                </Border.RenderTransform>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="3"/>
+                                    </Grid.RowDefinitions>
+
+                                    <ContentPresenter Grid.Row="0"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+
+                                    <!-- Accent underline indicator -->
+                                    <Border x:Name="Indicator"
+                                    Grid.Row="1"
+                                    Height="2.5"
+                                    Width="0"
+                                    HorizontalAlignment="Center"
+                                    CornerRadius="2"
+                                    Background="{StaticResource BrushAccent}"
+                                    Margin="0,4,0,0"/>
+
+                                </Grid>
+
+                            </Border>
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+
+                            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+
+                                        <ColorAnimation
+                                    Storyboard.TargetName="ButtonBorder"
+                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                    To="{StaticResource ColorHover}"
+                                    Duration="0:0:0.2">
+                                            <ColorAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </ColorAnimation.EasingFunction>
+                                        </ColorAnimation>
+
+                                        <ColorAnimation
+                                    Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                    To="{StaticResource ColorAccent}"
+                                    Duration="0:0:0.2">
+                                            <ColorAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </ColorAnimation.EasingFunction>
+                                        </ColorAnimation>
+
+                                        <DoubleAnimation
+                                    Storyboard.TargetName="ButtonScale"
+                                    Storyboard.TargetProperty="ScaleX"
+                                    To="1.03"
+                                    Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+
+                                        <DoubleAnimation
+                                    Storyboard.TargetName="ButtonScale"
+                                    Storyboard.TargetProperty="ScaleY"
+                                    To="1.03"
+                                    Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+
+                                        <DoubleAnimation
+                                    Storyboard.TargetName="Indicator"
+                                    Storyboard.TargetProperty="Width"
+                                    To="24"
+                                    Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+
+                                        <ColorAnimation
+                                    Storyboard.TargetName="ButtonBorder"
+                                    Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                    To="Transparent"
+                                    Duration="0:0:0.2"/>
+
+                                        <ColorAnimation
+                                    Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)"
+                                    To="{StaticResource ColorTextMain}"
+                                    Duration="0:0:0.2"/>
+
+                                        <DoubleAnimation
+                                    Storyboard.TargetName="ButtonScale"
+                                    Storyboard.TargetProperty="ScaleX"
+                                    To="1"
+                                    Duration="0:0:0.2"/>
+
+                                        <DoubleAnimation
+                                    Storyboard.TargetName="ButtonScale"
+                                    Storyboard.TargetProperty="ScaleY"
+                                    To="1"
+                                    Duration="0:0:0.2"/>
+
+                                        <DoubleAnimation
+                                    Storyboard.TargetName="Indicator"
+                                    Storyboard.TargetProperty="Width"
+                                    To="0"
+                                    Duration="0:0:0.2"/>
+
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+
+        <Style TargetType="Label" x:Key="MainLbl">
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="FontSize" Value="45"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="Btn">
+            <Setter Property="Background" Value="{StaticResource BrushButtonNormal}"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushInitialTransparent}"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="10" 
+                                BorderBrush="Transparent" 
+                                BorderThickness="0"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="border"
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            To="{StaticResource ColorButtonHover}" 
+                                                            Duration="0:0:0.15"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="border"
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            To="{StaticResource ColorButtonNormal}" 
+                                                            Duration="0:0:0.15"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource ColorButtonPressed}"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource BrushButtonDisabled}"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushTextMuted}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="ModernGridHeader">
+            <Setter Property="Background" Value="{StaticResource BrushSecondary}"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushComponents}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+
+        <Style TargetType="{x:Type DataGrid}" x:Key="ModernDataGrid">
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="Background" Value="{StaticResource BrushPrimary}"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushComponents}"/>
+            <Setter Property="RowHeight" Value="40"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BrushComponents}"/>
+            <Setter Property="RowBackground" Value="{StaticResource BrushPrimary}"/>
+            <Setter Property="AlternatingRowBackground" Value="{StaticResource BrushSecondary}"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+            <Setter Property="ColumnHeaderStyle" Value="{StaticResource ModernGridHeader}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="RowHeaderWidth" Value="0"/>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="Padding" Value="15,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource BrushComponents}"/>
+                    <Setter Property="Foreground" Value="{StaticResource BrushAccent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        
+        <!--Context Menu:-->
+        <Style TargetType="{x:Type Separator}" x:Key="ModernMenuSeparator">
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Margin" Value="4,4,4,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Separator}">
+                        <Border Background="{StaticResource BrushComponents}" Height="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type MenuItem}" x:Key="ModernMenuItem">
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                        <Border x:Name="MenuGridBorder" 
+                        Background="Transparent" 
+                        CornerRadius="6" 
+                        Margin="4,2"
+                        SnapsToDevicePixels="True">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="IconGroup"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="ArrowGroup"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ContentPresenter x:Name="HeaderHost"
+                                          Grid.Column="1"
+                                          ContentSource="Header"
+                                          VerticalAlignment="Center"
+                                          Margin="{TemplateBinding Padding}"/>
+
+                                <Path x:Name="RightArrow"
+                              Grid.Column="2"
+                              Data="M 0,0 L 4,4 L 0,8 Z"
+                              Fill="{StaticResource BrushTextMuted}"
+                              Margin="10,0,15,0"
+                              VerticalAlignment="Center"
+                              Visibility="Collapsed"/>
+
+                                <Popup x:Name="SubMenuPopup"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                               Placement="Right"
+                               PopupAnimation="Slide">
+
+                                    <Border Background="{StaticResource BrushSecondary}"
+                                    BorderBrush="{StaticResource BrushComponents}"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Padding="2">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.05" Color="Black"/>
+                                        </Border.Effect>
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="MenuGridBorder" Property="Background" Value="{StaticResource BrushHover}"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushAccent}"/>
+                            </Trigger>
+                            <Trigger Property="HasItems" Value="True">
+                                <Setter TargetName="RightArrow" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{StaticResource BrushTextMuted}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type ContextMenu}" x:Key="ModernContextMenu">
+            <Setter Property="Background" Value="{StaticResource BrushSecondary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushComponents}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="Grid.IsSharedSizeScope" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ContextMenu}">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10"
+                        SnapsToDevicePixels="True">
+  
+                            <ScrollViewer
+                                CanContentScroll="False" 
+                                Margin="0,2" 
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <!-- Modern Search TextBox Style (بدون زرار المسح) -->
+        <Style x:Key="ModernSearchTextBox" TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="12,0,12,0"/>
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="{StaticResource BrushSecondary}"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushComponents}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <!-- خلفية وحدود الـ TextBox -->
+                            <Border x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            SnapsToDevicePixels="True" 
+                            CornerRadius="8">
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            </Border>
+
+                            <!-- النص الإرشادي (Placeholder) -->
+                            <TextBlock x:Name="placeholder" 
+                               Text="Search..." 
+                               Foreground="{StaticResource BrushTextMuted}" 
+                               IsHitTestVisible="False" 
+                               VerticalAlignment="Center" 
+                               Margin="12,0,0,0" 
+                               Visibility="Collapsed"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <!-- إظهار/إخفاء الـ Placeholder تلقائياً -->
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="placeholder" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+
+                            <!-- Focus Effect (الأخضر الزيتي) -->
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BrushAccent}"/>
+                            </Trigger>
+
+                            <!-- Hover Effect -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BrushAccentLight}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <Style TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource ModernContextMenu}"/>
+        <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource ModernMenuItem}"/>
+        <Style TargetType="{x:Type Separator}" BasedOn="{StaticResource ModernMenuSeparator}"/>
+
+
+        <!-- ========================= -->
+        <!-- MODERN COMBOBOX RESOURCE  -->
+        <!-- ========================= -->
+
+        <!-- ToggleButton Template (السهم والحدود) -->
+        <ControlTemplate x:Key="ModernComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Border x:Name="templateRoot" 
+            Background="{TemplateBinding Background}" 
+            BorderBrush="{TemplateBinding BorderBrush}" 
+            BorderThickness="{TemplateBinding BorderThickness}" 
+            CornerRadius="8" 
+            SnapsToDevicePixels="true">
+                <Grid x:Name="innerGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="35"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- سهم القائمة الموديرن -->
+                    <Path x:Name="arrow" 
+                  Grid.Column="1" 
+                  Data="M 0,0 L 4,4 L 8,0" 
+                  HorizontalAlignment="Center" 
+                  VerticalAlignment="Center" 
+                  Stroke="{StaticResource BrushTextMuted}" 
+                  StrokeThickness="2" 
+                  SnapsToDevicePixels="True"/>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter TargetName="templateRoot" Property="BorderBrush" Value="{StaticResource BrushAccent}"/>
+                    <Setter TargetName="arrow" Property="Stroke" Value="{StaticResource BrushAccent}"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="true">
+                    <Setter TargetName="arrow" Property="RenderTransform">
+                        <Setter.Value>
+                            <RotateTransform Angle="180" CenterX="4" CenterY="2"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <!-- الـ Style الأساسي للـ ComboBox -->
+        <Style x:Key="ModernComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="Background" Value="{StaticResource BrushSecondary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushComponents}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="12,8,35,8"/>
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid x:Name="mainGrid" SnapsToDevicePixels="true">
+
+                            <!-- Popup القائمة المنسدلة -->
+                            <Popup x:Name="PART_Popup" 
+                           AllowsTransparency="true" 
+                           IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                           Margin="1" 
+                           Placement="Bottom" 
+                           PopupAnimation="Slide">
+
+                                <Border x:Name="dropDownBorder" 
+                                Background="{StaticResource BrushSecondary}" 
+                                BorderBrush="{StaticResource BrushComponents}" 
+                                BorderThickness="1" 
+                                CornerRadius="10" 
+                                Margin="0,5,0,0" 
+                                MinWidth="{Binding ActualWidth, ElementName=mainGrid}" 
+                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
+
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="15" ShadowDepth="4" Opacity="0.08" Color="Black" Direction="270"/>
+                                    </Border.Effect>
+
+                                    <ScrollViewer x:Name="DropDownScrollViewer">
+                                        <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                            <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                                <Rectangle x:Name="opaqueRect" 
+                                                   Fill="{Binding Background, ElementName=dropDownBorder}" 
+                                                   Height="{Binding ActualHeight, ElementName=dropDownBorder}" 
+                                                   Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                                            </Canvas>
+                                            <ItemsPresenter x:Name="ItemsPresenter" 
+                                                    KeyboardNavigation.DirectionalNavigation="Contained" 
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+
+                            <ToggleButton x:Name="toggleButton" 
+                                  Background="{TemplateBinding Background}" 
+                                  BorderBrush="{TemplateBinding BorderBrush}" 
+                                  BorderThickness="{TemplateBinding BorderThickness}" 
+                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                  Template="{StaticResource ModernComboBoxToggleButton}"/>
+
+                            <ContentPresenter x:Name="contentTemplate" 
+                                      Content="{TemplateBinding SelectionBoxItem}" 
+                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
+                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
+                                      ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                      IsHitTestVisible="false" 
+                                      Margin="{TemplateBinding Padding}" 
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style عناصر القائمة (ComboBoxItem) -->
+        <Style TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="Padding" Value="12,9"/>
+            <Setter Property="Margin" Value="4,2"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border x:Name="Bd" 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="6" 
+                        Padding="{TemplateBinding Padding}" 
+                        SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Hover Effect: استخدام لون BrushHover الأخضر الفاتح الناعم -->
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource BrushHover}"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushAccent}"/>
+                            </Trigger>
+                            <!-- Selection Effect: اختيار العنصر -->
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource BrushHover}"/>
+                                <Setter Property="Foreground" Value="{StaticResource BrushAccent}"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <!-- نقشة الخطوط المتقاطعة (Circuit Pattern) بتتكرر تلقائيًا -->
+        <DrawingBrush x:Key="CircuitPatternBrush"
+           TileMode="Tile"
+           Viewport="0,0,140,140"
+           ViewportUnits="Absolute"
+           Stretch="None"
+           Opacity="0.06">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+
+                    <!-- الخطوط -->
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{StaticResource BrushAccent}" Thickness="1.4"/>
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry>
+                                <PathFigure StartPoint="0,25" IsClosed="False">
+                                    <LineSegment Point="45,25"/>
+                                    <LineSegment Point="65,45"/>
+                                    <LineSegment Point="65,90"/>
+                                    <LineSegment Point="110,90"/>
+                                    <LineSegment Point="110,140"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="25,0" IsClosed="False">
+                                    <LineSegment Point="25,55"/>
+                                    <LineSegment Point="0,80"/>
+                                </PathFigure>
+                                <PathFigure StartPoint="100,0" IsClosed="False">
+                                    <LineSegment Point="100,35"/>
+                                    <LineSegment Point="140,70"/>
+                                </PathFigure>
+                            </PathGeometry>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+
+                    <!-- نقاط الوصل (العقد) -->
+                    <GeometryDrawing Brush="{StaticResource BrushAccent}">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <EllipseGeometry Center="45,25" RadiusX="2.6" RadiusY="2.6"/>
+                                <EllipseGeometry Center="65,90" RadiusX="2.6" RadiusY="2.6"/>
+                                <EllipseGeometry Center="25,55" RadiusX="2.6" RadiusY="2.6"/>
+                                <EllipseGeometry Center="100,35" RadiusX="2.6" RadiusY="2.6"/>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+
+    </Application.Resources>
+</Application>

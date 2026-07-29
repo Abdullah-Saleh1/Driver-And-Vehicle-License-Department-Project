@@ -1,0 +1,90 @@
+﻿<Window x:Class="DVLD_PresentationLayer.People.winManagePeople"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DVLD_PresentationLayer.People"
+        xmlns:fa="http://schemas.fontawesome.com/icons/fonts"
+        mc:Ignorable="d"
+        ResizeMode="CanResize"
+        
+        Title="ManagePeople" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="{StaticResource BrushTextMain}">Manage People</Label>
+
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal">
+                
+                <ComboBox Style="{StaticResource ModernComboBoxStyle}" Margin="5, 0, 0, 5" x:Name="cbPeopleFilter" SelectionChanged="cbPeopleFilter_SelectionChanged">
+                    <ComboBoxItem Content="All"/>
+                    <ComboBoxItem Content="Person ID"/>
+                    <ComboBoxItem Content="National No"/>
+                    <ComboBoxItem Content="First Name"/>
+                    <ComboBoxItem Content="Second Name"/>
+                    <ComboBoxItem Content="Third Name"/>
+                    <ComboBoxItem Content="Last Name"/>
+                    <ComboBoxItem Content="Nationality"/>
+                    <ComboBoxItem Content="Gender"/>
+                    <ComboBoxItem Content="Phone"/>
+                    <ComboBoxItem Content="Email"/>
+                </ComboBox>
+                <TextBox Style="{StaticResource ModernSearchTextBox}" Width="150" Margin="5, 0, 0, 5" x:Name="txtSearch" Visibility="Hidden" TextChanged="txtSearch_TextChanged"/>
+
+                
+            </StackPanel>
+            
+            <Button x:Name="btnAddPerson" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{StaticResource Btn}" Click="btnAddPerson_Click">
+                <fa:FontAwesome Icon="Solid_Plus"
+                    FontSize="15"
+                    Foreground="White"
+                    />
+            </Button>
+            
+        </Grid>
+
+        <DataGrid Grid.Row="1" ColumnWidth="*" x:Name="dgPeople" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True">
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Show Details" Click="ShowDetails"/>
+                    <Separator/>
+                    <MenuItem Header="Add New Person" Click="btnAddPerson_Click"/>
+                    <MenuItem Header="Edit" Click="DeletePerson"/>
+                    <MenuItem Header="Delete" Click="DeletePerson"/>
+                    <Separator/>
+                    <MenuItem Header="Send Email" Click="NotReady"/>
+                    <MenuItem Header="Phone Call" Click="NotReady"/>
+
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+
+            <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" >Records:</Label>
+            <Label VerticalAlignment="Center" HorizontalAlignment="Right" x:Name="lblRecordsCount" FontSize="14">5</Label>
+            <Button x:Name="btnClose" Grid.Column="2" Content="Close" Width="70" Click="btnClose_Click" Style="{StaticResource Btn}" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Center"/>
+        </Grid>
+
+    </Grid>
+
+</Window>

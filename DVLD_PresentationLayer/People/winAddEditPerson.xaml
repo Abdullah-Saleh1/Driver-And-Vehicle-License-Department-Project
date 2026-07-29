@@ -1,0 +1,265 @@
+﻿<Window x:Class="DVLD_PresentationLayer.People.winAddEditPerson"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DVLD_PresentationLayer.People"
+        mc:Ignorable="d"
+        Title="Add / Edit Person" Height="500" Width="800" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="10"/>
+            
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushComponents}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="FontSize" Value="14"/>
+
+            <Style.Triggers>
+
+                <Trigger Property="IsKeyboardFocused"
+                 Value="True">
+
+                    <Setter Property="BorderBrush"
+                    Value="{StaticResource BrushAccent}"/>
+
+                    <Setter Property="BorderThickness"
+                    Value="2"/>
+
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ModernDatePicker"
+       TargetType="DatePicker">
+
+            <Setter Property="Height"
+            Value="38"/>
+
+            <Setter Property="BorderBrush"
+            Value="{StaticResource BrushComponents}"/>
+
+            <Setter Property="FontSize"
+            Value="14"/>
+        </Style>
+
+    </Window.Resources>
+    
+    <Grid Margin="10">
+        
+        <!--
+        1. National Number when out check if it's already in the system and show error ✅
+        2. the minimum age is 18 years old so set MaxValue of the date picker to be 18 years ✅
+        // [by subtracting 18 years from the current date and set it as the MaxDate of the date picker] ✅
+        3. Change the default image to adopt the radio button selection of the gender ✅
+        4. Validate the email Address to be in the correct format ✅
+        5. Load the Countries from the database and set the default country Saudi Arabia ✅
+        
+        6. when set the image copy the image to D:\C#\Course 19 DVLD\DVLD\DVLD_PresentationLayer\Images\PeopleImages
+        and give it GUID name and save the new path in the database 
+        7. when save the person Invoke the delegate to update the list of people in winManagePeople.xaml
+        
+        8. when edit the image of a Person delete the old image from the specified path and save the new image
+        
+        to copy files use
+        using System.IO; 
+        File.Copy(sourceFilePath, destinationFilePath, true); // true to overwrite if exists
+        
+        
+        // implement Edit Person functionality
+        
+        // implement Delete Person functionality and it's not deleted show error message to the user
+        -->
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
+
+        <Label x:Name="lblAddEditPerson" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="{StaticResource BrushTextMain}">Add New Person</Label>
+
+        <!-- Write Code Here -->
+        <Grid Grid.Row="1" Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Name -->
+            <TextBlock Grid.Row="0"
+               Grid.Column="0"
+               Text="Name:"
+               FontWeight="Bold"
+               VerticalAlignment="Center"/>
+
+            <TextBox Grid.Row="0" x:Name="txtFirstName"
+             Grid.Column="1"
+             Margin="5"
+             Height="30"
+             />
+
+            <TextBox Grid.Row="0" x:Name="txtSecondName"
+             Grid.Column="2"
+             Margin="5"
+             Height="30"
+             />
+
+            <TextBox Grid.Row="0" x:Name="txtThirdName"
+             Grid.Column="3"
+             Margin="5"
+             Height="30"
+             />
+
+            <TextBox Grid.Row="0" x:Name="txtLastName"
+             Grid.Column="4"
+             Margin="5"
+             Height="30"
+             />
+
+            <!-- National No -->
+            <TextBlock Grid.Row="1"
+               Grid.Column="0"
+               Text="National No:"
+               FontWeight="Bold"
+               VerticalAlignment="Center"/>
+
+            <TextBox x:Name="txtNationalNo" Grid.Row="1"
+             Grid.Column="1"
+             Margin="5"
+             Height="30" LostFocus="txtNationalNo_LostFocus"
+             />
+
+            <!-- Date Of Birth -->
+            <TextBlock Grid.Row="1"
+               Grid.Column="2"
+               Text="Date Of Birth:"
+               FontWeight="Bold"
+               VerticalAlignment="Center"/>
+
+            <DatePicker x:Name="dtpDateOfBirth" Grid.Row="1"
+                Grid.Column="3"
+                Margin="5"/>
+
+            <!-- Gender -->
+            <TextBlock Grid.Row="2"
+               Grid.Column="0"
+               Text="Gender:"
+               FontWeight="Bold"
+               VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Row="2"
+                Grid.Column="1"
+                Orientation="Horizontal">
+                <RadioButton Content="Male"
+                     IsChecked="True"
+                     Checked="GenderChecked"      
+                     GroupName="Gender"
+                     Margin="5"/>
+                <RadioButton Content="Female"
+                     Checked="GenderChecked"      
+                     GroupName="Gender"
+                     Margin="15,5,5,5"/>
+            </StackPanel>
+
+            <!-- Phone -->
+            <TextBlock Grid.Row="2"
+               Grid.Column="2"
+               Text="Phone:"
+               FontWeight="Bold"
+               VerticalAlignment="Center"/>
+
+            <TextBox Grid.Row="2" x:Name="Phone"
+             Grid.Column="3"
+             Margin="5"
+             Height="30"/>
+
+            <!-- Email -->
+            <TextBlock Grid.Row="3"
+               Grid.Column="0"
+               Text="Email:"
+               FontWeight="Bold"
+               VerticalAlignment="Center"/>
+
+            <TextBox Grid.Row="3" x:Name="txtEmail"
+             Grid.Column="1"
+             Margin="5"
+             Height="30" LostFocus="txtEmail_LostFocus"/>
+
+            <!-- Country -->
+            <TextBlock Grid.Row="3"
+               Grid.Column="2"
+               Text="Country:"
+               FontWeight="Bold"
+               VerticalAlignment="Center"/>
+
+            <ComboBox Grid.Row="3"
+              x:Name="cbCountries"
+              DisplayMemberPath="CountryName" 
+              SelectedValuePath="CountryID"
+              Grid.Column="3"
+              Margin="5"
+              Height="30"/>
+
+            <!-- Address -->
+            <TextBlock Grid.Row="4"
+               Grid.Column="0"
+               Text="Address:"
+               FontWeight="Bold"
+               VerticalAlignment="Top"/>
+
+            <TextBox Grid.Row="4" x:Name="txtAddress"
+             Grid.Column="1"
+             Grid.ColumnSpan="3"
+             Margin="5"
+             AcceptsReturn="True"
+             TextWrapping="Wrap"/>
+
+            <!-- Person Image -->
+            <StackPanel Grid.Row="1"
+                Grid.Column="4"
+                Grid.RowSpan="4"
+                HorizontalAlignment="Center">
+
+                <Border BorderBrush="Gray"
+                BorderThickness="1"
+                Width="170"
+                Height="170">
+                    <Image Source="/Images/Male 512.png" x:Name="imgPerson"
+                   Stretch="Fill"/>
+                </Border>
+
+                <Button Style="{StaticResource Btn}" Content="Set Image"
+                   x:Name="btnSetImage"
+                   FontSize="16"
+                   HorizontalAlignment="Center"
+                   Margin="0,10,0,0" Click="btnSetImage_Click"/>
+            </StackPanel>
+
+        </Grid>
+
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnClose" Content="Close" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0, 0, 10, 0" Click="CloseWindow"/>
+            <Button x:Name="btnSave" Content="Save" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0" Click="SavePerson"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
