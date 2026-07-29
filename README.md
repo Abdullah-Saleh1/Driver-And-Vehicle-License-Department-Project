@@ -14,3 +14,21 @@ Below is the relational database design showing the entities, tables, constraint
 * **Database:** SQL Server (TSQL)
 * **Architecture:** 3-Tier Architecture (Data Access, Business Logic, and Presentation Layers)
 * **Design Principles:** Object-Oriented Programming (OOP) & Database Normalization Rules.
+  
+---
+
+## 💻 User Interface Showcase
+
+Below are some preview screenshots of the application interfaces:
+
+### 🏠 Main Screen
+
+<img width="959" height="539" alt="image" src="https://github.com/user-attachments/assets/eb28bafc-1a6a-4de9-b4c7-fcd268e9c46d" />
+
+---
+
+### 👥 Manage People Screen
+
+<img width="716" height="340" alt="image" src="https://github.com/user-attachments/assets/6c6b2c96-00fa-4e57-adbf-d374a01edb07" />
+
+
