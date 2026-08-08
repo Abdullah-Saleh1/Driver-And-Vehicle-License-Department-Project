@@ -168,8 +168,6 @@ namespace DVLD_PresentationLayer.People
 
         private void btnSetImage_Click(object sender, RoutedEventArgs e)
         {
-
-            MessageBox.Show(imgPerson.Source.ToString()); 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
 
@@ -264,56 +262,39 @@ namespace DVLD_PresentationLayer.People
 
         // Saving Person
 
-        //private string _AddNewImage(string ImagePath)
-        //{
-        //    Guid NewGuid = Guid.NewGuid();
-
-        //    string Extension = System.IO.Path.GetExtension(ImagePath);
-
-        //    string NewFileName = NewGuid.ToString() + Extension;
-
-        //    string DestinationPath = _ImagesPath + '\\' + NewFileName;
-
-        //    File.Copy(ImagePath, DestinationPath);
-
-        //    return DestinationPath;
-        //}
-
-        //private string _UpdateImage(string ImagePath)
-        //{
-        //    // 1. Delete Old Image if exists
-        //    // 2. Return _AddNewImage(ImagePath)
-
-        //    if (File.Exists(_Person.ImagePath))
-        //    {
-        //        File.Delete(_Person.ImagePath);
-        //    } 
-
-        //    return _AddNewImage(ImagePath);
-        //}
-
-
         private bool HandlePersonImage()
         {
             
+            // When the image is changed
             if (_Person.ImagePath != _ImagePath)
             {
-                if (_ImagePath == "")
+                
+                if (_Person.ImagePath != "")
                 {
-                    // User Remove Image
-                    if (File.Exists(_Person.ImagePath))
+
+                    try
                     {
-                        File.Delete(_Person.ImagePath);
+                        File.Delete(_Person.ImagePath); 
+                    } catch (IOException iox)
+                    {
+                        MessageBox.Show(iox.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    _Person.ImagePath = "";
                 }
 
-                
+                if (_ImagePath != "")
+                {
+                    if (util.CopyImageToImagesFolder(ref _ImagePath))
+                    {
+                        _Person.ImagePath = _ImagePath; 
+                        return true; 
+                    } else
+                    {
+                        return false; 
+                    }
+                }
             }
 
-
-
-            return true; 
+            return true; // when the image is not changed or handled successfully
         }
 
         private void SavePerson(object sender, RoutedEventArgs e)

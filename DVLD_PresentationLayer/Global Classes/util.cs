@@ -59,10 +59,10 @@ namespace DVLD_PresentationLayer.Global_Classes
             return NewFileName; 
         }
 
-        static bool CopyImageToImagesFolder(ref string SourceFile)
+        static public bool CopyImageToImagesFolder(ref string SourceFile)
         {
 
-            string ImagesFolder = @"D:\C#\Course 19 DLD\DVLD\DVLD_PresentationLayer\Images\PeopleImages\";
+            string ImagesFolder = @"D:\C#\Course 19 DVLD\DVLD\DVLD_PresentationLayer\Images\PeopleImages\";
 
             if (!CreateFolderIfNotExists(ImagesFolder)) return false; 
 
