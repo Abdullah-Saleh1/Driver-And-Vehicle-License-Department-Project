@@ -1,10 +1,11 @@
 ﻿using DVLD_BuisinessLayer;
 using System;
+using System.Data;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.IO;
-
 using System.Windows.Media.Imaging;
+using DVLD_PresentationLayer.Global_Classes;
 
 
 namespace DVLD_PresentationLayer.People.Controls
@@ -19,10 +20,15 @@ namespace DVLD_PresentationLayer.People.Controls
             InitializeComponent();
         }
 
-        private void _FillPersonInfo(clsPeople Person)
+        private int _PersonID;
+
+
+        private void _FillPersonInfo(clsPerson Person)
         {
             if (Person != null)
             {
+                _PersonID = Person.PersonID; 
+
                 lblName.Content = Person.FirstName + " " + Person.LastName;
                 lblPersonID.Content = Person.PersonID;
                 lblNational.Content = Person.NationalNO; 
@@ -35,12 +41,12 @@ namespace DVLD_PresentationLayer.People.Controls
 
                 if (!string.IsNullOrEmpty(Person.ImagePath) && File.Exists(Person.ImagePath))
                 {
-                    imgPerson.Source = new BitmapImage(new Uri(Person.ImagePath, UriKind.RelativeOrAbsolute));
+                    imgPerson.Source = util._LoadImageSafely(Person.ImagePath);
                 } else
                 {
                     //MessageBox.Show("Image file not found: " + Person.ImagePath, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                    if (Person.GenderText == clsPeople.enGender.Male)
+                    if (Person.GenderText == clsPerson.enGender.Male)
                     {
                         imgPerson.Source = new BitmapImage(new Uri("/Images/Male 512.png", UriKind.Relative));
                     }
@@ -59,7 +65,7 @@ namespace DVLD_PresentationLayer.People.Controls
 
         public void LoadPersonInfo(int PersonID)
         {
-            clsPeople Person = clsPeople.GetPersonByID(PersonID);
+            clsPerson Person = clsPerson.Find(PersonID);
 
             if (Person != null)
             {
@@ -69,6 +75,24 @@ namespace DVLD_PresentationLayer.People.Controls
             {
                 MessageBox.Show("Person not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+
+        private void _LoadPersonInfo(object sender, int PersonID)
+        {
+            LoadPersonInfo(PersonID);
+        }
+        private void EditPerson(object sender, RoutedEventArgs e)
+        {
+            winAddEditPerson AddEditPerson = new winAddEditPerson(_PersonID);
+
+            AddEditPerson.DataBack += _LoadPersonInfo; // Subscribe to the event
+
+
+            AddEditPerson.ShowDialog();
+
+            // لما بعدل الصوره بيضيفها تاني في الفولدر 
+            // ال Edit هنا مش مزبوط
         }
     }
 }

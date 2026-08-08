@@ -7,32 +7,6 @@
     <Application.Resources>
         <FontFamily x:Key="FontAwesome">/Fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
 
-        <!--<Color x:Key="ColorPrimaryDark">#0F172A</Color>
-        <Color x:Key="ColorSecondaryDark">#1E293B</Color>
-        <Color x:Key="ColorComponents">#334155</Color>
-        <Color x:Key="ColorHover">#222222</Color>
-        <Color x:Key="ColorTransparentHover">#00222222</Color>
-        <Color x:Key="ColorAccent">#38BDF8</Color>
-        <Color x:Key="ColorTextMain">#F8FAFC</Color>
-        <Color x:Key="ColorTextMuted">#94A3B8</Color>
-
-        <Color x:Key="ColorButtonNormal">#000</Color>
-        <Color x:Key="ColorButtonHover">#333</Color>
-        <Color x:Key="ColorButtonPressed">#111</Color>
-        <Color x:Key="ColorButtonDisabled">#1E1E2F</Color>
-
-        <SolidColorBrush x:Key="BrushPrimaryDark" Color="{StaticResource ColorPrimaryDark}"/>
-        <SolidColorBrush x:Key="BrushSecondaryDark" Color="{StaticResource ColorSecondaryDark}"/>
-        <SolidColorBrush x:Key="BrushComponents" Color="{StaticResource ColorComponents}"/>
-        <SolidColorBrush x:Key="BrushAccent" Color="{StaticResource ColorAccent}"/>
-        <SolidColorBrush x:Key="BrushTextMain" Color="{StaticResource ColorTextMain}"/>
-        <SolidColorBrush x:Key="BrushTextMuted" Color="{StaticResource ColorTextMuted}"/>
-        <SolidColorBrush x:Key="BrushInitialTransparent" Color="{StaticResource ColorTransparentHover}"/>
-
-        <SolidColorBrush x:Key="BrushButtonNormal" Color="{StaticResource ColorButtonNormal}"/>
-        <SolidColorBrush x:Key="BrushButtonDisabled" Color="{StaticResource ColorButtonDisabled}"/>-->
-
-
         <!-- ========================= -->
         <!-- BACKGROUND COLORS -->
         <!-- ========================= -->
@@ -896,7 +870,6 @@
                         </GeometryDrawing.Geometry>
                     </GeometryDrawing>
 
-                    <!-- نقاط الوصل (العقد) -->
                     <GeometryDrawing Brush="{StaticResource BrushAccent}">
                         <GeometryDrawing.Geometry>
                             <GeometryGroup>

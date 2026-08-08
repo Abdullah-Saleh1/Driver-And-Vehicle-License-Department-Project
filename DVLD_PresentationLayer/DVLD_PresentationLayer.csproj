@@ -76,6 +76,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Global Classes\clsValidation.cs" />
+    <Compile Include="Global Classes\util.cs" />
     <Compile Include="Login\winLogin.xaml.cs">
       <DependentUpon>winLogin.xaml</DependentUpon>
     </Compile>

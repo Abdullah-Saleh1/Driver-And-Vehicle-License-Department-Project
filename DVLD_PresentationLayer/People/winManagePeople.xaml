@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         ResizeMode="CanResize"
         
-        Title="ManagePeople" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Manage People" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -48,21 +48,21 @@
             
             <Button x:Name="btnAddPerson" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{StaticResource Btn}" Click="btnAddPerson_Click">
                 <fa:FontAwesome Icon="Solid_Plus"
-                    FontSize="15"
+                    FontSize="20"
                     Foreground="White"
                     />
             </Button>
             
         </Grid>
 
-        <DataGrid Grid.Row="1" ColumnWidth="*" x:Name="dgPeople" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True">
+        <DataGrid Grid.Row="1" ColumnWidth="*" x:Name="dgPeople" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True" MouseDoubleClick="dgPeople_MouseDoubleClick">
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Show Details" Click="ShowDetails"/>
                     <Separator/>
                     <MenuItem Header="Add New Person" Click="btnAddPerson_Click"/>
-                    <MenuItem Header="Edit" Click="DeletePerson"/>
+                    <MenuItem Header="Edit" Click="EditPerson"/>
                     <MenuItem Header="Delete" Click="DeletePerson"/>
                     <Separator/>
                     <MenuItem Header="Send Email" Click="NotReady"/>

@@ -21,14 +21,9 @@ namespace DVLD_PresentationLayer.People
         private DataTable _AllPeopleData;
         private DataTable _PeopleData; 
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close(); 
-        }
-
         private void _LoadPeople()
         {
-            _AllPeopleData = clsPeople.GetAllPeople();
+            _AllPeopleData = clsPerson.GetAllPeople();
             // ToTable Makes a new DataTable with the same data as the original DataTable, but with only the specified columns.
 
             // Two cons of this approach: 
@@ -68,39 +63,83 @@ namespace DVLD_PresentationLayer.People
         }
 
         // Context menu event handlers
+        private bool _IsPersonSelected()
+        {
+            return dgPeople.SelectedItems.Count > 0;
+        }
         private void ShowDetails(object sender, RoutedEventArgs e)
         {
-            if (dgPeople.SelectedItem == null)
+            if (!_IsPersonSelected())
             {
                 MessageBox.Show("Please select a person to show details.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-                
+
             int PersonID = Convert.ToInt32((dgPeople.SelectedItem as DataRowView)["PersonID"]);
 
             winShowPersonInfo showPersonInfo = new winShowPersonInfo(PersonID);
+
             showPersonInfo.ShowDialog();
+
+            _ReloadWindowData(); 
+        }
+
+        private void dgPeople_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ShowDetails(sender, e); 
+        }
+
+        private void _RefreshData(object sender, int PersonID)
+        {
+            _ReloadWindowData();
+        }
+
+        private void btnAddPerson_Click(object sender, RoutedEventArgs e)
+        {
+            winAddEditPerson AddEditPerson = new winAddEditPerson();
+
+            AddEditPerson.DataBack += _RefreshData; // Subscribe to the event
+
+            AddEditPerson.ShowDialog();
+        }
+
+        private void EditPerson(object sender, RoutedEventArgs e)
+        {
+            if (!_IsPersonSelected())
+            {
+                MessageBox.Show("Please select a person to edit.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            int PersonID = Convert.ToInt32((dgPeople.SelectedItem as DataRowView)["PersonID"]);
+
+            winAddEditPerson AddEditPerson = new winAddEditPerson(PersonID);
+
+            AddEditPerson.DataBack += _RefreshData; // Subscribe to the event
+
+            AddEditPerson.ShowDialog();
         }
 
         private void DeletePerson(object sender, RoutedEventArgs e)
         {
-            if (dgPeople.SelectedItem == null)
+            if (!_IsPersonSelected())
             {
                 MessageBox.Show("Please select a person to delete.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
+            if (MessageBox.Show("Are you sure you want to delete the selected person?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No) return; 
+
             int PersonID = Convert.ToInt32((dgPeople.SelectedItem as DataRowView)["PersonID"]);
-            MessageBox.Show(PersonID.ToString()); 
-            
-            //if (clsPeople.Delete(PersonID))
-            //{
-            //    MessageBox.Show("Person deleted successfully.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Failed to delete person.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
+
+            if (clsPerson.Delete(PersonID))
+            {
+                MessageBox.Show("Person deleted successfully.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Failed to delete person.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
             _ReloadWindowData(); 
         }
@@ -111,29 +150,33 @@ namespace DVLD_PresentationLayer.People
         }
 
 
+
         // Filter and Search Functionality
         private void cbPeopleFilter_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (cbPeopleFilter.SelectedIndex == 0) {
-                // Show all People and Remove SearchBar
-                txtSearch.Visibility = Visibility.Collapsed;
-                _PeopleData.DefaultView.RowFilter = string.Empty;
-                _UpdateRecordsCount(); 
+            txtSearch.Visibility = (cbPeopleFilter.SelectedIndex != 0) ? Visibility.Visible : Visibility.Collapsed;
 
-                return;
-            }
-
+            // when clearing the search the filter should be cleared as well
+            if (txtSearch.Visibility == Visibility.Visible)
             {
-                // Show SearchBar 
-                txtSearch.Visibility = Visibility.Visible;
-
-                _ClearSearch(); 
+                txtSearch.Text = string.Empty; 
+                txtSearch.Focus();
             }
         }
 
-        private void _ClearSearch()
+        private void _ApplyFilter(string ColumnName, string Query)
         {
-            txtSearch.Text = string.Empty;
+
+            // if the Columns is a Number
+            if (ColumnName == "PersonID" || ColumnName == "NationalNo" || ColumnName == "Phone")
+            {
+                _PeopleData.DefaultView.RowFilter = $"Convert({ColumnName}, 'System.String') Like '%{Query}%'";
+                //_PeopleData.DefaultView.RowFilter = $"Convert({ColumnName}, 'System.String') = '{Query}'";
+            }
+            else
+            {
+                _PeopleData.DefaultView.RowFilter = $"{ColumnName} Like '%{Query}%'";
+            }
         }
 
         private void txtSearch_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -142,7 +185,7 @@ namespace DVLD_PresentationLayer.People
             // If the search text is empty
             if (txtSearch.Text == string.Empty)
             {
-                _PeopleData.DefaultView.RowFilter = string.Empty;
+                _PeopleData.DefaultView.RowFilter = ""; // Clear the filter
                 _UpdateRecordsCount();
                 return;
             }
@@ -150,25 +193,14 @@ namespace DVLD_PresentationLayer.People
 
             string ColumnName = ((ComboBoxItem)cbPeopleFilter.SelectedItem).Content.ToString().Replace(" ", ""); // Get the selected filter column
 
-            // if the Columns is a Number
-            if (ColumnName == "PersonID" || ColumnName == "NationalNo" || ColumnName == "Phone")
-            {
-                _PeopleData.DefaultView.RowFilter = $"Convert({ColumnName}, 'System.String') Like '%{txtSearch.Text}%'";
-            }
-            else
-            {
-                _PeopleData.DefaultView.RowFilter = $"{ColumnName} Like '%{txtSearch.Text}%'";
-            }
+            _ApplyFilter(ColumnName, txtSearch.Text); 
 
             _UpdateRecordsCount();
         }
 
-
-        private void btnAddPerson_Click(object sender, RoutedEventArgs e)
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            winAddEditPerson AddEditPerson = new winAddEditPerson(); 
-
-            AddEditPerson.ShowDialog();
+            this.Close();
         }
     }
 }

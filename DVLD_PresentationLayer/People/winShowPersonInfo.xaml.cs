@@ -18,11 +18,7 @@ namespace DVLD_PresentationLayer.People
             ctrlPersonCard1.LoadPersonInfo(PersonID);
         }
 
-
-        private void EditPersonInfo(object sender, RoutedEventArgs e)
-        {
-            // Show Edit Person Window
-        }
+      
 
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
