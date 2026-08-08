@@ -245,17 +245,80 @@ namespace DVLD_DataAccessLayer
 
         // Edit 
 
-        public static bool UpdatePerson()
+        public static bool UpdatePerson(int PersonID, string NationalNO, string FirstName, string SecondName, string ThirdName, string LastName, DateTime DateOfBirth, byte Gender, string Address, string Phone, string Email, int CountryID, string ImagePath)
         {
-            return true; 
+            string query = @"UPDATE People 
+                            SET NationalNo = @NationalNo, 
+                                FirstName = @FirstName, 
+                                SecondName = @SecondName, 
+                                ThirdName = @ThirdName, 
+                                LastName = @LastName, 
+                                DateOfBirth = @DateOfBirth, 
+                                Gender = @Gender,
+                                Address = @Address, 
+                                Phone = @Phone, 
+                                Email = @Email, 
+                                NationalityCountryID = @NationalityCountryID, 
+                                ImagePath = @ImagePath 
+                            WHERE PersonID = @PersonID";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@PersonID", PersonID);
+                    command.Parameters.AddWithValue("@NationalNo", NationalNO);
+                    command.Parameters.AddWithValue("@FirstName", FirstName);
+                    command.Parameters.AddWithValue("@SecondName", SecondName);
+                    command.Parameters.AddWithValue("@ThirdName", string.IsNullOrEmpty(ThirdName) ? (object)DBNull.Value : ThirdName);
+                    command.Parameters.AddWithValue("@LastName", LastName);
+                    command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+                    command.Parameters.AddWithValue("@Gender", Gender);
+                    command.Parameters.AddWithValue("@Address", Address);
+                    command.Parameters.AddWithValue("@Phone", Phone);
+                    command.Parameters.AddWithValue("@Email", string.IsNullOrEmpty(Email) ? (object)DBNull.Value : Email);
+                    command.Parameters.AddWithValue("@NationalityCountryID", CountryID);
+                    command.Parameters.AddWithValue("@ImagePath", string.IsNullOrEmpty(ImagePath) ? (object)DBNull.Value : ImagePath);
+
+                    conn.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Logging error later
+                return false;
+            }
         }
 
         // Delete
 
-        public static bool DeletePerson()
+        public static bool DeletePerson(int PersonID)
         {
-            return true; 
+            string query = "DELETE FROM People WHERE PersonID = @PersonID";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@PersonID", PersonID);
+
+                    conn.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Logging error later
+                return false;
+            }
         }
+
+
     }
 }
 

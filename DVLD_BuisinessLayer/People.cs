@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace DVLD_BuisinessLayer
 {
-    public class clsPeople
+    public class clsPerson
     {
 
         enum enMode { AddNew, Update};
@@ -18,7 +18,7 @@ namespace DVLD_BuisinessLayer
 
         // to prevent changing the PersonID from Presentation Layer
         public int PersonID { get; private set; }
-        public string NationalNO { get; private set; }
+        public string NationalNO { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string ThirdName { get; set; }
@@ -40,7 +40,7 @@ namespace DVLD_BuisinessLayer
         public string ImagePath { get; set; }
 
 
-        public clsPeople()
+        public clsPerson()
         {
             _Mode = enMode.AddNew; 
 
@@ -59,7 +59,7 @@ namespace DVLD_BuisinessLayer
             ImagePath = "";
         }
         
-        private clsPeople(int PersonID, string NationalNO, string FirstName, string SecondName, string ThirdName, string LastName, DateTime DateOfBirth, byte Gender, string Address, string Phone, string Email, int CountryID, string ImagePath)
+        private clsPerson(int PersonID, string NationalNO, string FirstName, string SecondName, string ThirdName, string LastName, DateTime DateOfBirth, byte Gender, string Address, string Phone, string Email, int CountryID, string ImagePath)
         {
             _Mode = enMode.Update; 
 
@@ -83,7 +83,7 @@ namespace DVLD_BuisinessLayer
             return clsPeopleDataAccess.GetAllPeople(); 
         }
 
-        public static clsPeople GetPersonByID(int PersonID)
+        public static clsPerson Find(int PersonID)
         {
             string FirstName = "", LastName = "", SecondName = "", ThirdName = "", NationalNO = "";
             DateTime DateOfBirth = DateTime.MinValue;
@@ -93,7 +93,7 @@ namespace DVLD_BuisinessLayer
 
             if (clsPeopleDataAccess.GetPersonByID(PersonID, ref NationalNO, ref FirstName, ref LastName, ref SecondName, ref ThirdName, ref DateOfBirth, ref Gendor, ref Address, ref Phone, ref Email, ref CountryID, ref ImagePath))
             {
-                return new clsPeople(PersonID, NationalNO, FirstName, SecondName, ThirdName, LastName, DateOfBirth, Gendor, Address, Phone, Email, CountryID, ImagePath);
+                return new clsPerson(PersonID, NationalNO, FirstName, SecondName, ThirdName, LastName, DateOfBirth, Gendor, Address, Phone, Email, CountryID, ImagePath);
             }
 
             return null;
@@ -117,6 +117,11 @@ namespace DVLD_BuisinessLayer
             return this.PersonID != -1; 
         }
 
+        private bool _UpdatePerson()
+        {
+            return clsPeopleDataAccess.UpdatePerson(PersonID, NationalNO, FirstName, SecondName, ThirdName, LastName, DateOfBirth, Gender, Address, Phone, Email, CountryID, ImagePath);
+        }
+
 
 
         public bool Save()
@@ -134,7 +139,7 @@ namespace DVLD_BuisinessLayer
 
                    
                 case enMode.Update:
-                    return false;
+                    return _UpdatePerson();
 
                 default:
                     return false; 
