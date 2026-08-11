@@ -111,7 +111,7 @@ namespace DVLD_PresentationLayer.People
 
         private bool _ValidateNationalNo(string NationalNo)
         {
-            return clsPerson.IsNationalNoExists(txtNationalNo.Text); 
+            return clsPerson.IsPersonExists(txtNationalNo.Text); 
         }
 
         private void txtNationalNo_LostFocus(object sender, RoutedEventArgs e)
