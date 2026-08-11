@@ -18,7 +18,14 @@ namespace DVLD_PresentationLayer.People
             ctrlPersonCard1.LoadPersonInfo(PersonID);
         }
 
-      
+        public winShowPersonInfo(string NationalNO)
+        {
+            InitializeComponent();
+
+            ctrlPersonCard1.LoadPersonInfo(NationalNO);
+        }
+
+
 
         private void CloseWindow(object sender, RoutedEventArgs e)
         {

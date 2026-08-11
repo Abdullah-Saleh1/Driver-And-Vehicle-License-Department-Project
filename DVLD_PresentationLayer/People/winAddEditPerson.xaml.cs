@@ -22,7 +22,7 @@ namespace DVLD_PresentationLayer.People
 
         
         private string _ImagePath = "";
-        private clsPerson _Person = new clsPerson();
+        private clsPerson _Person;
         private int _PersonID = -1;
 
 
@@ -37,6 +37,7 @@ namespace DVLD_PresentationLayer.People
 
             // Set the maximum date for Date of Birth to ensure the person is at least 18 years old
             dtpDateOfBirth.DisplayDateEnd = DateTime.Now.AddYears(-18);
+            dtpDateOfBirth.DisplayDateStart = DateTime.Now.AddYears(-100); 
 
             this._PersonID = PersonID; 
 
@@ -74,6 +75,7 @@ namespace DVLD_PresentationLayer.People
             {
                 rbFemale.IsChecked = true; 
             } 
+
             txtEmail.Text = _Person.Email;
             txtAddress.Text = _Person.Address;
             txtPhone.Text = _Person.Phone; 
@@ -90,19 +92,25 @@ namespace DVLD_PresentationLayer.People
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void _ResetDefaultValues()
         {
-            _LoadCountries(); 
+            _LoadCountries();
 
             if (_Mode == enMode.Update)
             {
                 lblAddEditPerson.Content = "Edit Person";
-                _DispalyPersonData(); 
+                _DispalyPersonData();
             }
             else
             {
                 lblAddEditPerson.Content = "Add New Person";
+                _Person = new clsPerson(); 
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            _ResetDefaultValues();  
         }
 
 
@@ -129,10 +137,9 @@ namespace DVLD_PresentationLayer.People
 
         private void GenderChecked(object sender, RoutedEventArgs e)
         {
-            RadioButton radioButton = sender as RadioButton;
-
             if (imgPerson == null || _ImagePath != "") return; 
 
+            RadioButton radioButton = sender as RadioButton;
 
             if (radioButton.Content.ToString() == "Male")
             {
@@ -187,7 +194,7 @@ namespace DVLD_PresentationLayer.People
             imgPerson.Source = new BitmapImage(new Uri((bool)rbMale.IsChecked ? "/Images/Male 512.png" : "/Images/Female 512.png", UriKind.Relative)); 
             btnRemoveImage.Visibility = Visibility.Collapsed; 
         }
-
+            
         private bool _CheckFields()
         {
             if (string.IsNullOrEmpty(txtFirstName.Text))
@@ -264,33 +271,30 @@ namespace DVLD_PresentationLayer.People
 
         private bool HandlePersonImage()
         {
+
+            if (_Person.ImagePath == _ImagePath) return true; 
             
             // When the image is changed
-            if (_Person.ImagePath != _ImagePath)
+            if (_Person.ImagePath != "")
             {
-                
-                if (_Person.ImagePath != "")
+                try
                 {
-
-                    try
-                    {
-                        File.Delete(_Person.ImagePath); 
-                    } catch (IOException iox)
-                    {
-                        MessageBox.Show(iox.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    File.Delete(_Person.ImagePath); // Old Image
+                } catch (IOException iox)
+                {
+                    MessageBox.Show(iox.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
 
-                if (_ImagePath != "")
+            if (_ImagePath != "")
+            {
+                if (util.CopyImageToImagesFolder(ref _ImagePath)) // New Image
                 {
-                    if (util.CopyImageToImagesFolder(ref _ImagePath))
-                    {
-                        _Person.ImagePath = _ImagePath; 
-                        return true; 
-                    } else
-                    {
-                        return false; 
-                    }
+                    _Person.ImagePath = _ImagePath; 
+                    return true; 
+                } else
+                {
+                    return false; 
                 }
             }
 
@@ -306,21 +310,20 @@ namespace DVLD_PresentationLayer.People
 
             if (!HandlePersonImage()) return; 
 
-
-            _Person.FirstName = txtFirstName.Text;
-            _Person.SecondName = txtSecondName.Text;
-            _Person.ThirdName = txtThirdName.Text;
-            _Person.LastName = txtLastName.Text;
-            _Person.NationalNO = txtNationalNo.Text;
-            _Person.Email = txtEmail.Text;
-            _Person.Phone = txtPhone.Text; 
-            _Person.Address = txtAddress.Text;
+            _Person.FirstName = txtFirstName.Text.Trim();
+            _Person.SecondName = txtSecondName.Text.Trim();
+            _Person.ThirdName = txtThirdName.Text.Trim();
+            _Person.LastName = txtLastName.Text.Trim();
+            _Person.NationalNO = txtNationalNo.Text.Trim();
+            _Person.Email = txtEmail.Text.Trim();
+            _Person.Phone = txtPhone.Text.Trim(); 
+            _Person.Address = txtAddress.Text.Trim();
             _Person.DateOfBirth = dtpDateOfBirth.SelectedDate.Value;
 
             _Person.Gender = (bool)rbMale.IsChecked ? (byte)clsPerson.enGender.Male : (byte)clsPerson.enGender.Female;
 
             // Because SelectedIndex is Started from 0 so the first Country 
-            // with CountryID 1 is assigned to index 0 
+            // with CountryID 1 is assigned to the index 0 
             _Person.CountryID = cbCountries.SelectedIndex + 1;
 
 

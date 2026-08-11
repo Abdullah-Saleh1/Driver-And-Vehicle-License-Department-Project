@@ -20,41 +20,47 @@ namespace DVLD_PresentationLayer.People.Controls
             InitializeComponent();
         }
 
-        private int _PersonID;
+        private int _PersonID = -1; 
+        public int PersonID { get { return _PersonID; } }
 
+        private clsPerson _Person; 
 
-        private void _FillPersonInfo(clsPerson Person)
+        public clsPerson SelectedPersonInfo { get { return _Person; } }
+
+        private void _LoadPersonImage()
         {
-            if (Person != null)
+            if (!string.IsNullOrEmpty(_Person.ImagePath) && File.Exists(_Person.ImagePath))
             {
-                _PersonID = Person.PersonID; 
+                imgPerson.Source = util._LoadImageSafely(_Person.ImagePath);
+                return; 
+            }
 
-                lblName.Content = Person.FirstName + " " + Person.LastName;
-                lblPersonID.Content = Person.PersonID;
-                lblNational.Content = Person.NationalNO; 
-                lblGender.Content = Person.Gender;
-                lblEmail.Content = Person.Email;
-                lblAddress.Content = Person.Address; 
-                lblDateOfBirth.Content = Person.DateOfBirth.Date.ToShortDateString();
-                lblPhone.Content = Person.Phone;
-                lblCountry.Content = Person.CountryID.ToString();
+            if (_Person.GenderText == clsPerson.enGender.Male)
+            {
+                imgPerson.Source = new BitmapImage(new Uri("/Images/Male 512.png", UriKind.Relative));
+            }
+            else
+            {
+                imgPerson.Source = new BitmapImage(new Uri("/Images/Female 512.png", UriKind.Relative));
+            }
+        }
+        private void _FillPersonInfo()
+        {
+            if (_Person != null)
+            {
+                _PersonID = _Person.PersonID; 
 
-                if (!string.IsNullOrEmpty(Person.ImagePath) && File.Exists(Person.ImagePath))
-                {
-                    imgPerson.Source = util._LoadImageSafely(Person.ImagePath);
-                } else
-                {
-                    //MessageBox.Show("Image file not found: " + Person.ImagePath, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                lblName.Content = _Person.FirstName + " " + _Person.LastName;
+                lblPersonID.Content = _Person.PersonID;
+                lblNational.Content = _Person.NationalNO; 
+                lblGender.Content = _Person.Gender;
+                lblEmail.Content = _Person.Email;
+                lblAddress.Content = _Person.Address; 
+                lblDateOfBirth.Content = _Person.DateOfBirth.Date.ToShortDateString();
+                lblPhone.Content = _Person.Phone;
+                lblCountry.Content = _Person.CountryID.ToString();
 
-                    if (Person.GenderText == clsPerson.enGender.Male)
-                    {
-                        imgPerson.Source = new BitmapImage(new Uri("/Images/Male 512.png", UriKind.Relative));
-                    }
-                    else
-                    {
-                        imgPerson.Source = new BitmapImage(new Uri("/Images/Female 512.png", UriKind.Relative));
-                    }
-                }
+                _LoadPersonImage(); 
 
             }
             else
@@ -65,11 +71,25 @@ namespace DVLD_PresentationLayer.People.Controls
 
         public void LoadPersonInfo(int PersonID)
         {
-            clsPerson Person = clsPerson.Find(PersonID);
+            _Person = clsPerson.Find(PersonID);
 
-            if (Person != null)
+            if (_Person != null)
             {
-                _FillPersonInfo(Person);
+                _FillPersonInfo();
+            }
+            else
+            {
+                MessageBox.Show("Person not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public void LoadPersonInfo(string NationalNO)
+        {
+            _Person = clsPerson.Find(NationalNO);
+
+            if (_Person != null)
+            {
+                _FillPersonInfo();
             }
             else
             {
@@ -90,9 +110,6 @@ namespace DVLD_PresentationLayer.People.Controls
 
 
             AddEditPerson.ShowDialog();
-
-            // لما بعدل الصوره بيضيفها تاني في الفولدر 
-            // ال Edit هنا مش مزبوط
         }
     }
 }
