@@ -2,6 +2,7 @@
 using DVLD_PresentationLayer.People.Controls;
 using System;
 using System.Data;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -35,6 +36,12 @@ namespace DVLD_PresentationLayer.People
             _PeopleData = _AllPeopleData.DefaultView.ToTable(false, "PersonID", "NationalNo", "FirstName", "SecondName", "ThirdName", "LastName", "GenderCaption", "DateOfBirth", "CountryName", "Phone", "Email");
             _PeopleData.Columns["CountryName"].ColumnName = "Nationality";
             _PeopleData.Columns["GenderCaption"].ColumnName = "Gender"; 
+
+            _PeopleData.Columns["FirstName"].ColumnName = "First Name";
+            _PeopleData.Columns["SecondName"].ColumnName = "Second Name";
+            _PeopleData.Columns["ThirdName"].ColumnName = "Third Name";
+            _PeopleData.Columns["LastName"].ColumnName = "Last Name";
+            _PeopleData.Columns["DateOfBirth"].ColumnName = "Date Of Birth";
 
 
             dgPeople.ItemsSource = _PeopleData.DefaultView; 
@@ -79,15 +86,21 @@ namespace DVLD_PresentationLayer.People
 
             winShowPersonInfo showPersonInfo = new winShowPersonInfo(PersonID);
 
+            showPersonInfo.OnDataUpdated += _ReloadWindowData; // Subscribe to the event
+            // Only Refresh the data if the user updated the data in the child window.
+
             showPersonInfo.ShowDialog();
 
-            _ReloadWindowData(); 
+            //winFindPerson showPersonInfo = new winFindPerson(PersonID);
+            //showPersonInfo.ShowDialog(); 
         }
 
         private void dgPeople_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ShowDetails(sender, e); 
         }
+
+        
 
         private void _RefreshData(object sender, int PersonID)
         {
@@ -201,6 +214,22 @@ namespace DVLD_PresentationLayer.People
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void txtSearch_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            string ColumnName = ((ComboBoxItem)cbPeopleFilter.SelectedItem).Content.ToString().Replace(" ", "");
+            Regex regex;
+            if (ColumnName == "PersonID" || ColumnName == "Phone")
+            {
+                regex = new Regex("[^0-9]+"); // Only allow numbers
+            }
+            else
+            {
+                regex = new Regex("[^a-zA-Z0-9]+"); // Only allow letters and numbers
+            }
+
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

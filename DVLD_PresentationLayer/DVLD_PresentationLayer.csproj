@@ -89,7 +89,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="People\Controls\ctrlPersonCardWithFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="People\winAddEditPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="People\winFindPerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,8 +114,14 @@
     <Compile Include="People\Controls\ctrlPersonCard.xaml.cs">
       <DependentUpon>ctrlPersonCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="People\Controls\ctrlPersonCardWithFilter.xaml.cs">
+      <DependentUpon>ctrlPersonCardWithFilter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="People\winAddEditPerson.xaml.cs">
       <DependentUpon>winAddEditPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="People\winFindPerson.xaml.cs">
+      <DependentUpon>winFindPerson.xaml</DependentUpon>
     </Compile>
     <Compile Include="People\winShowPersonInfo.xaml.cs">
       <DependentUpon>winShowPersonInfo.xaml</DependentUpon>

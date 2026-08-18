@@ -41,7 +41,7 @@
                     <ComboBoxItem Content="Phone"/>
                     <ComboBoxItem Content="Email"/>
                 </ComboBox>
-                <TextBox Style="{StaticResource ModernSearchTextBox}" Width="150" Margin="5, 0, 0, 5" x:Name="txtSearch" Visibility="Hidden" TextChanged="txtSearch_TextChanged"/>
+                <TextBox Style="{StaticResource ModernSearchTextBox}" Width="150" Margin="5, 0, 0, 5" x:Name="txtSearch" Visibility="Hidden" TextChanged="txtSearch_TextChanged" PreviewTextInput="txtSearch_PreviewTextInput"/>
 
                 
             </StackPanel>

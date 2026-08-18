@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="DVLD_PresentationLayer.People.Controls.ctrlPersonCardWithFilter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.fontawesome.com/icons/fonts"
+             xmlns:local="clr-namespace:DVLD_PresentationLayer.People.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Fill="{StaticResource CircuitPatternBrush}"/>
+
+        <local:ctrlPersonCard x:Name="ctrlPersonCard1" Grid.Row="1"/>
+
+
+        <StackPanel x:Name="spFilters" Orientation="Horizontal" VerticalAlignment="Center">
+            <Label Content="Find by: " Style="{StaticResource lblStyle}" Margin="10"/>
+            <ComboBox SelectedIndex="0" x:Name="cbFilterBy" Width="150" Margin="10" Style="{StaticResource ModernComboBoxStyle}" SelectionChanged="cbFilterBy_SelectionChanged">
+                <ComboBoxItem Content="Person ID"/>
+                <ComboBoxItem Content="National No"/>
+            </ComboBox>
+            
+            <TextBox Tag="Filter Value" Width="200" Style="{StaticResource ModernTextBox}" x:Name="txtFilterValue" Margin="10" PreviewTextInput="txtFilterValue_PreviewTextInput"/>
+
+            <Button x:Name="btnSearch" VerticalAlignment="Center" Style="{StaticResource Btn}" Click="btnSearch_Click">
+                <fa:FontAwesome Icon="Solid_MagnifyingGlass"
+                    FontSize="20"
+                    Foreground="White"
+                    />
+            </Button>
+
+            <Button x:Name="btnAddPerson" VerticalAlignment="Center" Style="{StaticResource Btn}" Click="btnAddPerson_Click">
+                <fa:FontAwesome Icon="Solid_Plus"
+                    FontSize="20"
+                    Foreground="White"
+                    />
+            </Button>
+
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

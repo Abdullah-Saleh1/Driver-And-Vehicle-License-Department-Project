@@ -1,0 +1,26 @@
+﻿<Window x:Class="DVLD_PresentationLayer.People.winFindPerson"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DVLD_PresentationLayer.People.Controls"
+        mc:Ignorable="d"
+        Title="winShowPersonInfo" Height="450" Width="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
+
+
+        <Label Content="Find Person" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="{StaticResource BrushTextMain}"></Label>
+
+        <local:ctrlPersonCardWithFilter Grid.Row="1" x:Name="ctrlPersonCard1" Margin="10"/>
+
+        <Button Grid.Row="2" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="100" Height="30" Click="CloseWindow">Close</Button>
+    </Grid>
+</Window>

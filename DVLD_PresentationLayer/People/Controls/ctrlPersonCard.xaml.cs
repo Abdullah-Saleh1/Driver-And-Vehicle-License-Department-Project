@@ -20,6 +20,8 @@ namespace DVLD_PresentationLayer.People.Controls
             InitializeComponent();
         }
 
+        public event Action OnPersonUpdated; 
+
         private int _PersonID = -1; 
         public int PersonID { get { return _PersonID; } }
 
@@ -98,15 +100,17 @@ namespace DVLD_PresentationLayer.People.Controls
         }
 
 
-        private void _LoadPersonInfo(object sender, int PersonID)
+        private void _DataBackEvent(object sender, int PersonID)
         {
             LoadPersonInfo(PersonID);
+
+            OnPersonUpdated?.Invoke(); // Tell the parent that the person has been updated
         }
         private void EditPerson(object sender, RoutedEventArgs e)
         {
             winAddEditPerson AddEditPerson = new winAddEditPerson(_PersonID);
 
-            AddEditPerson.DataBack += _LoadPersonInfo; // Subscribe to the event
+            AddEditPerson.DataBack += _DataBackEvent; // Subscribe to the event
 
 
             AddEditPerson.ShowDialog();

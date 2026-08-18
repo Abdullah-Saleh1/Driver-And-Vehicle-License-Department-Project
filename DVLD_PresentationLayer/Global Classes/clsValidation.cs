@@ -12,5 +12,6 @@ namespace DVLD_PresentationLayer.Global_Classes
             return regex.IsMatch(Email);
         }
 
+        
     }
 }

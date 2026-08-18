@@ -8,47 +8,6 @@
         mc:Ignorable="d"
         Title="Add / Edit Person" Height="500" Width="800" Loaded="Window_Loaded">
 
-    <Window.Resources>
-        <Style x:Key="ModernTextBox" TargetType="TextBox">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="10"/>
-            
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BrushComponents}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10,0"/>
-            <Setter Property="FontSize" Value="14"/>
-
-            <Style.Triggers>
-
-                <Trigger Property="IsKeyboardFocused"
-                 Value="True">
-
-                    <Setter Property="BorderBrush"
-                    Value="{StaticResource BrushAccent}"/>
-
-                    <Setter Property="BorderThickness"
-                    Value="2"/>
-
-                </Trigger>
-
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="ModernDatePicker"
-       TargetType="DatePicker">
-
-            <Setter Property="Height"
-            Value="38"/>
-
-            <Setter Property="BorderBrush"
-            Value="{StaticResource BrushComponents}"/>
-
-            <Setter Property="FontSize"
-            Value="14"/>
-        </Style>
-
-    </Window.Resources>
     
     <Grid Margin="10">
         
@@ -114,25 +73,25 @@
                FontWeight="Bold"
                VerticalAlignment="Center"/>
 
-            <TextBox Grid.Row="0" x:Name="txtFirstName"
+            <TextBox Grid.Row="0" Tag="First Name" Width="Auto" Style="{StaticResource ModernTextBox}" x:Name="txtFirstName"
              Grid.Column="1"
              Margin="5"
              Height="30"
              />
 
-            <TextBox Grid.Row="0" x:Name="txtSecondName"
+            <TextBox Grid.Row="0" Tag="Second Name" Width="Auto" Style="{StaticResource ModernTextBox}" x:Name="txtSecondName"
              Grid.Column="2"
              Margin="5"
              Height="30"
              />
 
-            <TextBox Grid.Row="0" x:Name="txtThirdName"
+            <TextBox Grid.Row="0" Tag="Third Name" Width="Auto" Style="{StaticResource ModernTextBox}" x:Name="txtThirdName"
              Grid.Column="3"
              Margin="5"
              Height="30"
              />
 
-            <TextBox Grid.Row="0" x:Name="txtLastName"
+            <TextBox Grid.Row="0" Tag="Last Name" Width="Auto" Style="{StaticResource ModernTextBox}" x:Name="txtLastName"
              Grid.Column="4"
              Margin="5"
              Height="30"
@@ -145,7 +104,7 @@
                FontWeight="Bold"
                VerticalAlignment="Center"/>
 
-            <TextBox x:Name="txtNationalNo" Grid.Row="1"
+            <TextBox Tag="National No" Width="Auto" Style="{StaticResource ModernTextBox}" x:Name="txtNationalNo" Grid.Row="1"
              Grid.Column="1"
              Margin="5"
              Height="30" LostFocus="txtNationalNo_LostFocus"
@@ -190,7 +149,7 @@
                FontWeight="Bold"
                VerticalAlignment="Center"/>
 
-            <TextBox Grid.Row="2" x:Name="txtPhone"
+            <TextBox Tag="Phone" Width="Auto" Style="{StaticResource ModernTextBox}" Grid.Row="2" x:Name="txtPhone"
              Grid.Column="3"
              Margin="5"
              Height="30" PreviewTextInput="txtPhone_PreviewTextInput"/>
@@ -202,7 +161,7 @@
                FontWeight="Bold"
                VerticalAlignment="Center"/>
 
-            <TextBox Grid.Row="3" x:Name="txtEmail"
+            <TextBox Tag="Email" Width="Auto" Style="{StaticResource ModernTextBox}" Grid.Row="3" x:Name="txtEmail"
              Grid.Column="1"
              Margin="5"
              Height="30" LostFocus="txtEmail_LostFocus"/>
@@ -214,7 +173,7 @@
                FontWeight="Bold"
                VerticalAlignment="Center"/>
 
-            <ComboBox Grid.Row="3"
+            <ComboBox Style="{StaticResource ModernComboBoxStyle}" Grid.Row="3"
               x:Name="cbCountries"
               DisplayMemberPath="CountryName" 
               SelectedValuePath="CountryID"
@@ -229,7 +188,7 @@
                FontWeight="Bold"
                VerticalAlignment="Top"/>
 
-            <TextBox Grid.Row="4" x:Name="txtAddress"
+            <TextBox Tag="Address" Width="Auto" Style="{StaticResource ModernTextBox}" Grid.Row="4" x:Name="txtAddress"
              Grid.Column="1"
              Grid.ColumnSpan="3"
              Margin="5"

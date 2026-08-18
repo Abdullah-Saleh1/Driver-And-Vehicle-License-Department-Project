@@ -369,6 +369,13 @@
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
 
+        <Style x:Key="lblStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
         <Style TargetType="Button" x:Key="Btn">
             <Setter Property="Background" Value="{StaticResource BrushButtonNormal}"/>
             <Setter Property="Foreground" Value="{StaticResource BrushInitialTransparent}"/>
@@ -736,20 +743,20 @@
 
                             <!-- Popup القائمة المنسدلة -->
                             <Popup x:Name="PART_Popup" 
-                           AllowsTransparency="true" 
-                           IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
-                           Margin="1" 
-                           Placement="Bottom" 
-                           PopupAnimation="Slide">
+                   AllowsTransparency="true" 
+                   IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                   Margin="1" 
+                   Placement="Bottom" 
+                   PopupAnimation="Slide">
 
                                 <Border x:Name="dropDownBorder" 
-                                Background="{StaticResource BrushSecondary}" 
-                                BorderBrush="{StaticResource BrushComponents}" 
-                                BorderThickness="1" 
-                                CornerRadius="10" 
-                                Margin="0,5,0,0" 
-                                MinWidth="{Binding ActualWidth, ElementName=mainGrid}" 
-                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        Background="{StaticResource BrushSecondary}" 
+                        BorderBrush="{StaticResource BrushComponents}" 
+                        BorderThickness="1" 
+                        CornerRadius="10" 
+                        Margin="0,5,0,0" 
+                        MinWidth="{Binding ActualWidth, ElementName=mainGrid}" 
+                        MaxHeight="{TemplateBinding MaxDropDownHeight}">
 
                                     <Border.Effect>
                                         <DropShadowEffect BlurRadius="15" ShadowDepth="4" Opacity="0.08" Color="Black" Direction="270"/>
@@ -759,39 +766,47 @@
                                         <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
                                             <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
                                                 <Rectangle x:Name="opaqueRect" 
-                                                   Fill="{Binding Background, ElementName=dropDownBorder}" 
-                                                   Height="{Binding ActualHeight, ElementName=dropDownBorder}" 
-                                                   Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                                           Fill="{Binding Background, ElementName=dropDownBorder}" 
+                                           Height="{Binding ActualHeight, ElementName=dropDownBorder}" 
+                                           Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
                                             </Canvas>
                                             <ItemsPresenter x:Name="ItemsPresenter" 
-                                                    KeyboardNavigation.DirectionalNavigation="Contained" 
-                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            KeyboardNavigation.DirectionalNavigation="Contained" 
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </Border>
                             </Popup>
 
                             <ToggleButton x:Name="toggleButton" 
-                                  Background="{TemplateBinding Background}" 
-                                  BorderBrush="{TemplateBinding BorderBrush}" 
-                                  BorderThickness="{TemplateBinding BorderThickness}" 
-                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
-                                  Template="{StaticResource ModernComboBoxToggleButton}"/>
+                          Background="{TemplateBinding Background}" 
+                          BorderBrush="{TemplateBinding BorderBrush}" 
+                          BorderThickness="{TemplateBinding BorderThickness}" 
+                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                          Template="{StaticResource ModernComboBoxToggleButton}"/>
 
                             <ContentPresenter x:Name="contentTemplate" 
-                                      Content="{TemplateBinding SelectionBoxItem}" 
-                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
-                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
-                                      ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" 
-                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                      IsHitTestVisible="false" 
-                                      Margin="{TemplateBinding Padding}" 
-                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                              Content="{TemplateBinding SelectionBoxItem}" 
+                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
+                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
+                              ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" 
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                              IsHitTestVisible="false" 
+                              Margin="{TemplateBinding Padding}" 
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
+            <!-- الإضافة الجديدة الخاصة بـ Disable -->
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+            </Style.Triggers>
+
         </Style>
 
         <!-- Style عناصر القائمة (ComboBoxItem) -->
@@ -884,6 +899,77 @@
                 </DrawingGroup>
             </DrawingBrush.Drawing>
         </DrawingBrush>
+        
+        
+        <!--Text Box-->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="MinHeight" Value="35"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushComponents}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="8"
+                        ClipToBounds="True"
+                        SnapsToDevicePixels="True">
+
+                            <Grid VerticalAlignment="Stretch">
+
+                                <!-- رجعنا الـ Margin لـ 8 من الشمال عشان يرجع لورا -->
+                                <TextBlock x:Name="placeholder" 
+                                   Text="{TemplateBinding Tag}" 
+                                   Foreground="#8A8A8A" 
+                                   IsHitTestVisible="False" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left"
+                                   Margin="8,0,0,0"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   Visibility="Collapsed"/>
+
+                                <!-- رجعنا بداية الكورسر لـ 8 من الشمال بدلاً من 12 -->
+                                <ScrollViewer x:Name="PART_ContentHost" 
+                                      Focusable="false" 
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Stretch"
+                                      Margin="8,0,8,0"
+                                      Background="Transparent"
+                                      HorizontalScrollBarVisibility="Hidden" 
+                                      VerticalScrollBarVisibility="Hidden"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="placeholder" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#888888"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#046B38"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#F5F5F5"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="Foreground" Value="#A0A0A0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
 
     </Application.Resources>
 </Application>
