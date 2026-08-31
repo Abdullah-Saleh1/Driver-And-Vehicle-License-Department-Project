@@ -44,12 +44,14 @@ namespace DVLD_PresentationLayer.People
             _PeopleData.Columns["DateOfBirth"].ColumnName = "Date Of Birth";
 
 
-            dgPeople.ItemsSource = _PeopleData.DefaultView; 
+            dgPeople.ItemsSource = _PeopleData.DefaultView;
+
+            _UpdateRecordsCount(); 
         }
-        
+
         private void _UpdateRecordsCount()
         {
-            lblRecordsCount.Content = _PeopleData.DefaultView.Count; 
+            lblRecordsCount.Content = _PeopleData.DefaultView.Count;
         }
 
         private void JustifyColumnsWidth()
@@ -57,15 +59,9 @@ namespace DVLD_PresentationLayer.People
             dgPeople.Columns[0].Width = 80;
             dgPeople.Columns[1].Width = 100;
         }
-
-        void _ReloadWindowData()
-        {
-            _LoadPeople();
-            _UpdateRecordsCount();
-        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _ReloadWindowData();
+            _LoadPeople();
             JustifyColumnsWidth();
         }
 
@@ -86,7 +82,7 @@ namespace DVLD_PresentationLayer.People
 
             winShowPersonInfo showPersonInfo = new winShowPersonInfo(PersonID);
 
-            showPersonInfo.OnDataUpdated += _ReloadWindowData; // Subscribe to the event
+            showPersonInfo.OnDataUpdated += _LoadPeople; // Subscribe to the event
             // Only Refresh the data if the user updated the data in the child window.
 
             showPersonInfo.ShowDialog();
@@ -104,7 +100,7 @@ namespace DVLD_PresentationLayer.People
 
         private void _RefreshData(object sender, int PersonID)
         {
-            _ReloadWindowData();
+            _LoadPeople();
         }
 
         private void btnAddPerson_Click(object sender, RoutedEventArgs e)
@@ -154,7 +150,7 @@ namespace DVLD_PresentationLayer.People
                 MessageBox.Show("Failed to delete person.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            _ReloadWindowData(); 
+            _LoadPeople(); 
         }
 
         private void NotReady(object sender, RoutedEventArgs e)

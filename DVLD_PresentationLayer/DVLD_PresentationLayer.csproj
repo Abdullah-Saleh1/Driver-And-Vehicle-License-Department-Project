@@ -64,6 +64,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Users\winAddEditUser.xaml.cs">
+      <DependentUpon>winAddEditUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Users\winChangePassword.xaml.cs">
+      <DependentUpon>winChangePassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Users\winManageUsers.xaml.cs">
+      <DependentUpon>winManageUsers.xaml</DependentUpon>
+    </Compile>
     <Page Include="Login\winLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +115,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="People\winManagePeople.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Users\winAddEditUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Users\winChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Users\winManageUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,6 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\DVLD Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Login\Credentials.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,18 +1,9 @@
-﻿using DVLD_PresentationLayer.People;
+﻿using DVLD_PresentationLayer.Login;
+using DVLD_PresentationLayer.People;
+using DVLD_PresentationLayer.Users;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace DVLD_PresentationLayer
 {
@@ -25,6 +16,16 @@ namespace DVLD_PresentationLayer
         {
             InitializeComponent();
             
+        }
+
+        private void _LoadStatistics()
+        {
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            _LoadStatistics();
         }
 
         private void btnPeople_Click(object sender, RoutedEventArgs e)
@@ -46,5 +47,28 @@ namespace DVLD_PresentationLayer
             }
         }
 
+        private void btnAccountSettings_Click(object sender, RoutedEventArgs e)
+        {
+            btnAccountSettings.ContextMenu.PlacementTarget = btnAccountSettings;
+            btnAccountSettings.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom; 
+
+            btnAccountSettings.ContextMenu.IsOpen = true;
+        }
+
+        private void btnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+
+            winLogin Login = new winLogin();
+
+            Login.Show(); 
+
+            this.Close(); 
+        }
+
+        private void btnUsers_Click(object sender, RoutedEventArgs e)
+        {
+            winManageUsers ManageUsers = new winManageUsers();
+            ManageUsers.ShowDialog(); 
+        }
     }
 }

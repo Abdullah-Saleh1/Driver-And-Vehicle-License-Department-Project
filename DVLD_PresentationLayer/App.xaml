@@ -1,8 +1,8 @@
 ﻿<Application x:Class="DVLD_PresentationLayer.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
-    <!--     StartupUri="Login/winLogin.xaml"-->
+             StartupUri="Login/winLogin.xaml">
+             <!--StartupUri="MainWindow.xaml">-->
 
     <Application.Resources>
         <FontFamily x:Key="FontAwesome">/Fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
@@ -970,6 +970,69 @@
             </Setter>
         </Style>
 
+
+        <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
+            <Setter Property="MinHeight" Value="35"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushComponents}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border x:Name="border" 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="8"
+                        ClipToBounds="True"
+                        SnapsToDevicePixels="True">
+
+                            <Grid VerticalAlignment="Stretch">
+
+                                <!-- نص الـ Placeholder يقرأ من الـ Tag -->
+                                <TextBlock x:Name="placeholder" 
+                                   Text="{TemplateBinding Tag}" 
+                                   Foreground="#8A8A8A" 
+                                   IsHitTestVisible="False" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left"
+                                   Margin="8,0,0,0"
+                                   FontSize="{TemplateBinding FontSize}"/>
+
+                                <ScrollViewer x:Name="PART_ContentHost" 
+                                      Focusable="false" 
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Stretch"
+                                      Margin="8,0,8,0"
+                                      Background="Transparent"
+                                      HorizontalScrollBarVisibility="Hidden" 
+                                      VerticalScrollBarVisibility="Hidden"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#888888"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#046B38"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#F5F5F5"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="Foreground" Value="#A0A0A0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Application.Resources>
 </Application>

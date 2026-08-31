@@ -5,8 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DVLD_PresentationLayer.Login"
         mc:Ignorable="d"
-        Title="winLogin" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="winLogin" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button Click="Button_Click">Click</Button>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <TextBox x:Name="txtUserName" Tag="Username" Width="200" Height="30" Margin="0,0,0,10" Style="{StaticResource ModernTextBox}"/>
+            <PasswordBox x:Name="txtPassword" Tag="Password" Width="200" Height="30" Margin="0,0,0,10" 
+             Style="{StaticResource ModernPasswordBox}" 
+             PasswordChanged="txtPassword_PasswordChanged"/>
+
+            <Button x:Name="btnLogin" Style="{StaticResource Btn}" Click="btnLogin_Click">Login</Button>
+
+            <CheckBox x:Name="chkRememberMe" Content="Remember Me" Grid.Column="1" Margin="0,10,0,0" VerticalAlignment="Top"/>
+        </StackPanel>
+       
+
+
     </Grid>
 </Window>
