@@ -15,9 +15,9 @@
         </Grid.RowDefinitions>
         
         <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
-        
-        
-        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="{StaticResource BrushTextMain}">Person Info</Label>
+
+
+        <Label Content="Person Info" Style="{StaticResource TitleLabelStyle}"/>
 
         <local:ctrlPersonCard Grid.Row="1" x:Name="ctrlPersonCard1" Margin="10"/>
 

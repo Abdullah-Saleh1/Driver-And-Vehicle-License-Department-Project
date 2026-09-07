@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using DVLD_DataAccessLayer; 
 
@@ -8,6 +9,8 @@ namespace DVLD_BuisinessLayer
     {
 
         public enum enIsActive { Active = 1, InActive = 0 };
+        enum enMode { AddNew, Update };
+        enMode _Mode = enMode.AddNew;
         public int UserID { get; private set; }
 
         private int _PersonID; 
@@ -22,7 +25,7 @@ namespace DVLD_BuisinessLayer
         }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public int IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         public clsPerson PersonInfo { get; set; }
 
@@ -30,17 +33,21 @@ namespace DVLD_BuisinessLayer
 
         public clsUser()
         {
+            _Mode = enMode.AddNew; 
+            
             this.UserID = -1;
             this.PersonID = -1;
             this.UserName = "";
             this.Password = ""; 
-            this.IsActive = (int)enIsActive.Active;
+            this.IsActive = ((byte)enIsActive.Active == 1);
 
             this.PersonInfo = new clsPerson(); 
         }
 
-        private clsUser(int UserID, int PersonID, string UserName, string Password, int IsActive)
+        private clsUser(int UserID, int PersonID, string UserName, string Password, bool IsActive)
         {
+            _Mode = enMode.Update; 
+
             this.UserID = UserID;
             this.PersonID = PersonID;
             this.UserName = UserName;
@@ -53,7 +60,8 @@ namespace DVLD_BuisinessLayer
 
         static public clsUser Find(string UserName, string Password) 
         {
-            int UserID = -1, PersonID = -1, IsActive = -1;
+            int UserID = -1, PersonID = -1;
+            bool IsActive = false;
 
             if (clsUserDataAccess.GetUser(UserName, Password, ref UserID, ref PersonID, ref IsActive))
             {
@@ -63,10 +71,37 @@ namespace DVLD_BuisinessLayer
             return null; 
         }
 
+        static public clsUser Find(int UserID)
+        {
+            int PersonID = -1;
+            string Password = ""; 
+            string UserName = ""; 
+            bool IsActive = false;
+
+            if (clsUserDataAccess.GetUser(UserID, ref Password, ref UserName, ref PersonID, ref IsActive))
+            {
+                return new clsUser(UserID, PersonID, UserName, Password, IsActive);
+            }
+
+            return null;
+        }
+
 
         static public DataTable GetAllUsers()
         {
             return clsUserDataAccess.GetAllUsers(); 
+        }
+
+        public bool AddNewUser()
+        {
+            this.UserID = clsUserDataAccess.AddNewUser(PersonID, UserName, Password, IsActive);
+
+            return this.UserID != -1; 
+        }
+
+        public bool UpdateUser()
+        {
+            return clsUserDataAccess.UpdateUser(UserID, PersonID, UserName, Password, IsActive);
         }
 
         static public bool Delete(int UserID) 
@@ -74,6 +109,22 @@ namespace DVLD_BuisinessLayer
             return clsUserDataAccess.DeleteUser(UserID);
         }
 
+        
+        public bool Save()
+        {
+            switch(_Mode)
+            {
+                case enMode.AddNew:
+                    AddNewUser();
+                    _Mode = enMode.Update;
+                    return true;
+                case enMode.Update:
+                    return UpdateUser();
+
+                default:
+                    return false; 
+            }
+        }
 
     }
 }

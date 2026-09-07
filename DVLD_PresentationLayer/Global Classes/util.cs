@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -80,6 +81,18 @@ namespace DVLD_PresentationLayer.Global_Classes
 
             SourceFile = DestinationFile; 
             return true; 
+        }
+
+
+        static public void HandlePasswordBoxPlaceHolder(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = sender as PasswordBox;
+            TextBlock pbPlaceholder = pb.Template.FindName("placeholder", pb) as TextBlock;
+
+            if (pbPlaceholder != null)
+            {
+                pbPlaceholder.Visibility = string.IsNullOrEmpty(pb.Password) ? Visibility.Visible : Visibility.Collapsed;
+            }
         }
     }
 }

@@ -6,7 +6,7 @@
              xmlns:fa="http://schemas.fontawesome.com/icons/fonts"
              xmlns:local="clr-namespace:DVLD_PresentationLayer.People.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             Width="750" Height="Auto" Background="White">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>

@@ -17,7 +17,7 @@
         <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
 
 
-        <Label Content="Find Person" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="{StaticResource BrushTextMain}"></Label>
+        <Label Content="Find Person" Style="{StaticResource TitleLabelStyle}"/>
 
         <local:ctrlPersonCardWithFilter Grid.Row="1" x:Name="ctrlPersonCard1" Margin="10"/>
 

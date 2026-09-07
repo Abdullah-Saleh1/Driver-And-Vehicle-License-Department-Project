@@ -43,7 +43,7 @@
 
         <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
 
-        <Label x:Name="lblAddEditPerson" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="{StaticResource BrushTextMain}">Add New Person</Label>
+        <Label x:Name="lblAddEditPerson" Style="{StaticResource TitleLabelStyle}">Add New Person</Label>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
             <Label Content="PersonID:" FontWeight="bold"/>
             <Label x:Name="lblPersonID" Content=""></Label>

@@ -233,7 +233,10 @@ namespace DVLD_PresentationLayer.Users
                 return;
             }
 
-            winChangePassword ChangePassword = new winChangePassword();
+            int PersonID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["PersonID"]);
+            int UserID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["UserID"]);
+
+            winChangePassword ChangePassword = new winChangePassword(PersonID, UserID);
             ChangePassword.ShowDialog(); // Send the User ID Here 
         }
 

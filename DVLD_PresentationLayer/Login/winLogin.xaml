@@ -9,6 +9,7 @@
         Title="winLogin" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
 
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>

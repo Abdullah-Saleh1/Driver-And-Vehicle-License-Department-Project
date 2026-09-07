@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
+using DVLD_PresentationLayer.Global_Classes; 
 
 
 namespace DVLD_PresentationLayer.Login
@@ -19,13 +19,7 @@ namespace DVLD_PresentationLayer.Login
 
         private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            PasswordBox pb = sender as PasswordBox;
-            TextBlock pbPlaceholder = pb.Template.FindName("placeholder", pb) as TextBlock;
-
-            if (pbPlaceholder != null)
-            {
-                pbPlaceholder.Visibility = string.IsNullOrEmpty(pb.Password) ? Visibility.Visible : Visibility.Collapsed;
-            }
+            util.HandlePasswordBoxPlaceHolder(sender, e);
         }
 
         static string CredentialsPath = "D:\\C#\\Course 19 DVLD\\DVLD\\DVLD_PresentationLayer\\Login\\Credentials.txt";
@@ -61,7 +55,7 @@ namespace DVLD_PresentationLayer.Login
                 return;
             }
 
-            if (User.IsActive == (int)clsUser.enIsActive.InActive)
+            if (!User.IsActive)
             {
                 MessageBox.Show("This User is InActive, Please Contact Your Admin.");
                 return;

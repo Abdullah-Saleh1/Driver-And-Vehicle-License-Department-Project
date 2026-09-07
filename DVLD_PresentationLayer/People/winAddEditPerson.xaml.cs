@@ -155,7 +155,7 @@ namespace DVLD_PresentationLayer.People
         {
             if (txtEmail.Text == string.Empty) return;
 
-            if (!clsValidation._ValidateEmail(txtEmail.Text))
+            if (!clsValidation.ValidateEmail(txtEmail.Text))
             {
                 MessageBox.Show("Invalid Email Address.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
                 txtEmail.Clear();

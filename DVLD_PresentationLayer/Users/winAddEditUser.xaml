@@ -5,8 +5,101 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DVLD_PresentationLayer.Users"
         mc:Ignorable="d"
-        Title="winAddEditUser" Height="450" Width="800">
-    <Grid>
         
+        xmlns:uc="clr-namespace:DVLD_PresentationLayer.People.Controls"
+        
+        Title="winAddEditUser" Height="670" Width="820">
+    
+    
+    <!--
+    1. Fininsh the layout of Add/Edit Window ✅
+    2. Use the Delegate that exists in winAddEditPerson to send the PersonID through
+    subscribing to databack event when adding a new user 
+    3. Add the logic to the Next button to open the next window and pass the PersonID through
+    4. Disable Next Button until a person is selected use delegate again I think to notify the button to enable
+    5. In LoginInfo window check the password and confirmations is the same and use the event used in winChangePassword
+    
+    // Delete
+    1. Check If the user is connected to any other data and if so do not allow deletion
+    
+    // Edit
+    1. When Open this window for editing just Disable the search bar and filter simply using the property in the ctrlPersonCardWithFilter
+        
+    // Show Details
+    1. Only Put the ctrlPersonCard and ctrlUserCard and a Close button
+    
+    // Loggedin User is simply a shared class in GlobalClass
+    1. Simply Pass the UserID to the ShowDetails window 
+    2. And the same for ChangePassword in window in MainWindow
+    -->
+    <Grid Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
+
+        <Label Content="Add User" Style="{StaticResource TitleLabelStyle}"/>
+
+        <TabControl Grid.Row="1" x:Name="tcUserTabs">
+            <TabItem Header="Personal Info" Padding="5">
+
+                <StackPanel>
+                    <uc:ctrlPersonCardWithFilter x:Name="ctrlPersonCard1"/>
+
+                    <Button x:Name="btnNext"
+                        Style="{StaticResource Btn}"
+                        Content="Next"
+                        Width="70"
+                        Margin="0, 0, 10, 10"
+                        HorizontalAlignment="Right"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Login Info">
+
+                <StackPanel Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                    <!-- UserID -->
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <Label Content="UserID:" Width="130" HorizontalContentAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        <Label Content=""  Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- UserName -->
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <Label Content="UserName:" Width="130" HorizontalContentAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBox  Width="180" Style="{StaticResource ModernTextBox}" Height="25" Margin="10,0,0,0" />
+                    </StackPanel>
+
+                    <!-- Password -->
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <Label Content="Password:" Width="130" HorizontalContentAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        <PasswordBox Width="180" Height="25" Style="{StaticResource ModernPasswordBox}" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Confirm Password -->
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <Label Content="Confirm Password:" Width="130" HorizontalContentAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        <PasswordBox Width="180" Height="25" Style="{StaticResource ModernPasswordBox}" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Is Active -->
+                    <StackPanel Orientation="Horizontal" Margin="130,10,0,0">
+                        <CheckBox Content="Is Active" IsChecked="True" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+
+            </TabItem>
+        </TabControl>
+  
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnClose" Content="Close" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0, 0, 10, 0" Click="CloseWindow" IsCancel="True"/>
+            <Button x:Name="btnSave" Content="Save" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0" Click="SavePerson" IsDefault="True"/>
+        </StackPanel>
     </Grid>
 </Window>

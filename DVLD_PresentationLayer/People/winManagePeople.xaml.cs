@@ -36,11 +36,6 @@ namespace DVLD_PresentationLayer.People
             _PeopleData = _AllPeopleData.DefaultView.ToTable(false, "PersonID", "NationalNo", "FirstName", "SecondName", "ThirdName", "LastName", "GenderCaption", "DateOfBirth", "CountryName", "Phone", "Email");
             _PeopleData.Columns["CountryName"].ColumnName = "Nationality";
             _PeopleData.Columns["GenderCaption"].ColumnName = "Gender"; 
-
-            _PeopleData.Columns["FirstName"].ColumnName = "First Name";
-            _PeopleData.Columns["SecondName"].ColumnName = "Second Name";
-            _PeopleData.Columns["ThirdName"].ColumnName = "Third Name";
-            _PeopleData.Columns["LastName"].ColumnName = "Last Name";
             _PeopleData.Columns["DateOfBirth"].ColumnName = "Date Of Birth";
 
 

@@ -23,5 +23,17 @@ namespace DVLD_PresentationLayer.Users
         {
             InitializeComponent();
         }
+
+
+        private void SavePerson(object sender, RoutedEventArgs e)
+        {
+            // Validate 
+
+            // Save
+        }
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close(); 
+        }
     }
 }

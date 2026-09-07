@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DVLD_PresentationLayer.People.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800">
+             Width="800" Height="Auto">
 
-    <Border CornerRadius="10" Background="{StaticResource BrushPrimary}" Padding="10">
+    <Border CornerRadius="10" Background="White" Padding="10">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -71,7 +71,7 @@
 
                 <Button Width="Auto" HorizontalAlignment="Center" Style="{StaticResource Btn}" Click="EditPerson">Edit Person Info</Button>
 
-                <Image x:Name="imgPerson" Source="/Images/Male 512.png" Width="250" Height="250" Stretch="Fill"></Image>
+                <Image x:Name="imgPerson" Source="/Images/Male 512.png" Width="210" Height="210" Stretch="Fill"></Image>
                 
             </StackPanel>
 
