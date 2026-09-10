@@ -61,6 +61,8 @@ namespace DVLD_PresentationLayer.Login
                 return;
             }
 
+            clsGlobal.CurrentUser = User; 
+
             MainWindow mainWindow = new MainWindow();
 
             mainWindow.Show();

@@ -1,8 +1,10 @@
 ﻿using DVLD_BuisinessLayer;
+using DVLD_PresentationLayer.Global_Classes;
 using System;
 using System.Data;
 using System.Data.Common;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -81,6 +83,9 @@ namespace DVLD_PresentationLayer.Users
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
             winAddEditUser AddEditUser = new winAddEditUser();
+
+            AddEditUser.OnPersonSaved += _LoadUsers; // Subscribe to the event
+
             AddEditUser.ShowDialog(); 
         }
 
@@ -94,8 +99,11 @@ namespace DVLD_PresentationLayer.Users
             }
 
             int PersonID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["PersonID"]);
+            int UserID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["UserID"]);
 
-            winAddEditUser AddEditUser = new winAddEditUser();
+            winAddEditUser AddEditUser = new winAddEditUser(UserID, PersonID);
+            AddEditUser.ctrlPersonCardWithFilter1.FilterEnabled = false; 
+            AddEditUser.OnPersonSaved += _LoadUsers; // Subscribe to the event  
             AddEditUser.ShowDialog();
         }
 
@@ -107,9 +115,17 @@ namespace DVLD_PresentationLayer.Users
                 return;
             }
 
-            if (MessageBox.Show("Are you sure you want to delete the selected person?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No) return;
 
             int UserID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["UserID"]);
+
+            if (UserID == clsGlobal.CurrentUser.UserID)
+            {
+                MessageBox.Show("You cannot delete your own account.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (MessageBox.Show("Are you sure you want to delete the selected person?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No) return;
+
 
             if (clsUser.Delete(UserID))
             {
@@ -117,7 +133,7 @@ namespace DVLD_PresentationLayer.Users
             }
             else
             {
-                MessageBox.Show("Failed to delete person.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Cannot delete this User because they are linked to active records or other operations.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             _LoadUsers();
@@ -207,6 +223,15 @@ namespace DVLD_PresentationLayer.Users
                 MessageBox.Show("Please select a person to show details.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
+
+            int PersonID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["PersonID"]);
+            int UserID  = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["UserID"]);
+
+            winUserInfo UserInfo = new winUserInfo(UserID, PersonID);
+
+            UserInfo.OnPersonUpdated += _LoadUsers;
+
+            UserInfo.ShowDialog(); 
         }
 
         private void txtSearch_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)

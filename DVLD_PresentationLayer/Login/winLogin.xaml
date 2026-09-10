@@ -21,7 +21,7 @@
              Style="{StaticResource ModernPasswordBox}" 
              PasswordChanged="txtPassword_PasswordChanged"/>
 
-            <Button x:Name="btnLogin" Style="{StaticResource Btn}" Click="btnLogin_Click">Login</Button>
+            <Button x:Name="btnLogin" Style="{StaticResource Btn}" Click="btnLogin_Click" IsDefault="True">Login</Button>
 
             <CheckBox x:Name="chkRememberMe" Content="Remember Me" Grid.Column="1" Margin="0,10,0,0" VerticalAlignment="Top"/>
         </StackPanel>

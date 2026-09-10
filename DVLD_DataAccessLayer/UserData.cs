@@ -221,5 +221,29 @@ namespace DVLD_DataAccessLayer
             }
         }
 
+        public static bool IsUserNameExist(string userName)
+        {
+            string query = "SELECT TOP 1 1 FROM Users WHERE UserName = @UserName";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@UserName", userName);
+
+                    conn.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    return result != null;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Logging error later
+                return false;
+            }
+        }
     }
 }

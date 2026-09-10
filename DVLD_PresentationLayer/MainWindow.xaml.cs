@@ -1,4 +1,5 @@
-﻿using DVLD_PresentationLayer.Login;
+﻿using DVLD_PresentationLayer.Global_Classes;
+using DVLD_PresentationLayer.Login;
 using DVLD_PresentationLayer.People;
 using DVLD_PresentationLayer.Users;
 using System;
@@ -7,15 +8,12 @@ using System.Windows;
 
 namespace DVLD_PresentationLayer
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-            
         }
 
         private void _LoadStatistics()
@@ -69,6 +67,20 @@ namespace DVLD_PresentationLayer
         {
             winManageUsers ManageUsers = new winManageUsers();
             ManageUsers.ShowDialog(); 
+        }
+
+        private void btnCurrentUserInfo_Click(object sender, RoutedEventArgs e)
+        {
+            winUserInfo UserInfo = new winUserInfo(clsGlobal.CurrentUser.UserID, clsGlobal.CurrentUser.PersonID);
+
+            UserInfo.ShowDialog(); 
+        }
+
+        private void btnChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            winChangePassword ChangePassword = new winChangePassword(clsGlobal.CurrentUser.PersonID, clsGlobal.CurrentUser.UserID);
+
+            ChangePassword.ShowDialog(); 
         }
     }
 }

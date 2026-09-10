@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DVLD_PresentationLayer.Users"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         
         xmlns:uc="clr-namespace:DVLD_PresentationLayer.People.Controls"
         
@@ -13,24 +14,30 @@
     
     <!--
     1. Fininsh the layout of Add/Edit Window ✅
-    2. Use the Delegate that exists in winAddEditPerson to send the PersonID through
-    subscribing to databack event when adding a new user 
-    3. Add the logic to the Next button to open the next window and pass the PersonID through
-    4. Disable Next Button until a person is selected use delegate again I think to notify the button to enable
-    5. In LoginInfo window check the password and confirmations is the same and use the event used in winChangePassword
+    2. Use the Delegate that exists in winAddEditPerson to send the PersonID through ✅
+    subscribing to databack event when adding a new user ✅ 
+    (delegate in step 2 is already implemented in ctrlPersonCardWithFilter)
+    
+    3. Add the logic to the Next button to open the next window ✅
+    4. Disable Next Button until a person is selected use delegate again I think to notify the button to enable ✅
+    5. In LoginInfo window check the password and confirmations is the same ✅
+    
+    6. Make sure the user is not already in the system before adding a new user ✅
+    // 6.5 Add Unique constraint to the UserName and PersonID columns in the database ✅
+    7. Make Delegate to Notify ManageUsers window to refresh the datagrid when a new user is added ✅
     
     // Delete
     1. Check If the user is connected to any other data and if so do not allow deletion
     
     // Edit
-    1. When Open this window for editing just Disable the search bar and filter simply using the property in the ctrlPersonCardWithFilter
+    1. When Open this window for editing just Disable the search bar and filter simply using the property in the ctrlPersonCardWithFilter ✅
         
     // Show Details
-    1. Only Put the ctrlPersonCard and ctrlUserCard and a Close button
+    1. Only Put the ctrlPersonCard and ctrlUserCard and a Close button ✅
     
     // Loggedin User is simply a shared class in GlobalClass
-    1. Simply Pass the UserID to the ShowDetails window 
-    2. And the same for ChangePassword in window in MainWindow
+    1. Simply Pass the UserID to the ShowDetails window ✅
+    2. And the same for ChangePassword in window in MainWindow ✅
     -->
     <Grid Margin="10">
 
@@ -42,15 +49,16 @@
 
         <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
 
-        <Label Content="Add User" Style="{StaticResource TitleLabelStyle}"/>
+        <Label Content="Add User" x:Name="txtTitle" Style="{StaticResource TitleLabelStyle}"/>
 
         <TabControl Grid.Row="1" x:Name="tcUserTabs">
             <TabItem Header="Personal Info" Padding="5">
 
                 <StackPanel>
-                    <uc:ctrlPersonCardWithFilter x:Name="ctrlPersonCard1"/>
+                    <uc:ctrlPersonCardWithFilter x:Name="ctrlPersonCardWithFilter1"/>
 
                     <Button x:Name="btnNext"
+                        Click="btnNext_Click"
                         Style="{StaticResource Btn}"
                         Content="Next"
                         Width="70"
@@ -58,7 +66,7 @@
                         HorizontalAlignment="Right"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Login Info">
+            <TabItem Header="Login Info" x:Name="tabLoginInfo" IsEnabled="False">
 
                 <StackPanel Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
 
@@ -71,24 +79,24 @@
                     <!-- UserName -->
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <Label Content="UserName:" Width="130" HorizontalContentAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
-                        <TextBox  Width="180" Style="{StaticResource ModernTextBox}" Height="25" Margin="10,0,0,0" />
+                        <TextBox x:Name="txtUserName" Width="180" Style="{StaticResource ModernTextBox}" Height="25" Margin="10,0,0,0"/>
                     </StackPanel>
 
                     <!-- Password -->
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <Label Content="Password:" Width="130" HorizontalContentAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
-                        <PasswordBox Width="180" Height="25" Style="{StaticResource ModernPasswordBox}" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
+                        <PasswordBox x:Name="txtPassword" Width="180" Height="25" Style="{StaticResource ModernPasswordBox}" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
 
                     <!-- Confirm Password -->
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <Label Content="Confirm Password:" Width="130" HorizontalContentAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
-                        <PasswordBox Width="180" Height="25" Style="{StaticResource ModernPasswordBox}" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
+                        <PasswordBox x:Name="txtConfirmPassword" Width="180" Height="25" Style="{StaticResource ModernPasswordBox}" Margin="10,0,0,0" VerticalContentAlignment="Center" PreviewLostKeyboardFocus="txtConfirmPassword_PreviewLostKeyboardFocus"/>
                     </StackPanel>
 
                     <!-- Is Active -->
                     <StackPanel Orientation="Horizontal" Margin="130,10,0,0">
-                        <CheckBox Content="Is Active" IsChecked="True" VerticalAlignment="Center"/>
+                        <CheckBox x:Name="chkIsActive" Content="Is Active" IsChecked="True" VerticalAlignment="Center"/>
                     </StackPanel>
 
                 </StackPanel>

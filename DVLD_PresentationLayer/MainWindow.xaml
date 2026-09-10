@@ -178,8 +178,8 @@
                         <Button.ContextMenu>
                             <ContextMenu>
                                 
-                                <MenuItem Header="Current User Info"/>
-                                <MenuItem Header="Change Password"/>
+                                <MenuItem x:Name="btnCurrentUserInfo" Header="Current User Info" Click="btnCurrentUserInfo_Click"/>
+                                <MenuItem x:Name="btnChangePassword" Header="Change Password" Click="btnChangePassword_Click"/>
                                 <MenuItem x:Name="btnSignOut" Header="Sign Out" Click="btnSignOut_Click"/>
 
                             </ContextMenu>

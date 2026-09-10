@@ -92,6 +92,11 @@ namespace DVLD_BuisinessLayer
             return clsUserDataAccess.GetAllUsers(); 
         }
 
+        static public bool IsUserNameExist(string UserName)
+        {
+            return clsUserDataAccess.IsUserNameExist(UserName);
+        }
+
         public bool AddNewUser()
         {
             this.UserID = clsUserDataAccess.AddNewUser(PersonID, UserName, Password, IsActive);
@@ -106,6 +111,7 @@ namespace DVLD_BuisinessLayer
 
         static public bool Delete(int UserID) 
         {
+
             return clsUserDataAccess.DeleteUser(UserID);
         }
 
@@ -115,9 +121,8 @@ namespace DVLD_BuisinessLayer
             switch(_Mode)
             {
                 case enMode.AddNew:
-                    AddNewUser();
                     _Mode = enMode.Update;
-                    return true;
+                    return AddNewUser(); ;
                 case enMode.Update:
                     return UpdateUser();
 

@@ -24,12 +24,16 @@ namespace DVLD_PresentationLayer.People.Controls
     /// </summary>
     public partial class ctrlPersonCardWithFilter : UserControl
     {
+
+        public event Action<int> OnPersonSelected;
+        public event Action OnPersonSaved;
         public ctrlPersonCardWithFilter()
         {
             InitializeComponent();
+
+            ctrlPersonCard1.OnPersonUpdated += () => OnPersonSaved?.Invoke();
         }
 
-        public event Action<int> OnPersonSelected;  
 
         public int PersonID
         {
