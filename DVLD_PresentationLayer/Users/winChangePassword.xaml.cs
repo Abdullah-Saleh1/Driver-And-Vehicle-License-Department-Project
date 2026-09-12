@@ -1,60 +1,36 @@
 ﻿using DVLD_BuisinessLayer;
 using DVLD_PresentationLayer.Global_Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DVLD_PresentationLayer.Users
 {
-    /// <summary>
-    /// Interaction logic for winChangePassword.xaml
-    /// </summary>
+
     public partial class winChangePassword : Window
     {
-        private int _PersonID = -1; 
-        private int _UserID = -1;
-        clsUser CurrentUser; 
-        public winChangePassword(int PersonID, int UserID)
+        private int _UserID;
+        private clsUser _User; 
+        public winChangePassword(int UserID)
         {
-            InitializeComponent();
-
-            _PersonID = PersonID; 
+            InitializeComponent(); 
             _UserID = UserID;
-            CurrentUser = clsUser.Find(UserID); 
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ctrlPersonCard1.LoadPersonInfo(_PersonID);
+            _User = clsUser.FindByUserID(_UserID);
 
-            ctrlUserCard1.LoadUserInfo(_UserID); 
+            if (_User == null)
+            {
+                MessageBox.Show("The User Is Not Exists", "Error",MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+                return; 
+            }
 
-
+            ctrlUserCard1.LoadUserInfo(_UserID);
         }
 
-        private void txtCurrentPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            util.HandlePasswordBoxPlaceHolder(sender, e); 
-        }
-
-        private void txtNewPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            util.HandlePasswordBoxPlaceHolder(sender, e);
-        }
-
-        private void txtConfirmPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             util.HandlePasswordBoxPlaceHolder(sender, e);
         }
@@ -63,7 +39,7 @@ namespace DVLD_PresentationLayer.Users
         {
             if (string.IsNullOrWhiteSpace(txtCurrentPassword.Password)) return;
 
-            if (txtCurrentPassword.Password != CurrentUser.Password)
+            if (txtCurrentPassword.Password != _User.Password)
             {
                 txtCurrentPassword.Clear();
                 txtCurrentPassword.Focus();
@@ -94,6 +70,8 @@ namespace DVLD_PresentationLayer.Users
                 txtConfirmPassword.Focus();
                 return false;
             }
+
+
             if (txtNewPassword.Password != txtConfirmPassword.Password)
             {
                 MessageBox.Show("New password and confirmation do not match.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -111,9 +89,9 @@ namespace DVLD_PresentationLayer.Users
 
             if (!_ValidateFields()) return;
 
-            CurrentUser.Password = txtNewPassword.Password;
+            _User.Password = txtNewPassword.Password;
 
-            if (CurrentUser.Save())
+            if (clsUser.ChangePassword(_UserID, _User.Password))
             {
                 MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }

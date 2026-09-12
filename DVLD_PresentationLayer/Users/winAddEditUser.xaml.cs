@@ -1,28 +1,17 @@
 ﻿using DVLD_BuisinessLayer;
+using DVLD_PresentationLayer.Global_Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DVLD_PresentationLayer.Users
 {
-    /// <summary>
-    /// Interaction logic for winAddEditUser.xaml
-    /// </summary>
     public partial class winAddEditUser : Window
     {
 
         public event Action OnPersonSaved;
-        clsUser _User; 
+        clsUser _User;
+        private int _UserID; 
         enum enMode { Add, Edit };
         enMode _Mode;
 
@@ -30,44 +19,49 @@ namespace DVLD_PresentationLayer.Users
         public winAddEditUser()
         {
             InitializeComponent();
-            _Mode = enMode.Add; 
-            txtTitle.Content = "Add User";
-
-            _User = new clsUser(); 
-
-
-            ctrlPersonCardWithFilter1.OnPersonSaved += () => OnPersonSaved?.Invoke();
         }
-
         // Edit
-        public winAddEditUser(int UserID, int PersonID)
+        public winAddEditUser(int UserID)
         {
             InitializeComponent();
 
-            _Mode = enMode.Edit; 
+            _Mode = enMode.Edit;
+            _UserID = UserID; 
+        }
 
-            _FillUserInfo(UserID, PersonID); 
-            
-            tabLoginInfo.IsEnabled = true;
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_Mode == enMode.Add)
+            {
+                _Mode = enMode.Add;
+                txtTitle.Content = "Add User";
+                _User = new clsUser(); 
+            } else
+            {
+                _LoadUserData();
 
-            txtTitle.Content = "Edit User";
+                tabLoginInfo.IsEnabled = true;
+
+                txtTitle.Content = "Edit User";
+            }
 
             ctrlPersonCardWithFilter1.OnPersonSaved += () => OnPersonSaved?.Invoke();
         }
 
-        private void _FillUserInfo(int UserID, int PersonID)
+        private void _LoadUserData()
         {
 
-            ctrlPersonCardWithFilter1.LoadPersonInfo(PersonID);
-            _User = clsUser.Find(UserID);
+            _User = clsUser.FindByUserID(_UserID);
 
             if (_User != null)
             {
+                lblUserID.Content = _UserID.ToString(); 
                 txtUserName.Text = _User.UserName;
                 txtPassword.Password = _User.Password; 
                 txtConfirmPassword.Password = _User.Password;
 
                 chkIsActive.IsChecked = _User.IsActive;
+                ctrlPersonCardWithFilter1.LoadPersonInfo(_User.PersonID);
             }
         }
 
@@ -78,14 +72,36 @@ namespace DVLD_PresentationLayer.Users
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
+            if (_Mode == enMode.Edit) {
+                tabLoginInfo.IsEnabled = true;
+                tcUserTabs.SelectedIndex = 1;
+            }
+
+
+            if (_Mode == enMode.Add)
+            {
+                if (ctrlPersonCardWithFilter1.PersonID == -1)
+                {
+                    MessageBox.Show("Please select a person to continue.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return; 
+                }
+
+                if (clsUser.IsUserExistsForPersonID(ctrlPersonCardWithFilter1.PersonID))
+                {
+                    MessageBox.Show("Selected Person already has a user, choose another one.", "Select another Person", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return; 
+                }
+
+                tabLoginInfo.IsEnabled = true; 
+                tcUserTabs.SelectedIndex = 1; 
+            } 
+
+
             if (ctrlPersonCardWithFilter1.PersonID == -1)
             {
                 MessageBox.Show("Please select a person to continue.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            tabLoginInfo.IsEnabled = true;
-            tcUserTabs.SelectedIndex = 1; 
         }
 
 
@@ -121,29 +137,38 @@ namespace DVLD_PresentationLayer.Users
                 return;
             }
 
-            if (clsUser.IsUserNameExist(txtUserName.Text) && _Mode == enMode.Add)
+            // Check If Username is not the same as the current _User 
+            // And is not used by another user
+            if ((txtUserName.Text != _User?.UserName) && clsUser.IsUserExists(txtUserName.Text))
             {
                 MessageBox.Show("Username already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 txtUserName.Clear();
+                txtUserName.Focus();
                 return; 
             }
 
             _User.PersonID = ctrlPersonCardWithFilter1.PersonID;
-            _User.UserName = txtUserName.Text; 
-            _User.Password = txtPassword.Password;
+            _User.UserName = txtUserName.Text.Trim(); 
+            _User.Password = txtPassword.Password.Trim();
             _User.IsActive = chkIsActive.IsChecked == true; 
 
             if (_User.Save())
             {
+                _Mode = enMode.Edit;
+                lblUserID.Content = _User.UserID.ToString();
+                txtTitle.Content = "Update User";
+
+                if (_User.UserID == clsGlobal.CurrentUser.UserID) clsGlobal.CurrentUser = _User;
+
+                OnPersonSaved?.Invoke();
+
+
                 MessageBox.Show("User saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
                 MessageBox.Show("Failed to save user.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            _Mode = enMode.Edit; 
-            OnPersonSaved?.Invoke(); 
         }
     }
 }

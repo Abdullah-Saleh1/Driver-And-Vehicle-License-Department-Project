@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace DVLD_DataAccessLayer
 {
-    public static class clsPersonDataAccess
+    public static class clsPersonData
     {
         public static DataTable GetAllPeople()  
         {

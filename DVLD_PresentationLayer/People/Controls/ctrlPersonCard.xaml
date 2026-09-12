@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Width="800" Height="Auto">
 
-    <Border CornerRadius="10" Background="White" Padding="10">
+    <Border Background="White" Padding="10">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

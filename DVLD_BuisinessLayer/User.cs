@@ -7,29 +7,31 @@ namespace DVLD_BuisinessLayer
 {
     public class clsUser
     {
-
-        public enum enIsActive { Active = 1, InActive = 0 };
         enum enMode { AddNew, Update };
         enMode _Mode = enMode.AddNew;
         public int UserID { get; private set; }
 
-        private int _PersonID; 
+        private int _PersonID;
+
         public int PersonID 
         { 
             get { return _PersonID; }
-            set
-                {
-                    _PersonID = value;
-                    PersonInfo = clsPerson.Find(_PersonID); 
-                }
+            set { _PersonID = value;  }
+        }
+
+        private clsPerson _PersonInfo; 
+        public clsPerson PersonInfo
+        {
+            get {
+                if (_PersonInfo == null) _PersonInfo = clsPerson.Find(_PersonID); 
+                return _PersonInfo;
+            }
         }
         public string UserName { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }
 
-        public clsPerson PersonInfo { get; set; }
 
-        
 
         public clsUser()
         {
@@ -39,9 +41,7 @@ namespace DVLD_BuisinessLayer
             this.PersonID = -1;
             this.UserName = "";
             this.Password = ""; 
-            this.IsActive = ((byte)enIsActive.Active == 1);
-
-            this.PersonInfo = new clsPerson(); 
+            this.IsActive = true;
         }
 
         private clsUser(int UserID, int PersonID, string UserName, string Password, bool IsActive)
@@ -54,16 +54,16 @@ namespace DVLD_BuisinessLayer
             this.Password = Password;
             this.IsActive = IsActive;
 
-            this.PersonInfo = clsPerson.Find(PersonID);  
+            //this.PersonInfo = clsPerson.Find(PersonID);  
         }
 
 
-        static public clsUser Find(string UserName, string Password) 
+        static public clsUser FindByUsernameAndPassword(string UserName, string Password) 
         {
             int UserID = -1, PersonID = -1;
             bool IsActive = false;
 
-            if (clsUserDataAccess.GetUser(UserName, Password, ref UserID, ref PersonID, ref IsActive))
+            if (clsUserData.GetUserByUsernameAndPassword(UserName, Password, ref UserID, ref PersonID, ref IsActive))
             {
                 return new clsUser(UserID, PersonID, UserName, Password, IsActive);
             }
@@ -71,14 +71,29 @@ namespace DVLD_BuisinessLayer
             return null; 
         }
 
-        static public clsUser Find(int UserID)
+        static public clsUser FindByUserID(int UserID)
         {
             int PersonID = -1;
             string Password = ""; 
             string UserName = ""; 
             bool IsActive = false;
 
-            if (clsUserDataAccess.GetUser(UserID, ref Password, ref UserName, ref PersonID, ref IsActive))
+            if (clsUserData.GetUserByUserID(UserID, ref Password, ref UserName, ref PersonID, ref IsActive))
+            {
+                return new clsUser(UserID, PersonID, UserName, Password, IsActive);
+            }
+
+            return null;
+        }
+
+        static public clsUser FindByPersonID(int PersonID)
+        {
+            int UserID = -1;
+            string Password = "";
+            string UserName = "";
+            bool IsActive = false;
+
+            if (clsUserData.GetUserByPersonID(PersonID, ref UserID, ref Password, ref UserName, ref IsActive))
             {
                 return new clsUser(UserID, PersonID, UserName, Password, IsActive);
             }
@@ -89,30 +104,43 @@ namespace DVLD_BuisinessLayer
 
         static public DataTable GetAllUsers()
         {
-            return clsUserDataAccess.GetAllUsers(); 
+            return clsUserData.GetAllUsers(); 
         }
 
-        static public bool IsUserNameExist(string UserName)
+        static public bool IsUserExists(string UserName)
         {
-            return clsUserDataAccess.IsUserNameExist(UserName);
+            return clsUserData.IsUserExists(UserName);
+        }
+        static public bool IsUserExists(int UserID)
+        {
+            return clsUserData.IsUserExists(UserID);
+        }
+        static public bool IsUserExistsForPersonID(int PersonID)
+        {
+            return clsUserData.IsUserExistsForPersonID(PersonID);
         }
 
         public bool AddNewUser()
         {
-            this.UserID = clsUserDataAccess.AddNewUser(PersonID, UserName, Password, IsActive);
+            this.UserID = clsUserData.AddNewUser(PersonID, UserName, Password, IsActive);
 
             return this.UserID != -1; 
         }
 
         public bool UpdateUser()
         {
-            return clsUserDataAccess.UpdateUser(UserID, PersonID, UserName, Password, IsActive);
+            return clsUserData.UpdateUser(UserID, PersonID, UserName, Password, IsActive);
         }
 
         static public bool Delete(int UserID) 
         {
 
-            return clsUserDataAccess.DeleteUser(UserID);
+            return clsUserData.DeleteUser(UserID);
+        }
+
+        static public bool ChangePassword(int UserID, string NewPassword)
+        {
+            return clsUserData.ChangePassword(UserID, NewPassword); 
         }
 
         

@@ -64,6 +64,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Applications\ApplicationTypes\winEditApplicationType.xaml.cs">
+      <DependentUpon>winEditApplicationType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\ApplicationTypes\winManageApplicationTypes.xaml.cs">
+      <DependentUpon>winManageApplicationTypes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Global Classes\clsGlobal.cs" />
     <Compile Include="Users\Controls\ctrlUserCard.xaml.cs">
       <DependentUpon>ctrlUserCard.xaml</DependentUpon>
@@ -80,6 +86,14 @@
     <Compile Include="Users\winUserInfo.xaml.cs">
       <DependentUpon>winUserInfo.xaml</DependentUpon>
     </Compile>
+    <Page Include="Applications\ApplicationTypes\winEditApplicationType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\ApplicationTypes\winManageApplicationTypes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login\winLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +229,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Login\Credentials.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Applications\Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

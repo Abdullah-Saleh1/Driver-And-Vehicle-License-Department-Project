@@ -87,7 +87,7 @@
                                         <MenuItem Header="Release Detained License"/>
                                     </MenuItem>
 
-                                    <MenuItem Header="Manage Application Types"/>
+                                    <MenuItem Header="Manage Application Types" x:Name="btnManageApplicationTypes" Click="btnManageApplicationTypes_Click"/>
                                     <MenuItem Header="Manage Test Types"/>
 
                                 </ContextMenu>

@@ -4,10 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DVLD_PresentationLayer.Users.Controls"
+             xmlns:uc="clr-namespace:DVLD_PresentationLayer.People.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="750">
+             d:DesignHeight="450" d:DesignWidth="750">
     <Grid>
-        <Border CornerRadius="10" Background="White" Padding="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <uc:ctrlPersonCard x:Name="ctrlPersonCard1" Grid.Row="0"/>
+
+        <Border Background="White" Padding="10" Grid.Row="1">
 
             <Grid>
                 <Grid.ColumnDefinitions>

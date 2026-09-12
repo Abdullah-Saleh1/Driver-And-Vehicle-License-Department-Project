@@ -49,15 +49,15 @@ namespace DVLD_PresentationLayer.Users
             }
         }
 
-        private void NotReady(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("This Feature is Not Implemented Yet!", "Not Ready!", MessageBoxButton.OK, MessageBoxImage.Warning);
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _LoadUsers();
-            _JustifyColumns(); 
+            _JustifyColumns();
+        }
+
+        private void NotReady(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("This Feature is Not Implemented Yet!", "Not Ready!", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -69,15 +69,33 @@ namespace DVLD_PresentationLayer.Users
         {
             return dgUsers.SelectedItems.Count > 0;
         }
-        private void dgUsers_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            // show details
 
+        private void ShowDetails(object sender, RoutedEventArgs e)
+        {
             if (!_IsUserSelected())
             {
                 MessageBox.Show("Please select a person to show details.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
+
+            int PersonID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["PersonID"]);
+            int UserID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["UserID"]);
+
+            winUserInfo UserInfo = new winUserInfo(UserID);
+
+            UserInfo.OnPersonUpdated += _LoadUsers;
+
+            UserInfo.ShowDialog();
+        }
+        private void dgUsers_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (!_IsUserSelected())
+            {
+                MessageBox.Show("Please select a person to show details.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            ShowDetails(null, null); 
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
@@ -101,8 +119,7 @@ namespace DVLD_PresentationLayer.Users
             int PersonID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["PersonID"]);
             int UserID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["UserID"]);
 
-            winAddEditUser AddEditUser = new winAddEditUser(UserID, PersonID);
-            AddEditUser.ctrlPersonCardWithFilter1.FilterEnabled = false; 
+            winAddEditUser AddEditUser = new winAddEditUser(UserID);
             AddEditUser.OnPersonSaved += _LoadUsers; // Subscribe to the event  
             AddEditUser.ShowDialog();
         }
@@ -140,6 +157,8 @@ namespace DVLD_PresentationLayer.Users
         }
 
 
+
+
         private void _ClearFilters()
         {
             _UsersData.DefaultView.RowFilter = "";
@@ -149,9 +168,9 @@ namespace DVLD_PresentationLayer.Users
         private void cbUsersFilter_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 
-            _ClearFilters(); 
+            _ClearFilters();
 
-            if (cbUsersFilter.SelectedIndex == 5)
+            if (cbUsersFilter.SelectedIndex == 5) // Is Active
             {
                 txtSearch.Visibility = Visibility.Collapsed; 
                 cbActiveFilter.Visibility = Visibility.Visible; 
@@ -176,8 +195,9 @@ namespace DVLD_PresentationLayer.Users
         {
             if (cbActiveFilter.SelectedIndex == 0)
             {
-                _UsersData.DefaultView.RowFilter = ""; 
-            } else if (cbActiveFilter.SelectedIndex == 1)
+                _UsersData.DefaultView.RowFilter = "";
+            }
+            else if (cbActiveFilter.SelectedIndex == 1)
             {
                 _UsersData.DefaultView.RowFilter = "IsActive = 1"; 
             } else
@@ -193,18 +213,19 @@ namespace DVLD_PresentationLayer.Users
             if (ColumnName == "UserID" || ColumnName == "PersonID")
             {
                 // Number
-                _UsersData.DefaultView.RowFilter = $"{ColumnName} = {txtSearch.Text}"; 
-
+                _UsersData.DefaultView.RowFilter = $"{ColumnName} = {txtSearch.Text}";
             } else
             {
                 // String
-                _UsersData.DefaultView.RowFilter = $"{ColumnName} Like '%{txtSearch.Text}%'"; 
+                _UsersData.DefaultView.RowFilter = $"{ColumnName} Like '%{txtSearch.Text}%'";
             }
+
+            _UpdateRecordsCount();
         }
 
         private void txtSearch_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if (txtSearch.Text == string.Empty)
+            if (txtSearch.Text == "")
             {
                 _ClearFilters(); 
                 return;
@@ -213,25 +234,6 @@ namespace DVLD_PresentationLayer.Users
 
             string ColumnName = ((ComboBoxItem)cbUsersFilter.SelectedItem).Content.ToString().Replace(" ", ""); // Get the selected filter column
             _ApplyFilter(ColumnName);
-            _UpdateRecordsCount(); 
-        }
-
-        private void ShowDetails(object sender, RoutedEventArgs e)
-        {
-            if (!_IsUserSelected())
-            {
-                MessageBox.Show("Please select a person to show details.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            int PersonID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["PersonID"]);
-            int UserID  = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["UserID"]);
-
-            winUserInfo UserInfo = new winUserInfo(UserID, PersonID);
-
-            UserInfo.OnPersonUpdated += _LoadUsers;
-
-            UserInfo.ShowDialog(); 
         }
 
         private void txtSearch_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -261,8 +263,8 @@ namespace DVLD_PresentationLayer.Users
             int PersonID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["PersonID"]);
             int UserID = Convert.ToInt32((dgUsers.SelectedItem as DataRowView)["UserID"]);
 
-            winChangePassword ChangePassword = new winChangePassword(PersonID, UserID);
-            ChangePassword.ShowDialog(); // Send the User ID Here 
+            winChangePassword ChangePassword = new winChangePassword(UserID);
+            ChangePassword.ShowDialog();
         }
 
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DVLD_BuisinessLayer;
+using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,17 +22,21 @@ namespace DVLD_PresentationLayer.Users
     public partial class winUserInfo : Window
     {
 
+        private int _UserID; 
 
         public event Action OnPersonUpdated; 
-        public winUserInfo(int UserID, int PersonID)
+        public winUserInfo(int UserID)
         {
             InitializeComponent();
+            _UserID = UserID; 
 
-            ctrlPersonCard1.LoadPersonInfo(PersonID);
-            ctrlUserCard1.LoadUserInfo(UserID);
-
-            ctrlPersonCard1.OnPersonUpdated += () => OnPersonUpdated?.Invoke(); 
+            // Pass The Action 
+            ctrlUserCard1.ctrlPersonCard1.OnPersonUpdated += () => OnPersonUpdated?.Invoke();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ctrlUserCard1.LoadUserInfo(_UserID);
+        }
     }
 }

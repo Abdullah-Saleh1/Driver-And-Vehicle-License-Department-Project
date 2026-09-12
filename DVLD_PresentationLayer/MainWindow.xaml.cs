@@ -1,4 +1,5 @@
-﻿using DVLD_PresentationLayer.Global_Classes;
+﻿using DVLD_PresentationLayer.Applications.ApplicationTypes;
+using DVLD_PresentationLayer.Global_Classes;
 using DVLD_PresentationLayer.Login;
 using DVLD_PresentationLayer.People;
 using DVLD_PresentationLayer.Users;
@@ -55,11 +56,9 @@ namespace DVLD_PresentationLayer
 
         private void btnSignOut_Click(object sender, RoutedEventArgs e)
         {
-
+            clsGlobal.CurrentUser = null; 
             winLogin Login = new winLogin();
-
             Login.Show(); 
-
             this.Close(); 
         }
 
@@ -71,16 +70,22 @@ namespace DVLD_PresentationLayer
 
         private void btnCurrentUserInfo_Click(object sender, RoutedEventArgs e)
         {
-            winUserInfo UserInfo = new winUserInfo(clsGlobal.CurrentUser.UserID, clsGlobal.CurrentUser.PersonID);
+            winUserInfo UserInfo = new winUserInfo(clsGlobal.CurrentUser.UserID);
 
             UserInfo.ShowDialog(); 
         }
 
         private void btnChangePassword_Click(object sender, RoutedEventArgs e)
         {
-            winChangePassword ChangePassword = new winChangePassword(clsGlobal.CurrentUser.PersonID, clsGlobal.CurrentUser.UserID);
+            winChangePassword ChangePassword = new winChangePassword(clsGlobal.CurrentUser.UserID);
 
             ChangePassword.ShowDialog(); 
+        }
+
+        private void btnManageApplicationTypes_Click(object sender, RoutedEventArgs e)
+        {
+            winManageApplicationTypes winManageApplicationTypes = new winManageApplicationTypes();
+            winManageApplicationTypes.ShowDialog();
         }
     }
 }

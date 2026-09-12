@@ -9,7 +9,7 @@
         
         xmlns:uc="clr-namespace:DVLD_PresentationLayer.People.Controls"
         
-        Title="winAddEditUser" Height="670" Width="820">
+        Title="winAddEditUser" Height="670" Width="820" Loaded="Window_Loaded">
     
     
     <!--
@@ -73,7 +73,7 @@
                     <!-- UserID -->
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <Label Content="UserID:" Width="130" HorizontalContentAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
-                        <Label Content=""  Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <Label Content="" x:Name="lblUserID" Margin="10,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <!-- UserName -->

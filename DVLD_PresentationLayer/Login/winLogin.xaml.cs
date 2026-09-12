@@ -12,6 +12,7 @@ namespace DVLD_PresentationLayer.Login
     /// </summary>
     public partial class winLogin : Window
     {
+        static string CredentialsPath = "D:\\C#\\Course 19 DVLD\\DVLD\\DVLD_PresentationLayer\\Login\\Credentials.txt"; 
         public winLogin()
         {
             InitializeComponent();
@@ -21,9 +22,6 @@ namespace DVLD_PresentationLayer.Login
         {
             util.HandlePasswordBoxPlaceHolder(sender, e);
         }
-
-        static string CredentialsPath = "D:\\C#\\Course 19 DVLD\\DVLD\\DVLD_PresentationLayer\\Login\\Credentials.txt";
-
 
         private void _HandleRememberMe()
         {
@@ -38,16 +36,13 @@ namespace DVLD_PresentationLayer.Login
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
-            _HandleRememberMe();
-
             if (string.IsNullOrWhiteSpace(txtUserName.Text) || string.IsNullOrWhiteSpace(txtPassword.Password))
             {
                 MessageBox.Show("Please enter both Username and Password.", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            clsUser User = clsUser.Find(txtUserName.Text, txtPassword.Password);
+            clsUser User = clsUser.FindByUsernameAndPassword(txtUserName.Text, txtPassword.Password);
 
             if (User == null)
             {
@@ -60,6 +55,8 @@ namespace DVLD_PresentationLayer.Login
                 MessageBox.Show("This User is InActive, Please Contact Your Admin.");
                 return;
             }
+
+            _HandleRememberMe();
 
             clsGlobal.CurrentUser = User; 
 
