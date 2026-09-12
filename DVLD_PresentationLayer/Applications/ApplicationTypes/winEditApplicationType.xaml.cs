@@ -1,4 +1,5 @@
 ﻿using DVLD_BuisinessLayer;
+using DVLD_PresentationLayer.Global_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace DVLD_PresentationLayer.Applications.ApplicationTypes
                 txtTitle.Focus();
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(txtFees.Text) || !float.TryParse(txtFees.Text, out float fees) || fees < 0)
+            if (string.IsNullOrWhiteSpace(txtFees.Text) || !clsValidation.IsNumber(txtFees.Text) || float.Parse(txtFees.Text) < 0)
             {
                 MessageBox.Show("Please enter a valid non-negative fee.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 txtFees.Focus();
