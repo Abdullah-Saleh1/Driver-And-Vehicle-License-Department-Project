@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DVLD_PresentationLayer.Applications.ApplicationTypes"
         mc:Ignorable="d"
-        Title="winManageApplicationTypes" Height="450" Width="650" Loaded="Window_Loaded">
-    <Grid>
+        Title="winManageApplicationTypes" Height="500" Width="600" Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -16,11 +17,11 @@
         <Label Content="Manage Application Types" Style="{StaticResource TitleLabelStyle}"/>
 
 
-        <DataGrid Grid.Row="1" ColumnWidth="*" x:Name="dgApplicationTypes" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True" MouseDoubleClick="dgPeople_MouseDoubleClick">
+        <DataGrid Grid.Row="1" ColumnWidth="*" x:Name="dgApplicationTypes" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True">
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Edit Application Type" Click="EditApplicationType"/>
+                    <MenuItem x:Name="btnEditApplicationType" Header="Edit Application Type" Click="EditApplicationType"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
@@ -35,7 +36,7 @@
 
             <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" >Records:</Label>
             <Label VerticalAlignment="Center" HorizontalAlignment="Right" x:Name="lblRecordsCount" FontSize="14">5</Label>
-            <Button x:Name="btnClose" Grid.Column="2" Content="Close" Width="70" Click="btnClose_Click" Style="{StaticResource Btn}" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Center"/>
+            <Button x:Name="btnClose" Grid.Column="2" Content="Close" Width="70" Click="btnClose_Click" Style="{StaticResource Btn}" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Center" IsCancel="True"/>
         </Grid>
 
     </Grid>

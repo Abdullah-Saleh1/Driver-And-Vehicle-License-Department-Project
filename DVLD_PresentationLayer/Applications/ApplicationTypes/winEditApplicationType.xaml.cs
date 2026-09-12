@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD_BuisinessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,9 @@ namespace DVLD_PresentationLayer.Applications.ApplicationTypes
     public partial class winEditApplicationType : Window
     {
 
+        public event Action OnApplicationTypeUpdated;
         private int _ApplicationTypeID;
+        private clsApplicationType _ApplicationType;
         public winEditApplicationType(int ApplicationTypeID)
         {
             InitializeComponent();
@@ -31,17 +34,61 @@ namespace DVLD_PresentationLayer.Applications.ApplicationTypes
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lblID.Content = _ApplicationTypeID.ToString();
-            
+
+            _ApplicationType = clsApplicationType.FindApplicationTypeByID(_ApplicationTypeID);
+
+            if (_ApplicationType != null)
+            {
+                txtTitle.Text = _ApplicationType.Title;
+                txtFees.Text = _ApplicationType.Fees.ToString(); 
+            }
+        }
+        private bool _ValidateFields()
+        {
+            if (string.IsNullOrWhiteSpace(txtTitle.Text))
+            {
+                MessageBox.Show("Please enter a valid title.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtTitle.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtFees.Text) || !float.TryParse(txtFees.Text, out float fees) || fees < 0)
+            {
+                MessageBox.Show("Please enter a valid non-negative fee.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtFees.Focus();
+                return false;
+            }
+
+            return true; 
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
-            this.Close(); 
+            this.Close();
         }
 
-        private void SavePerson(object sender, RoutedEventArgs e)
+        private void SaveApplicationType(object sender, RoutedEventArgs e)
         {
+            if (!_ValidateFields()) return; 
 
+            if (txtTitle.Text != _ApplicationType.Title || float.Parse(txtFees.Text) != _ApplicationType.Fees)
+            {
+                _ApplicationType.Title = txtTitle.Text.Trim();
+                _ApplicationType.Fees = Convert.ToSingle(txtFees.Text.Trim());
+
+                if (_ApplicationType.Save())
+                {
+                    MessageBox.Show("Application Type updated successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    OnApplicationTypeUpdated?.Invoke();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update Application Type.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No changes detected.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

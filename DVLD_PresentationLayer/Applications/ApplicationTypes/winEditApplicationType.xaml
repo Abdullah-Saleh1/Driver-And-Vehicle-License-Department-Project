@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DVLD_PresentationLayer.Applications.ApplicationTypes"
         mc:Ignorable="d"
-        Title="winEditApplicationType" Height="270" Width="450">
+        Title="winEditApplicationType" Height="300" Width="450" Loaded="Window_Loaded">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -29,7 +29,7 @@
         <!-- 2. ID Section -->
         <Label Content="ID:" Grid.Row="1" Grid.Column="0" 
                FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
-        <Label Content="2" x:Name="lblID" Grid.Row="1" Grid.Column="2" 
+        <Label Content="" x:Name="lblID" Grid.Row="1" Grid.Column="2" 
                FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
 
         <!-- 3. Title Section -->
@@ -59,7 +59,7 @@
                     Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,0,0">
 
             <Button x:Name="btnClose" Content="Close" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0, 0, 10, 0" Click="CloseWindow" IsCancel="True"/>
-            <Button x:Name="btnSave" Content="Save" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0" Click="SavePerson" IsDefault="True"/>
+            <Button x:Name="btnSave" Content="Save" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0" Click="SaveApplicationType" IsDefault="True"/>
         </StackPanel>
     </Grid>
 </Window>

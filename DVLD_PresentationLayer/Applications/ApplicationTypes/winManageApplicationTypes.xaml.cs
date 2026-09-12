@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD_BuisinessLayer;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -15,14 +16,39 @@ using System.Windows.Shapes;
 
 namespace DVLD_PresentationLayer.Applications.ApplicationTypes
 {
-    /// <summary>
-    /// Interaction logic for winManageApplicationTypes.xaml
-    /// </summary>
     public partial class winManageApplicationTypes : Window
     {
+
+        DataTable _ApplicationTypesData; 
         public winManageApplicationTypes()
         {
             InitializeComponent();
+        }
+
+        private void _UpdateRecordsCount()
+        {
+            lblRecordsCount.Content = dgApplicationTypes.Items.Count;
+        }
+
+        private void _JustifyColumns()
+        {
+            dgApplicationTypes.Columns[0].Width = 100;
+            //dgApplicationTypes.Columns[1].Width = 100;
+            dgApplicationTypes.Columns[2].Width = 120;
+
+
+            dgApplicationTypes.Columns[0].Header = "ID";
+            dgApplicationTypes.Columns[1].Header = "Title";
+            dgApplicationTypes.Columns[2].Header = "Fees";
+
+        }
+
+        private void _LoadApplicationTypesData()
+        {
+            _ApplicationTypesData = clsApplicationType.GetAllAplicationTypes();
+
+            dgApplicationTypes.ItemsSource = _ApplicationTypesData.DefaultView; 
+            _UpdateRecordsCount(); 
         }
 
         private void EditApplicationType(object sender, RoutedEventArgs e)
@@ -30,20 +56,18 @@ namespace DVLD_PresentationLayer.Applications.ApplicationTypes
             int ApplicationTypeID = Convert.ToInt32((dgApplicationTypes.SelectedItem as DataRowView)["ApplicationTypeID"]);
 
             winEditApplicationType winEditApplicationType = new winEditApplicationType(ApplicationTypeID);
+
+            winEditApplicationType.OnApplicationTypeUpdated += _LoadApplicationTypesData; 
+
             winEditApplicationType.ShowDialog(); 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // Load Application Types
-            lblRecordsCount.Content = dgApplicationTypes.Items.Count;
-
+            _LoadApplicationTypesData();
+            _JustifyColumns(); 
         }
 
-        private void dgPeople_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
