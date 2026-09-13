@@ -2,6 +2,7 @@
 using DVLD_PresentationLayer.Global_Classes;
 using DVLD_PresentationLayer.Login;
 using DVLD_PresentationLayer.People;
+using DVLD_PresentationLayer.Tests.Test_Types;
 using DVLD_PresentationLayer.Users;
 using System;
 using System.Windows;
@@ -86,6 +87,12 @@ namespace DVLD_PresentationLayer
         {
             winManageApplicationTypes winManageApplicationTypes = new winManageApplicationTypes();
             winManageApplicationTypes.ShowDialog();
+        }
+
+        private void btnManageTestTypes_Click(object sender, RoutedEventArgs e)
+        {
+            winManageTestTypes winManageTestTypes = new winManageTestTypes();
+            winManageTestTypes.ShowDialog(); 
         }
     }
 }

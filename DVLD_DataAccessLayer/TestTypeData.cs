@@ -5,13 +5,13 @@ using System.Data.SqlClient;
 
 namespace DVLD_DataAccessLayer
 {
-    public static class clsApplicationTypeData
+    public static class clsTestTypeData
     {
 
-        public static DataTable GetAllApplicationTypes()
+        public static DataTable GetAllTestTypes()
         {
             DataTable dt = new DataTable();
-            string query = @"select * from ApplicationTypes";
+            string query = @"select * from TestTypes";
             try
             {
                 using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
@@ -34,19 +34,19 @@ namespace DVLD_DataAccessLayer
             return dt;
         }
 
-        public static bool GetApplicationTypeInfoByID(int ApplicationTypeID, ref string Title, ref float Fees)
+        public static bool GetTestTypeInfoByID(int TestTypeID, ref string Title, ref string Description, ref float Fees)
         {
 
             bool IsFound = false;
 
-            string query = "SELECT ApplicationTypeTitle, ApplicationFees FROM ApplicationTypes WHERE ApplicationTypeID = @ApplicationTypeID";
+            string query = "SELECT TestTypeTitle, TestTypeDescription, TestTypeFees FROM TestTypes WHERE TestTypeID = @TestTypeID order by TestTypeID";
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
-                    command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
+                    command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
                     conn.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -54,8 +54,9 @@ namespace DVLD_DataAccessLayer
                         {
                             IsFound = true;
 
-                            Title = reader["ApplicationTypeTitle"].ToString();
-                            Fees = Convert.ToSingle(reader["ApplicationFees"]);
+                            Title = reader["TestTypeTitle"].ToString();
+                            Description = reader["TestTypeDescription"].ToString();
+                            Fees = Convert.ToSingle(reader["TestTypeFees"]);
                         }
                         else
                         {
@@ -72,15 +73,15 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
-        public static int AddNewApplicationType(string Title, float Fees)
+        public static int AddNewTestType(string Title, string Description, float Fees)
         {
-            string query = @"INSERT INTO ApplicationTypes 
-                     (ApplicationTypeTitle, ApplicationFees) 
+            string query = @"INSERT INTO TestTypes 
+                     (TestTypeTitle, TestTypeDescription, TestFees) 
                      VALUES 
-                     (@Title, @Fees); 
+                     (@Title, @Description, @Fees); 
                      SELECT SCOPE_IDENTITY();";
 
-            int ApplicationTypeID = -1;
+            int TestTypeID = -1;
 
             try
             {
@@ -88,6 +89,7 @@ namespace DVLD_DataAccessLayer
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@Title", Title);
+                    command.Parameters.AddWithValue("@Description", Description);
                     command.Parameters.AddWithValue("@Fees", Fees);
 
                     conn.Open();
@@ -95,33 +97,35 @@ namespace DVLD_DataAccessLayer
 
                     if (InsertedID != null && int.TryParse(InsertedID.ToString(), out int insertedID))
                     {
-                        ApplicationTypeID = insertedID;
+                        TestTypeID = insertedID;
                     }
                 }
             }
             catch (Exception ex)
             {
                 // Logging error later
-                return ApplicationTypeID; // هترجع -1 لو حصلت مشكلة
+                return TestTypeID; // هترجع -1 لو حصلت مشكلة
             }
 
-            return ApplicationTypeID;
+            return TestTypeID;
         }
 
-        public static bool UpdateApplicationType(int ApplicationTypeID, string Title, float Fees)
+        public static bool UpdateTestType(int TestTypeID, string Title, string Description, float Fees)
         {
-            string query = @"UPDATE ApplicationTypes 
-                     SET ApplicationTypeTitle = @Title, 
-                         ApplicationFees = @Fees 
-                     WHERE ApplicationTypeID = @ApplicationTypeID";
+            string query = @"UPDATE TestTypes 
+                     SET TestTypeTitle = @Title, 
+                         TestTypeDescription = @Description, 
+                         TestTypeFees = @Fees 
+                     WHERE TestTypeID = @TestTypeID";
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
-                    command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
+                    command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
                     command.Parameters.AddWithValue("@Title", Title);
+                    command.Parameters.AddWithValue("@Description", Description);
                     command.Parameters.AddWithValue("@Fees", Fees);
 
                     conn.Open();

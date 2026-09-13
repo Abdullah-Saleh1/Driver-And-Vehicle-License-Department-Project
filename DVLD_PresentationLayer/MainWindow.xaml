@@ -88,7 +88,7 @@
                                     </MenuItem>
 
                                     <MenuItem Header="Manage Application Types" x:Name="btnManageApplicationTypes" Click="btnManageApplicationTypes_Click"/>
-                                    <MenuItem Header="Manage Test Types"/>
+                                    <MenuItem Header="Manage Test Types" x:Name="btnManageTestTypes" Click="btnManageTestTypes_Click"/>
 
                                 </ContextMenu>
                             </Button.ContextMenu>

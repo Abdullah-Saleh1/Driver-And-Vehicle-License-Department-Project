@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationTypeData.cs" />
+    <Compile Include="TestTypeData.cs" />
     <Compile Include="CountryData.cs" />
     <Compile Include="DataAccessSettings.cs" />
     <Compile Include="PersonData.cs" />

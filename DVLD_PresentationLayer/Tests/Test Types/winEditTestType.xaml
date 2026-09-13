@@ -1,0 +1,76 @@
+﻿<Window x:Class="DVLD_PresentationLayer.Tests.Test_Types.winEditTestType"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DVLD_PresentationLayer.Tests.Test_Types"
+        mc:Ignorable="d"
+        Title="winEditTestType" Height="400" Width="450" Loaded="Window_Loaded">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- 1. Header Title -->
+        <Label Content="Update Test Type" 
+               Grid.Row="0" Grid.ColumnSpan="3"
+               Style="{StaticResource TitleLabelStyle}"/>
+
+        <!-- 2. ID Section -->
+        <Label Content="ID:" Grid.Row="1" Grid.Column="0" 
+               FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
+        <Label Content="" x:Name="lblID" Grid.Row="1" Grid.Column="2" 
+               FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
+
+        <!-- 3. Title Section -->
+        <Label Content="Title:" Grid.Row="2" Grid.Column="0" 
+               FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Margin="0,10,0,0"/>
+
+        <!-- Icon Placeholder -->
+        <Label Content="📄" Grid.Row="2" Grid.Column="1" Foreground="{StaticResource BrushAccent}"
+               FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+
+        <TextBox x:Name="txtTitle" Grid.Row="2" Grid.Column="2" 
+                 FontSize="14" Padding="4" Height="30" VerticalContentAlignment="Center" Margin="0,10,0,0"/>
+        
+        <!-- Description Section -->
+        <Label Content="Description:" Grid.Row="3" Grid.Column="0" 
+               FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Margin="0,10,0,0"/>
+
+        <TextBox x:Name="txtDescription" Grid.Row="3" Grid.Column="2" 
+                 FontSize="14" Padding="4" Height="Auto" Margin="0,10,0,0"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True" 
+                 VerticalScrollBarVisibility="Auto"/>
+
+        <!-- 4. Fees Section -->
+        <Label Content="Fees:" Grid.Row="4" Grid.Column="0" 
+               FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Margin="0,10,0,0"/>
+
+        <!-- Icon Placeholder -->
+        <Label Content="💵" Grid.Row="4" Grid.Column="1" Foreground="{StaticResource BrushAccent}"
+               FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+
+        <TextBox x:Name="txtFees" Grid.Row="4" Grid.Column="2" 
+                 FontSize="14" Padding="4" Height="30" VerticalContentAlignment="Center" Margin="0,10,0,0"/>
+
+        <!-- 5. Action Buttons -->
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="3" 
+                    Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,0,0">
+
+            <Button x:Name="btnClose" Content="Close" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0, 0, 10, 0" Click="CloseWindow" IsCancel="True"/>
+            <Button x:Name="btnSave" Content="Save" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0" Click="SaveApplicationType" IsDefault="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

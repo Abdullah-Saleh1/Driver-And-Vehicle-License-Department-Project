@@ -1,33 +1,36 @@
 ﻿using DVLD_BuisinessLayer;
 using DVLD_PresentationLayer.Global_Classes;
 using System;
-using System.Windows;
+using System.Net.Mail;
+using System.Windows; 
 
-namespace DVLD_PresentationLayer.Applications.ApplicationTypes
+namespace DVLD_PresentationLayer.Tests.Test_Types
 {
-    public partial class winEditApplicationType : Window
+    public partial class winEditTestType : Window
     {
 
-        public event Action OnApplicationTypeUpdated;
-        private int _ApplicationTypeID;
-        private clsApplicationType _ApplicationType;
-        public winEditApplicationType(int ApplicationTypeID)
+        public event Action OnTestTypeUpdated;
+        private clsTestType.enTestType _TestTypeID = clsTestType.enTestType.VisionTest;
+        private clsTestType _TestType; 
+
+        public winEditTestType(clsTestType.enTestType TestTypeID)
         {
             InitializeComponent();
 
-            _ApplicationTypeID = ApplicationTypeID;
+            _TestTypeID = TestTypeID; 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lblID.Content = _ApplicationTypeID.ToString();
+            lblID.Content = _TestTypeID.ToString(); 
 
-            _ApplicationType = clsApplicationType.FindApplicationTypeByID(_ApplicationTypeID);
+            _TestType = clsTestType.Find((clsTestType.enTestType)_TestTypeID);
 
-            if (_ApplicationType != null)
+            if (_TestType != null)
             {
-                txtTitle.Text = _ApplicationType.Title;
-                txtFees.Text = _ApplicationType.Fees.ToString(); 
+                txtTitle.Text = _TestType.Title;
+                txtDescription.Text = _TestType.Description;
+                txtFees.Text = _TestType.Fees.ToString();
             }
         }
         private bool _ValidateFields()
@@ -38,6 +41,14 @@ namespace DVLD_PresentationLayer.Applications.ApplicationTypes
                 txtTitle.Focus();
                 return false;
             }
+
+            if (string.IsNullOrEmpty(txtDescription.Text))
+            {
+                MessageBox.Show("Please enter a valid description.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtDescription.Focus();
+                return false; 
+            }
+
             if (string.IsNullOrWhiteSpace(txtFees.Text) || !clsValidation.IsNumber(txtFees.Text) || float.Parse(txtFees.Text) < 0)
             {
                 MessageBox.Show("Please enter a valid non-negative fee.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -45,7 +56,7 @@ namespace DVLD_PresentationLayer.Applications.ApplicationTypes
                 return false;
             }
 
-            return true; 
+            return true;
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
@@ -55,17 +66,18 @@ namespace DVLD_PresentationLayer.Applications.ApplicationTypes
 
         private void SaveApplicationType(object sender, RoutedEventArgs e)
         {
-            if (!_ValidateFields()) return; 
+            if (!_ValidateFields()) return;
 
-            if (txtTitle.Text != _ApplicationType.Title || float.Parse(txtFees.Text) != _ApplicationType.Fees)
+            if (txtTitle.Text != _TestType.Title || txtDescription.Text != _TestType.Description || float.Parse(txtFees.Text) != _TestType.Fees)
             {
-                _ApplicationType.Title = txtTitle.Text.Trim();
-                _ApplicationType.Fees = Convert.ToSingle(txtFees.Text.Trim());
+                _TestType.Title = txtTitle.Text.Trim();
+                _TestType.Description = txtDescription.Text.Trim(); 
+                _TestType.Fees = Convert.ToSingle(txtFees.Text.Trim());
 
-                if (_ApplicationType.Save())
+                if (_TestType.Save())
                 {
                     MessageBox.Show("Application Type updated successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    OnApplicationTypeUpdated?.Invoke();
+                    OnTestTypeUpdated?.Invoke();
                 }
                 else
                 {
