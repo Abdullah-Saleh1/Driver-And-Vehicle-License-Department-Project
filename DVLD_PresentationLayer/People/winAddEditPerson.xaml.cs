@@ -10,9 +10,6 @@ using DVLD_PresentationLayer.Global_Classes;
 
 namespace DVLD_PresentationLayer.People
 {
-    /// <summary>
-    /// Interaction logic for winAddEditPerson.xaml
-    /// </summary>
     public partial class winAddEditPerson : Window
     {
 

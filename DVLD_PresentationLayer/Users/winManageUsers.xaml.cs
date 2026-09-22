@@ -266,8 +266,5 @@ namespace DVLD_PresentationLayer.Users
             winChangePassword ChangePassword = new winChangePassword(UserID);
             ChangePassword.ShowDialog();
         }
-
-
-
     }
 }

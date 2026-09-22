@@ -1,4 +1,5 @@
 ﻿using DVLD_PresentationLayer.Applications.ApplicationTypes;
+using DVLD_PresentationLayer.Applications.LocalApplications;
 using DVLD_PresentationLayer.Global_Classes;
 using DVLD_PresentationLayer.Login;
 using DVLD_PresentationLayer.People;
@@ -93,6 +94,23 @@ namespace DVLD_PresentationLayer
         {
             winManageTestTypes winManageTestTypes = new winManageTestTypes();
             winManageTestTypes.ShowDialog(); 
+        }
+
+        private void btnManageLocalDrivingLicenseApplication_Click(object sender, RoutedEventArgs e)
+        {
+            winManageLocalDrivingLicenseApplications winLocalApplications = new winManageLocalDrivingLicenseApplications();
+            winLocalApplications.ShowDialog(); 
+        }
+
+        private void btnCreateNewLicense_Click(object sender, RoutedEventArgs e)
+        {
+            btnNewLocalDrivingLisenceApplication_Click(null, null); 
+        }
+
+        private void btnNewLocalDrivingLisenceApplication_Click(object sender, RoutedEventArgs e)
+        {
+            winNewLocalDrivingLilcenseApplication winNewLocalApplication = new winNewLocalDrivingLilcenseApplication();
+            winNewLocalApplication.ShowDialog();
         }
     }
 }

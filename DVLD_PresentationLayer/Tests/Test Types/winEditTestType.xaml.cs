@@ -22,12 +22,11 @@ namespace DVLD_PresentationLayer.Tests.Test_Types
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lblID.Content = _TestTypeID.ToString(); 
-
             _TestType = clsTestType.Find((clsTestType.enTestType)_TestTypeID);
 
             if (_TestType != null)
             {
+                lblID.Content = _TestTypeID.ToString();
                 txtTitle.Text = _TestType.Title;
                 txtDescription.Text = _TestType.Description;
                 txtFees.Text = _TestType.Fees.ToString();

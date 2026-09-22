@@ -70,6 +70,12 @@
     <Compile Include="Applications\ApplicationTypes\winManageApplicationTypes.xaml.cs">
       <DependentUpon>winManageApplicationTypes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Applications\LocalApplications\winManageLocalDrivingLicenseApplications.xaml.cs">
+      <DependentUpon>winManageLocalDrivingLicenseApplications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\LocalApplications\winNewLocalDrivingLilcenseApplication.xaml.cs">
+      <DependentUpon>winNewLocalDrivingLilcenseApplication.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Global Classes\clsGlobal.cs" />
     <Compile Include="Tests\Test Types\winEditTestType.xaml.cs">
       <DependentUpon>winEditTestType.xaml</DependentUpon>
@@ -97,6 +103,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Applications\ApplicationTypes\winManageApplicationTypes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\LocalApplications\winManageLocalDrivingLicenseApplications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\LocalApplications\winNewLocalDrivingLilcenseApplication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -65,7 +65,7 @@
                     <MenuItem Header="Add New User" Click="btnAddUser_Click"/>
                     <MenuItem Header="Edit" Click="EditUser"/>
                     <MenuItem Header="Delete" Click="DeleteUser"/>
-                    <MenuItem Header="Change Password" Click="ChangePassword"/>
+                    <MenuItem x:Name="btnChangePassword" Header="Change Password" Click="ChangePassword"/>
                     <Separator/>
                     <MenuItem Header="Send Email" Click="NotReady"/>
                     <MenuItem Header="Phone Call" Click="NotReady"/>

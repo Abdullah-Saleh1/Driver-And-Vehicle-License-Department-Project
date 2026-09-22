@@ -66,7 +66,7 @@
 
                                     <MenuItem Header="Driving Licenses Services">
                                         <MenuItem Header="New Driving License">
-                                            <MenuItem Header="Local License"/>
+                                            <MenuItem x:Name="btnNewLocalDrivingLisenceApplication" Header="Local License" Click="btnNewLocalDrivingLisenceApplication_Click"/>
                                             <MenuItem Header="International License"/>
                                         </MenuItem>
 
@@ -77,7 +77,7 @@
                                     </MenuItem>
 
                                     <MenuItem Header="Manage Applications">
-                                        <MenuItem Header="Local Driving License Applications"/>
+                                        <MenuItem Header="Local Driving License Applications" x:Name="btnManageLocalDrivingLicenseApplication" Click="btnManageLocalDrivingLicenseApplication_Click" />
                                         <MenuItem Header="International Driving License Applications"/>
                                     </MenuItem>
 
@@ -213,9 +213,10 @@
                         
 
                         <Button Style="{StaticResource Btn}" 
+                            x:Name="btnCreateNewLicense"
                             Height="45"
                             FontSize="18"
-                            Cursor="Hand">
+                            Cursor="Hand" Click="btnCreateNewLicense_Click">
 
                             <StackPanel Orientation="Horizontal">
 

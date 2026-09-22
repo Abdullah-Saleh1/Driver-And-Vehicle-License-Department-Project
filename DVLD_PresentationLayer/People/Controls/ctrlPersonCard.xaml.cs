@@ -1,6 +1,5 @@
 ﻿using DVLD_BuisinessLayer;
 using System;
-using System.Data;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,9 +9,6 @@ using DVLD_PresentationLayer.Global_Classes;
 
 namespace DVLD_PresentationLayer.People.Controls
 {
-    /// <summary>
-    /// Interaction logic for ctrlPersonCard.xaml
-    /// </summary>
     public partial class ctrlPersonCard : UserControl
     {
         public ctrlPersonCard()
@@ -28,6 +24,7 @@ namespace DVLD_PresentationLayer.People.Controls
         private clsPerson _Person; 
 
         public clsPerson SelectedPersonInfo { get { return _Person; } }
+
 
         private void _LoadPersonImage()
         {
@@ -55,7 +52,7 @@ namespace DVLD_PresentationLayer.People.Controls
                 lblName.Content = _Person.FirstName + " " + _Person.LastName;
                 lblPersonID.Content = _Person.PersonID;
                 lblNational.Content = _Person.NationalNO; 
-                lblGender.Content = _Person.Gender;
+                lblGender.Content = _Person.GenderText;
                 lblEmail.Content = _Person.Email;
                 lblAddress.Content = _Person.Address; 
                 lblDateOfBirth.Content = _Person.DateOfBirth.Date.ToShortDateString();

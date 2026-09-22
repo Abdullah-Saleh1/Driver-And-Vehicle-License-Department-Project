@@ -72,6 +72,40 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
+        public static float GetApplicationFees(int ApplicationTypeID)
+        {
+            float fees = 0;
+
+            string query = @"SELECT ApplicationFees 
+                         FROM ApplicationTypes 
+                         WHERE ApplicationTypeID = @ApplicationTypeID";
+
+            using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
+
+                    try
+                    {
+                        connection.Open();
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && float.TryParse(result.ToString(), out float parsedFees))
+                        {
+                            fees = parsedFees;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        fees = 0;
+                    }
+                }
+            }
+
+            return fees;
+        }
+
         public static int AddNewApplicationType(string Title, float Fees)
         {
             string query = @"INSERT INTO ApplicationTypes 

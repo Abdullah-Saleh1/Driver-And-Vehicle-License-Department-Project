@@ -1,10 +1,5 @@
 ﻿using DVLD_DataAccessLayer;
-using System;
-using System.Configuration;
 using System.Data;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Permissions;
-using System.Security.Policy;
 
 namespace DVLD_BuisinessLayer
 {
@@ -61,6 +56,11 @@ namespace DVLD_BuisinessLayer
                 return new clsApplicationType(ApplicationTypeID, Title, Fees);
             }
             return null;
+        }
+
+        static public float GetApplicationFees(int ApplicationID)
+        {
+            return clsApplicationTypeData.GetApplicationFees(ApplicationID); 
         }
 
 

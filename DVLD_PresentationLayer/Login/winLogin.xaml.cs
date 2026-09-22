@@ -7,9 +7,6 @@ using DVLD_PresentationLayer.Global_Classes;
 
 namespace DVLD_PresentationLayer.Login
 {
-    /// <summary>
-    /// Interaction logic for winLogin.xaml
-    /// </summary>
     public partial class winLogin : Window
     {
         static string CredentialsPath = "D:\\C#\\Course 19 DVLD\\DVLD\\DVLD_PresentationLayer\\Login\\Credentials.txt"; 

@@ -66,7 +66,6 @@ namespace DVLD_BuisinessLayer
             return null;
         }
 
-
         public bool Save()
         {
             switch (_Mode)

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DVLD_PresentationLayer.Tests.Test_Types"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="winEditTestType" Height="400" Width="450" Loaded="Window_Loaded">
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -21,6 +22,8 @@
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <Rectangle Grid.RowSpan="6" Grid.ColumnSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
 
         <!-- 1. Header Title -->
         <Label Content="Update Test Type" 

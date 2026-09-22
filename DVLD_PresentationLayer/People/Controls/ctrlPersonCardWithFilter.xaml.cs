@@ -1,27 +1,12 @@
 ﻿using DVLD_BuisinessLayer;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DVLD_PresentationLayer.People.Controls
 {
-    /// <summary>
-    /// Interaction logic for ctrlPersonCardWithFilter.xaml
-    /// </summary>
     public partial class ctrlPersonCardWithFilter : UserControl
     {
 
@@ -56,6 +41,13 @@ namespace DVLD_PresentationLayer.People.Controls
         {
             get { return _ShowAddPerson; }
             set { _ShowAddPerson = value; btnAddPerson.Visibility = value ? Visibility.Visible : Visibility.Collapsed;  }
+        }
+
+        private bool _SearchByNationalNo; 
+
+        public bool SearchByNationalNo {
+            get { return _SearchByNationalNo; }
+            set { _SearchByNationalNo = value; cbFilterBy.SelectedIndex = _SearchByNationalNo ? 1 : 0; }
         }
 
 
@@ -137,12 +129,12 @@ namespace DVLD_PresentationLayer.People.Controls
         {
             Regex regex = new Regex(""); 
 
-            if (cbFilterBy.Text == "Person ID")
+            if (cbFilterBy.SelectedIndex == 0) // PersonID
             {
                 regex = new Regex("[^0-9]+");
             }
 
-            if (cbFilterBy.Text == "National No")
+            if (cbFilterBy.SelectedIndex == 1) // National No
             {
                 regex = new Regex("[^a-zA-Z0-9]+");
             }
