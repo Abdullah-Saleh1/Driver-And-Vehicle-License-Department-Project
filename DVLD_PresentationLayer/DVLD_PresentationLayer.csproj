@@ -70,11 +70,17 @@
     <Compile Include="Applications\ApplicationTypes\winManageApplicationTypes.xaml.cs">
       <DependentUpon>winManageApplicationTypes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Applications\Controls\ctrlLocalDrivinLicenseApplicationInfo.xaml.cs">
+      <DependentUpon>ctrlLocalDrivinLicenseApplicationInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\LocalApplications\winLocalDrivingLicenseApplicationInfo.xaml.cs">
+      <DependentUpon>winLocalDrivingLicenseApplicationInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Applications\LocalApplications\winManageLocalDrivingLicenseApplications.xaml.cs">
       <DependentUpon>winManageLocalDrivingLicenseApplications.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Applications\LocalApplications\winNewLocalDrivingLilcenseApplication.xaml.cs">
-      <DependentUpon>winNewLocalDrivingLilcenseApplication.xaml</DependentUpon>
+    <Compile Include="Applications\LocalApplications\winAddUpdateLocalDrivingLilcenseApplication.xaml.cs">
+      <DependentUpon>winAddUpdateLocalDrivingLilcenseApplication.xaml</DependentUpon>
     </Compile>
     <Compile Include="Global Classes\clsGlobal.cs" />
     <Compile Include="Tests\Test Types\winEditTestType.xaml.cs">
@@ -82,6 +88,12 @@
     </Compile>
     <Compile Include="Tests\Test Types\winManageTestTypes.xaml.cs">
       <DependentUpon>winManageTestTypes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\winScheduleTest.xaml.cs">
+      <DependentUpon>winScheduleTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\winTestAppointment.xaml.cs">
+      <DependentUpon>winTestAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Users\Controls\ctrlUserCard.xaml.cs">
       <DependentUpon>ctrlUserCard.xaml</DependentUpon>
@@ -106,11 +118,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Applications\Controls\ctrlLocalDrivinLicenseApplicationInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\LocalApplications\winLocalDrivingLicenseApplicationInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Applications\LocalApplications\winManageLocalDrivingLicenseApplications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Applications\LocalApplications\winNewLocalDrivingLilcenseApplication.xaml">
+    <Page Include="Applications\LocalApplications\winAddUpdateLocalDrivingLilcenseApplication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,6 +184,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tests\Test Types\winManageTestTypes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tests\winScheduleTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tests\winTestAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,8 +286,6 @@
   <ItemGroup>
     <Resource Include="Login\Credentials.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Applications\Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

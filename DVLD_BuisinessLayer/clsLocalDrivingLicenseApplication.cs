@@ -4,44 +4,55 @@ using System.Data;
 
 namespace DVLD_BuisinessLayer
 {
-    public class clsLocalDrivingLicenseApplication
+    public class clsLocalDrivingLicenseApplication : clsApplication
     {
 
         enum enMode { AddNew, Update}; 
         private enMode _Mode; 
-        public int ID;
+
+        public int LocalDrivingLicenseApplicationID;
         public int LicenseClassID;
-        public int ApplicationID;
 
-        private clsApplication _ApplicationInfo;
-
-        public clsApplication ApplicationInfo
+        private clsLicenseClass _LicenseClassInfo;
+        public clsLicenseClass LicenseClassInfo
         {
-            get {
-                    // Only Find the Application when the ApplicationInfo Object is NULL
-                    if (this._ApplicationInfo == null) _ApplicationInfo = clsApplication.Find(ApplicationID);
-                    return _ApplicationInfo;
-                }
-            set { _ApplicationInfo = value; }
+            get
+            {
+                if (this._LicenseClassInfo == null) _LicenseClassInfo = clsLicenseClass.Find(LicenseClassID);
+                return _LicenseClassInfo;
+            }
+            set { _LicenseClassInfo = value; }
         }
 
-        public clsLocalDrivingLicenseApplication()
+        public string PersonFullName
+        {
+            get { return base.PersonInfo.FullName; }
+        }
+
+        public clsLocalDrivingLicenseApplication() : base()
         {
             _Mode = enMode.AddNew;
 
-            this.ID = -1;
-            this.ApplicationID = -1;
+            this.LocalDrivingLicenseApplicationID = -1;
             this.LicenseClassID = -1;
-            this.ApplicationInfo = new clsApplication(); 
         }
-        private clsLocalDrivingLicenseApplication(int ID, int ApplicationID, int LicenseClassID)
+        private clsLocalDrivingLicenseApplication(
+            int LocalDrivingLicenseApplicationID,
+            int ApplicationID,
+            int ApplicantPersonID,
+            DateTime ApplicationDate,
+            int ApplicationTypeID,
+            enStatus ApplicationStatus,
+            DateTime LastStatusDate,
+            float PaidFees,
+            int CreatedByUserID,
+            int LicenseClassID) : base (ApplicationID, ApplicantPersonID, ApplicationDate, ApplicationTypeID,
+                                      ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID)
         {
             _Mode = enMode.Update;
 
-            this.ID = ID;
-            this.ApplicationID = ApplicationID;
-            this.LicenseClassID = LicenseClassID;
-            // this.ApplicationInfo = clsApplication.Find(ApplicationID);
+            this.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
+            this.LicenseClassID = LicenseClassID; 
         }
 
 
@@ -52,35 +63,124 @@ namespace DVLD_BuisinessLayer
 
         private bool _AddNewLocalDrivingLicenseApplication()
         {
-            this.ID = clsLocalDrivingLicenseApplicationData.AddNewLocalDrivingLicenseApplication(
+            this.LocalDrivingLicenseApplicationID = clsLocalDrivingLicenseApplicationData.AddNewLocalDrivingLicenseApplication(
                 this.ApplicationID, this.LicenseClassID);
 
 
-            return this.ID != -1;
+            return this.LocalDrivingLicenseApplicationID != -1;
         }
 
         private bool _UpdateLocalDrivingLicenseApplication()
         {
-            return clsLocalDrivingLicenseApplicationData.UpdateLocalDrivingLicenseApplication(ID, ApplicationID, LicenseClassID); 
+            return clsLocalDrivingLicenseApplicationData.UpdateLocalDrivingLicenseApplication(LocalDrivingLicenseApplicationID, ApplicationID, LicenseClassID); 
         }
 
-        static public int DoesHaveActiveApplication(int PersonID, int LicenseClassID)
+        public bool Delete()
         {
-            return clsLocalDrivingLicenseApplicationData.DoesHaveActiveApplication(PersonID, LicenseClassID); 
+            if (LocalDrivingLicenseApplicationID == -1 || ApplicationID == -1) return false; 
+
+            bool IsLocalDrivingApplicationDeleted = false;
+            bool IsBaseApplication = false;
+
+            IsLocalDrivingApplicationDeleted = clsLocalDrivingLicenseApplication.DeleteLocalDrivingLicenseApplication(LocalDrivingLicenseApplicationID);
+
+            if (!IsLocalDrivingApplicationDeleted) return false;
+
+            IsBaseApplication = base.DeleteApplication();
+
+            return IsBaseApplication; 
         }
 
-        public bool Save()
+
+        public new bool Save()
         {
+            base._Mode = (clsApplication.enMode)_Mode;
+
+            // Here we save the clsApplication for adding or updating
+            if (!base.Save()) return false; 
+
             switch (_Mode)
             {
                 case enMode.AddNew:
-                    _Mode = enMode.Update;
-                    return _AddNewLocalDrivingLicenseApplication();
+                    if (_AddNewLocalDrivingLicenseApplication())
+                    {
+                        _Mode = enMode.Update;
+                        return true; 
+                    }
+                    clsApplication.DeleteApplication(ApplicationID); // Roll back 
+                    return false; 
                 case enMode.Update:
                     return _UpdateLocalDrivingLicenseApplication();
                 default:
                     return false; 
             }
+        }
+
+        public static clsLocalDrivingLicenseApplication FindByLocalDrivingAppLicenseID(int LocalDrivingLicenseApplicationID)
+        {
+
+            int ApplicationID = -1, LicenseClassID = -1;
+
+            bool IsFound = clsLocalDrivingLicenseApplicationData.GetLocalDrivingLicenseApplicationInfoByID(LocalDrivingLicenseApplicationID, ref ApplicationID, ref LicenseClassID);
+
+            if (IsFound)
+            {
+                clsApplication Application = clsApplication.FindBaseApplication(ApplicationID);
+
+                return new clsLocalDrivingLicenseApplication(
+                    LocalDrivingLicenseApplicationID,
+                    ApplicationID,
+                    Application.ApplicantPersonID,
+                    Application.ApplicationDate,
+                    Application.ApplicationTypeID,
+                    Application.Status,
+                    Application.LastStatusDate,
+                    Application.PaidFees,
+                    Application.CreatedByUserID,
+                    LicenseClassID); 
+            }
+            return null;
+        }
+
+        public static clsLocalDrivingLicenseApplication FindByApplicationID(int ApplicationID)
+        {
+
+            int LocalDrivingLicenseApplicationID = -1, LicenseClassID = -1; 
+
+            bool IsFound =  clsLocalDrivingLicenseApplicationData.GetLocalDrivingLicenseApplicationInfoByApplicationID(ApplicationID, ref LocalDrivingLicenseApplicationID, ref LicenseClassID); 
+
+            if (IsFound)
+            {
+                clsApplication Application = clsApplication.FindBaseApplication(ApplicationID);
+
+                return new clsLocalDrivingLicenseApplication(
+                    LocalDrivingLicenseApplicationID,
+                    ApplicationID,
+                    Application.ApplicantPersonID,
+                    Application.ApplicationDate,
+                    Application.ApplicationTypeID,
+                    Application.Status,
+                    Application.LastStatusDate,
+                    Application.PaidFees,
+                    Application.CreatedByUserID,
+                    LicenseClassID);
+            }
+            return null;
+        }
+
+        public static bool DeleteLocalDrivingLicenseApplication(int LocalDrivingLicenseApplicationID)
+        {
+            return clsLocalDrivingLicenseApplicationData.DeleteLocalDrivingLicenseApplication(LocalDrivingLicenseApplicationID);
+        }
+
+        public int GetActiveLicenseID()
+        {
+            return clsLicense.GetActiveLicenseIDByPersonID(this.ApplicantPersonID, this.LicenseClassID); 
+        }
+
+        public int GetPassedTestCount()
+        {
+            return -1; // Placeholder for actual implementation
         }
     }
 }

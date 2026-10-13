@@ -18,6 +18,12 @@ namespace DVLD_BuisinessLayer
         public string SecondName { get; set; }
         public string ThirdName { get; set; }
         public string LastName { get; set; }
+
+        public string FullName
+        {
+            get { return FirstName + ' ' + SecondName + ' ' + ThirdName + ' ' + LastName; }
+        }
+
         public DateTime DateOfBirth { get; set; }
         public byte Gender { get; set; }
 
@@ -41,7 +47,6 @@ namespace DVLD_BuisinessLayer
             get { return _ImagePath; }
             set { _ImagePath = value; }
         }
-
 
         public clsPerson()
         {

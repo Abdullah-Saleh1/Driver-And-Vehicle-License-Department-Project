@@ -160,12 +160,8 @@ namespace DVLD_PresentationLayer.People
         {
             txtSearch.Visibility = (cbPeopleFilter.SelectedIndex != 0) ? Visibility.Visible : Visibility.Collapsed;
 
-            // when clearing the search the filter should be cleared as well
-            if (txtSearch.Visibility == Visibility.Visible)
-            {
-                txtSearch.Text = string.Empty; 
-                txtSearch.Focus();
-            }
+            txtSearch.Text = string.Empty; 
+            txtSearch.Focus();
         }
 
         private void _ApplyFilter(string ColumnName, string Query)

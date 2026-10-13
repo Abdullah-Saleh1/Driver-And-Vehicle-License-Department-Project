@@ -137,8 +137,11 @@ namespace DVLD_PresentationLayer.Users
                 return;
             }
 
-            // Check If Username is not the same as the current _User 
-            // And is not used by another user
+
+
+            // Check if the Username is changed
+            // And it's not used by another user
+
             if ((txtUserName.Text != _User?.UserName) && clsUser.IsUserExists(txtUserName.Text))
             {
                 MessageBox.Show("Username already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

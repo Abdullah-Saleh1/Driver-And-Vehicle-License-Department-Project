@@ -109,7 +109,7 @@ namespace DVLD_PresentationLayer
 
         private void btnNewLocalDrivingLisenceApplication_Click(object sender, RoutedEventArgs e)
         {
-            winNewLocalDrivingLilcenseApplication winNewLocalApplication = new winNewLocalDrivingLilcenseApplication();
+            winAddUpdateLocalDrivingLilcenseApplication winNewLocalApplication = new winAddUpdateLocalDrivingLilcenseApplication();
             winNewLocalApplication.ShowDialog();
         }
     }

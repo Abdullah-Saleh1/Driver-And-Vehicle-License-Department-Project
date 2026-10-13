@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,6 +42,47 @@ namespace DVLD_DataAccessLayer
             }
 
             return dt;
+        }
+
+        public static bool GetLicenseClassInfoByID(int LicenseClassID, ref string ClassName, ref string ClassDescription, ref byte MinimumAllowedAge, ref byte DefaultValidityLength, ref float ClassFees)
+        {
+            bool IsFound = false;
+            string query = "SELECT * FROM LicenseClasses WHERE LicenseClassID = @LicenseClassID";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+                    conn.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            IsFound = true;
+
+                            ClassName = reader["ClassName"].ToString();
+                            ClassDescription = reader["ClassDescription"] == DBNull.Value ? "" : reader["ClassDescription"].ToString();
+                            MinimumAllowedAge = Convert.ToByte(reader["MinimumAllowedAge"]);
+                            DefaultValidityLength = Convert.ToByte(reader["DefaultValidityLength"]);
+                            ClassFees = Convert.ToSingle(reader["ClassFees"]);
+                        }
+                        else
+                        {
+                            IsFound = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error
+                IsFound = false;
+            }
+
+            return IsFound;
         }
 
         public static int GetMinAllowedAgeByClassID(int LicenseClassID)

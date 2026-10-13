@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="DVLD_PresentationLayer.Applications.Controls.ctrlLocalDrivinLicenseApplicationInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Width="700" Height="Auto" Background="White">
+
+    <Grid>
+
+        <Rectangle Fill="{StaticResource CircuitPatternBrush}"/>
+
+        <Border Padding="10">
+            <StackPanel>
+
+                <!-- Section 1: Driving License Application Info -->
+                <Label Content="Driving License Application Info" Style="{StaticResource lblStyle}" Margin="0,0,0,10"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- D.L.App ID -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                        <Label Content="D.L.App ID:" Style="{StaticResource lblStyle}" Width="120"/>
+                        <Label x:Name="lblLocalDrivingLicenseAppID" Content="[???]" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+
+                    <!-- Applied For License -->
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                        <Label Content="Applied For License:" Style="{StaticResource lblStyle}" Width="160"/>
+                        <Label x:Name="lblAppliedForLicense" Content="[???]" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+
+                    <!-- Show License Info -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                        <Button x:Name="btnShowLicenseInfo" Content="Show License Info" Click="btnShowLicenseInfo_Click" Style="{StaticResource Btn}"/>
+                    </StackPanel>
+
+                    <!-- Passed Tests -->
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                        <Label Content="Passed Tests:" Style="{StaticResource lblStyle}" Width="160"/>
+                        <Label x:Name="lblPassedTests" Content="0" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <Separator Margin="0,10,0,0"/>
+
+                <!-- Section 2: Application Basic Info -->
+                <Label Content="Application Basic Info" Style="{StaticResource lblStyle}" Margin="0,0,0,10"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- ID -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                        <Label Content="ID:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label x:Name="lblApplicationID" Content="[???]" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+
+                    <!-- Date -->
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                        <Label Content="Date:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label x:Name="lblDate" Content="[???]" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+
+                    <!-- Status -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                        <Label Content="Status:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label x:Name="lblStatus" Content="[???]" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+
+                    <!-- Status Date -->
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                        <Label Content="Status Date:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label x:Name="lblStatusDate" Content="[???]" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+
+                    <!-- Fees -->
+                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                        <Label Content="Fees:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label x:Name="lblFees" Content="[???]" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+
+                    <!-- Created By -->
+                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                        <Label Content="Created By:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label x:Name="lblCreatedByUser" Content="[???]" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+
+                    <!-- Type -->
+                    <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+                        <Label Content="Type:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label x:Name="lblType" Content="[???]" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+
+                    <!-- Applicant -->
+                    <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
+                        <Label Content="Applicant:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label x:Name="lblApplicant" Content="[???]" Style="{StaticResource lblStyle}"/>
+                    </StackPanel>
+
+                    <!-- View Person Info -->
+                    <StackPanel Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button x:Name="btnViewPersonInfo" Content="View Person Info" Click="btnViewPersonInfo_Click" Style="{StaticResource Btn}"/>
+                    </StackPanel>
+                </Grid>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

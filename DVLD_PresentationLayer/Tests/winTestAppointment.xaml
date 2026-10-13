@@ -1,0 +1,65 @@
+﻿<Window x:Class="DVLD_PresentationLayer.Tests.winTestAppointment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DVLD_PresentationLayer.Tests"
+        
+        xmlns:fa="http://schemas.fontawesome.com/icons/fonts"
+        mc:Ignorable="d"
+        
+        xmlns:uc="clr-namespace:DVLD_PresentationLayer.Applications.Controls"
+        WindowStartupLocation="CenterScreen"
+        Title="winScheduleTest" Height="700" Width="Auto" Loaded="Window_Loaded">
+    <Grid Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3.5*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Fill="{StaticResource CircuitPatternBrush}" Grid.Row="2"/>
+
+        <Label Content="Schedule Test" x:Name="lblTitle" Style="{StaticResource MainLbl}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
+        <uc:ctrlLocalDrivinLicenseApplicationInfo x:Name="ctrlLocalDrivingLicenseApplicationInfo1" Grid.Row="1"/>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+
+            <Grid>
+                <Label Content="Appointments" 
+                    Style="{StaticResource lblStyle}" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"/>
+
+                <Button x:Name="btnAddScheduleTest" 
+                    Click="AddAppointment" 
+                    Style="{StaticResource Btn}" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center">
+                    <fa:FontAwesome Icon="Solid_Plus"
+                        FontSize="20"
+                        Foreground="White"/>
+                </Button>
+                
+            </Grid>
+
+            <DataGrid x:Name="dgScheduleTest" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True" Height="100">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="btnEditAppointment" Header="Edit Schedule Test" Click="EditAppointment"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Records: " Style="{StaticResource lblStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="lblScheduleRecordsCount" Content="0" Style="{StaticResource lblStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
+            
+            
+        </StackPanel>
+
+    </Grid>
+</Window>

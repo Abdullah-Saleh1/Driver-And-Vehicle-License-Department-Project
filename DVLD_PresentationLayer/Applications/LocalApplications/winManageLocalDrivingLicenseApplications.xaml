@@ -7,7 +7,7 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/fonts"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="winManageLocalDrivingLicenseApplications" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="winManageLocalDrivingLicenseApplications" Height="600" Width="1000" Loaded="Window_Loaded">
     
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -49,18 +49,28 @@
 
         </Grid>
 
-        <DataGrid Grid.Row="1" ColumnWidth="Auto" x:Name="dgLocalDrivingLicenseApplicaions" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True" MouseDoubleClick="dgLocalDrivingLicenseApplicaions_MouseDoubleClick">
+        <DataGrid Grid.Row="1" ColumnWidth="Auto" x:Name="dgLocalDrivingLicenseApplicaions" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True" MouseDoubleClick="dgLocalDrivingLicenseApplicaions_MouseDoubleClick" SelectionChanged="dgLocalDrivingLicenseApplicaions_SelectionChanged">
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <!--<MenuItem Header="Show Details" Click="ShowDetails"/>
+                    <MenuItem Header="Show Application Details" x:Name="btnShowApplicationDetails" Click="ShowApplicationDetails"/>
                     <Separator/>
-                    <MenuItem Header="Add New Person" Click="btnAddPerson_Click"/>
-                    <MenuItem Header="Edit" Click="EditPerson"/>
-                    <MenuItem Header="Delete" Click="DeletePerson"/>
+                    <MenuItem Header="Edit Application" x:Name="btnEditApplication" Click="EditApplication"/>
+                    <MenuItem Header="Delete Application" x:Name="btnDeleteApplication" Click="DeleteApplication"/>
                     <Separator/>
-                    <MenuItem Header="Send Email" Click="NotReady"/>
-                    <MenuItem Header="Phone Call" Click="NotReady"/>-->
+                    <MenuItem Header="Cancel Application" x:Name="btnCancelApplication" Click="CancelApplication"/>
+                    <Separator/>
+                    <MenuItem Header="Schedule Tests" x:Name="btnScheduleTests">
+                        <MenuItem Header="Schedule Vision" x:Name="btnScheduleVisionTest" Click="ScheduleVision"/>
+                        <MenuItem Header="Schedule Written" x:Name="btnScheduleWrittenTest" Click="ScheduleWritten"/>
+                        <MenuItem Header="Schedule Street" x:Name="btnScheduleStreetTest" Click="ScheduleStreet"/>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Issue Driving License (First Time)" x:Name="btnIssueDrivingLicenseForFirstTime" Click="IssueDrivingLicenseForFirstTime"/>
+                    <Separator/>
+                    <MenuItem Header="Show License" x:Name="btnShowLicense" Click="ShowLicense"/>
+                    <Separator/>
+                    <MenuItem Header="Show Person License History" x:Name="btnShowPersonLicenseHistory" Click="ShowPersonLicenseHistory"/>
 
                 </ContextMenu>
             </DataGrid.ContextMenu>
