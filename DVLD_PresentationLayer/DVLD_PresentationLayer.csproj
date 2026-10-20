@@ -83,6 +83,12 @@
       <DependentUpon>winAddUpdateLocalDrivingLilcenseApplication.xaml</DependentUpon>
     </Compile>
     <Compile Include="Global Classes\clsGlobal.cs" />
+    <Compile Include="Tests\Controls\ctrlScheduledTest.xaml.cs">
+      <DependentUpon>ctrlScheduledTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\Controls\ctrlScheduleTest.xaml.cs">
+      <DependentUpon>ctrlScheduleTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tests\Test Types\winEditTestType.xaml.cs">
       <DependentUpon>winEditTestType.xaml</DependentUpon>
     </Compile>
@@ -91,6 +97,9 @@
     </Compile>
     <Compile Include="Tests\winScheduleTest.xaml.cs">
       <DependentUpon>winScheduleTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\winTakeTest.xaml.cs">
+      <DependentUpon>winTakeTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tests\winTestAppointment.xaml.cs">
       <DependentUpon>winTestAppointment.xaml</DependentUpon>
@@ -179,6 +188,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tests\Controls\ctrlScheduledTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tests\Controls\ctrlScheduleTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tests\Test Types\winEditTestType.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tests\winScheduleTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tests\winTakeTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

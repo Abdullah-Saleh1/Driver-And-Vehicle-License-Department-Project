@@ -284,7 +284,7 @@ namespace DVLD_DataAccessLayer
         {
             bool isFound = false;
             string query = @"select found = 1 where exists (
-                                select * from People Where PersonID = @PersonID)";
+                                select 1 from People Where PersonID = @PersonID)";
 
             try
             {

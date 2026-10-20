@@ -70,7 +70,7 @@ namespace DVLD_PresentationLayer.Applications.Controls
 
         private void _LoadLocalDrivingLicenseApplicationInfo()
         {
-            lblLocalDrivingLicenseAppID.Content = _LocalApp.LocalDrivingLicenseApplicationID.ToString();
+            lblLocalDrivingLicenseAppID.Content = _LocalApp.LocalAppID.ToString();
             lblAppliedForLicense.Content = _LocalApp.LicenseClassInfo.ClassName;
             lblPassedTests.Content = _LocalApp.GetPassedTestCount().ToString() + "/3";
         }

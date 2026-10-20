@@ -58,9 +58,9 @@ namespace DVLD_BuisinessLayer
             return null;
         }
 
-        static public float GetApplicationFees(int ApplicationID)
+        static public float GetApplicationFees(int ApplicationTypeID)
         {
-            return clsApplicationTypeData.GetApplicationFees(ApplicationID); 
+            return clsApplicationTypeData.GetApplicationFees(ApplicationTypeID); 
         }
 
 

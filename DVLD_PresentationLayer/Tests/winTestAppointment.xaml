@@ -45,10 +45,11 @@
                 
             </Grid>
 
-            <DataGrid x:Name="dgScheduleTest" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True" Height="100">
+            <DataGrid x:Name="dgAppointments" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True" Height="100">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem x:Name="btnEditAppointment" Header="Edit Schedule Test" Click="EditAppointment"/>
+                        <MenuItem x:Name="btnTakeTest" Header="Take Test" Click="TakeTest"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

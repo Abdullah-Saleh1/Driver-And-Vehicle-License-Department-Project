@@ -112,5 +112,11 @@ namespace DVLD_PresentationLayer
             winAddUpdateLocalDrivingLilcenseApplication winNewLocalApplication = new winAddUpdateLocalDrivingLilcenseApplication();
             winNewLocalApplication.ShowDialog();
         }
+
+        private void btnRetakeTest_Click(object sender, RoutedEventArgs e)
+        {
+            winManageLocalDrivingLicenseApplications winManageLocalApps = new winManageLocalDrivingLicenseApplications();
+            winManageLocalApps.ShowDialog(); 
+        }
     }
 }

@@ -38,6 +38,8 @@ namespace DVLD_PresentationLayer.Applications.LocalApplications
         private void btnAddLocalApplication_Click(object sender, RoutedEventArgs e)
         {
             winAddUpdateLocalDrivingLilcenseApplication winAddUpdateLocalDrivingLilcenseApplication = new winAddUpdateLocalDrivingLilcenseApplication();
+            winAddUpdateLocalDrivingLilcenseApplication.OnLocalApplicationSaved += _LoadLocalApplications; 
+
             winAddUpdateLocalDrivingLilcenseApplication.ShowDialog();
         }
 
@@ -109,6 +111,7 @@ namespace DVLD_PresentationLayer.Applications.LocalApplications
                     _LocalApplicationData.DefaultView.RowFilter = ""; // Clear the filter
                     break;
             }
+            _UpdateRecordsCount(); 
         }
 
 
@@ -209,22 +212,29 @@ namespace DVLD_PresentationLayer.Applications.LocalApplications
             }
         }
 
-        private void ScheduleVision(object sender, RoutedEventArgs e)
+        private void _ScheduleTest(clsTestType.enTestType TestType)
         {
             int LocalAppID = Convert.ToInt32((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["LDLAppID"]);
 
-            winTestAppointment TestAppointment = new winTestAppointment(winTestAppointment.enTestType.VisionTest, LocalAppID);
+            winTestAppointment TestAppointment = new winTestAppointment(TestType, LocalAppID);
+            TestAppointment.OnTestAppointmentTaken += _LoadLocalApplications;
+
             TestAppointment.ShowDialog();
+        }
+
+        private void ScheduleVision(object sender, RoutedEventArgs e)
+        {
+            _ScheduleTest(clsTestType.enTestType.VisionTest);
         }
 
         private void ScheduleWritten(object sender, RoutedEventArgs e)
         {
-
+            _ScheduleTest(clsTestType.enTestType.WrittenTest);
         }
 
         private void ScheduleStreet(object sender, RoutedEventArgs e)
         {
-
+            _ScheduleTest(clsTestType.enTestType.StreetTest);
         }
 
         private void IssueDrivingLicenseForFirstTime(object sender, RoutedEventArgs e)
@@ -244,143 +254,185 @@ namespace DVLD_PresentationLayer.Applications.LocalApplications
 
         private void dgLocalDrivingLicenseApplicaions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dgLocalDrivingLicenseApplicaions.SelectedItem == null) return; 
+            if (dgLocalDrivingLicenseApplicaions.SelectedItem == null) return;
+
+            // 1. Total TestPassed => from grid; ✅
+            // 2. LicenseExists => database query ✅
+            // 3. ApplicationStatus => from grid; ✅
+            // - setp 2 and 3 will be given from LocapApp Object
+            // 4. PassedVisionTest, PassedWrittenTest, PassedStreetTest => from TotalTestPassed ✅
+
+
+            int LocalAppID = Convert.ToInt32((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["LDLAppID"]);
+            clsLocalDrivingLicenseApplication LocalApp = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalAppID);
+
+
+            int TotalTestPassed = Convert.ToInt32((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)?["PassedTests"]);
+
+            // Here I Create LocalApp to Know if There is an Active Licnese for this application
+            // because I need Information like PersonId, LicenseClassID to check if there is license or no 
+            // and these information Is Inherited from clsApplication
+            bool LicenseExists = LocalApp.IsLicenseIssued();
+
+
+            btnShowLicense.IsEnabled = LicenseExists;
+            btnIssueDrivingLicenseForFirstTime.IsEnabled = (TotalTestPassed == 3) && !LicenseExists; 
+            btnEditApplication.IsEnabled = !LicenseExists && (LocalApp.Status == clsApplication.enStatus.New);
+            btnCancelApplication.IsEnabled = LocalApp.Status == clsApplication.enStatus.New;
+            btnDeleteApplication.IsEnabled = LocalApp.Status == clsApplication.enStatus.New;
 
 
 
-            if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["Status"].ToString() == "New")
+            bool PassedVisionTest = TotalTestPassed >= 1; 
+            bool PassedWrittenTest = TotalTestPassed >= 2; 
+            bool PassedStreetTest = TotalTestPassed >= 3;
+
+            btnScheduleTests.IsEnabled = (!PassedVisionTest || !PassedWrittenTest || !PassedStreetTest) && LocalApp.Status == clsApplication.enStatus.New; 
+
+
+            if (btnScheduleTests.IsEnabled)
             {
+                btnScheduleVisionTest.IsEnabled = !PassedVisionTest;
 
-                btnIssueDrivingLicenseForFirstTime.IsEnabled = false;
-                btnShowLicense.IsEnabled = false;
-                btnScheduleTests.IsEnabled = true; 
+                btnScheduleWrittenTest.IsEnabled = PassedVisionTest && !PassedWrittenTest;
 
-                if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["PassedTests"].ToString() == "0")
-                {
-                    btnScheduleVisionTest.IsEnabled = true;
-                    btnScheduleWrittenTest.IsEnabled = false;
-                    btnScheduleStreetTest.IsEnabled = false; 
-
-                    return; 
-                }
-
-                if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["PassedTests"].ToString() == "1")
-                {
-                    btnScheduleVisionTest.IsEnabled = false;
-                    btnScheduleWrittenTest.IsEnabled = true;
-                    btnScheduleStreetTest.IsEnabled = false;
-
-                    return; 
-                }
-
-                if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["PassedTests"].ToString() == "2")
-                {
-                    btnScheduleVisionTest.IsEnabled = false;
-                    btnScheduleWrittenTest.IsEnabled = false;
-                    btnScheduleStreetTest.IsEnabled = true;
-
-                    return; 
-                }
-
-                if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["PassedTests"].ToString() == "3")
-                {
-                    btnScheduleTests.IsEnabled = false;
-                    btnShowLicense.IsEnabled = false;
-
-                    btnIssueDrivingLicenseForFirstTime.IsEnabled = true; 
-                    return; 
-                }
-
-            }
-
-            if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["Status"].ToString() == "Cancelled")
-            {
-                btnEditApplication.IsEnabled = false;
-                btnDeleteApplication.IsEnabled = false;
-                btnCancelApplication.IsEnabled = false;
-                btnScheduleTests.IsEnabled = false; 
-                btnIssueDrivingLicenseForFirstTime.IsEnabled = false;
-                btnShowLicense.IsEnabled = false;
-                btnShowPersonLicenseHistory.IsEnabled = false;
-
-                return; 
+                btnScheduleStreetTest.IsEnabled = PassedVisionTest && PassedWrittenTest && !PassedStreetTest;
             }
 
 
-            if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["Status"].ToString() == "Completed")
-            {
+            //if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["Status"].ToString() == "New")
+            //{
 
-                btnEditApplication.IsEnabled = false;
-                btnDeleteApplication.IsEnabled = false;
-                btnCancelApplication.IsEnabled = false;
-                btnScheduleTests.IsEnabled = false;
-                btnIssueDrivingLicenseForFirstTime.IsEnabled = false;
+            //    btnIssueDrivingLicenseForFirstTime.IsEnabled = false;
+            //    btnShowLicense.IsEnabled = false;
+            //    btnScheduleTests.IsEnabled = true;
 
-                btnShowApplicationDetails.IsEnabled = true;
-                btnShowLicense.IsEnabled = true;
-                btnShowPersonLicenseHistory.IsEnabled = true; 
-            }
+            //    if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["PassedTests"].ToString() == "0")
+            //    {
+            //        btnScheduleVisionTest.IsEnabled = true;
+            //        btnScheduleWrittenTest.IsEnabled = false;
+            //        btnScheduleStreetTest.IsEnabled = false;
+
+            //        return;
+            //    }
+
+            //    if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["PassedTests"].ToString() == "1")
+            //    {
+            //        btnScheduleVisionTest.IsEnabled = false;
+            //        btnScheduleWrittenTest.IsEnabled = true;
+            //        btnScheduleStreetTest.IsEnabled = false;
+
+            //        return;
+            //    }
+
+            //    if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["PassedTests"].ToString() == "2")
+            //    {
+            //        btnScheduleVisionTest.IsEnabled = false;
+            //        btnScheduleWrittenTest.IsEnabled = false;
+            //        btnScheduleStreetTest.IsEnabled = true;
+
+            //        return;
+            //    }
+
+            //    if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["PassedTests"].ToString() == "3")
+            //    {
+            //        btnScheduleTests.IsEnabled = false;
+            //        btnShowLicense.IsEnabled = false;
+
+            //        btnIssueDrivingLicenseForFirstTime.IsEnabled = true;
+            //        return;
+            //    }
+
+            //}
+
+            //if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["Status"].ToString() == "Cancelled")
+            //{
+            //    btnEditApplication.IsEnabled = false;
+            //    btnDeleteApplication.IsEnabled = false;
+            //    btnCancelApplication.IsEnabled = false;
+            //    btnScheduleTests.IsEnabled = false;
+            //    btnIssueDrivingLicenseForFirstTime.IsEnabled = false;
+            //    btnShowLicense.IsEnabled = false;
+            //    btnShowPersonLicenseHistory.IsEnabled = false;
+
+            //    return;
+            //}
+
+
+            //if ((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["Status"].ToString() == "Completed")
+            //{
+
+            //    btnEditApplication.IsEnabled = false;
+            //    btnDeleteApplication.IsEnabled = false;
+            //    btnCancelApplication.IsEnabled = false;
+            //    btnScheduleTests.IsEnabled = false;
+            //    btnIssueDrivingLicenseForFirstTime.IsEnabled = false;
+
+            //    btnShowApplicationDetails.IsEnabled = true;
+            //    btnShowLicense.IsEnabled = true;
+            //    btnShowPersonLicenseHistory.IsEnabled = true;
+            //}
         }
     }
 }
 
 // Context Menu Depend on Row Status and what to do: 
 
-// 1. New AND Passed Tests is 0 
-// - Enable Schedule Vision Test and Disable Other Tests
+// 1. New AND Passed Tests is 0 ✅
+// - Enable Schedule Vision Test and Disable Other Tests ✅
 
-// 2. New AND Passed Tests is 1
-// - Enable Schedule Writtin Tests and Disable Other Tests
+// 2. New AND Passed Tests is 1 ✅
+// - Enable Schedule Writtin Tests and Disable Other Tests ✅
 
-// 3. New AND Passed Tests is 2
-// - Enable Schedule Street Test and Disable Other Tests
-
-
-// 4. New AND Passed Tests is 3
-// - Disable Schedule Tests, Show License
-// - Enable Issue Driving License for First Time
-// - Enable Rest of the Buttons
-
-// These steps for all new Applications:
-// - Disable Issue Driving License for First Time, Show License(Unless when New AND Passed Tests is 3)
-// - Enable Rest of the Buttons
+// 3. New AND Passed Tests is 2 ✅
+// - Enable Schedule Street Test and Disable Other Tests ✅
 
 
-// 5. Completed
-// - Disable All 
-// - Enable ShowApplicationDetails, Show License, Show Person License History
+// 4. New AND Passed Tests is 3 ✅
+// - Disable Schedule Tests, Show License ✅
+// - Enable Issue Driving License for First Time ✅
+// - Enable Rest of the Buttons ✅
+
+// These steps for all new Applications: ✅
+// - Disable Issue Driving License for First Time, Show License(Unless when New AND Passed Tests is 3) ✅
+// - Enable Rest of the Buttons ✅
 
 
-// 6. Cancelled
-// -- Disable All 
-// -- Enable ShowApplicationDetails
+// 5. Completed ✅
+// - Disable All ✅
+// - Enable ShowApplicationDetails, Show License, Show Person License History ✅
+
+
+// 6. Cancelled ✅
+// -- Disable All ✅
+// -- Enable ShowApplicationDetails ✅
 
 
 
-// Implement Vision Test Appointments Window Put ctrlLocalDrivinLicenseApplicationInfo
-// and DataGrid for Appointments, Columns: AppointmentID, AppointmentDate, PaidFees, IsLocked
-// with Records and Close Button
+// Implement General Test Appointment Window Put ctrlLocalDrivinLicenseApplicationInfo ✅
+// and DataGrid for Appointments, Columns: AppointmentID, AppointmentDate, PaidFees, IsLocked ✅
+// with Records and Close Button ✅
 
-// ContextMenu for: Edit, Take Test
-// Edit: show winScheduleTest with the selected AppointmentID
-// and if the appointment is locked show the window and disable 
-// Save, Date then show Message sayed: Person Already sat for this test appointment Locked.
+// ContextMenu for: Edit, Take Test ✅
+// Edit: show winScheduleTest with the selected AppointmentID ✅
+// and if the appointment is locked show the window and disable ✅
+// Save, Date then show Message sayed: Person Already sat for this test appointment Locked. ✅
 
-// Take Test : show winTakeTest with the selected AppointmentID
+// Take Test : show winTakeTest with the selected AppointmentID ✅
 
 // Add Button:
-// 1. check if there is a non-locked appointment if so show messagebox and return   
-// MessageBox.Show("Person already has an active appointment for this test. you cannot add new appointment.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-// 2. check if the person has passed the test if so show messagebox and return
-// MessageBox.Show("This person already Passed this test before, you can only retake failed Tests.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-// Show winScheduleTest
+// 1. check if there is a non-locked appointment if so show messagebox and return ✅
+// MessageBox.Show("Person already has an active appointment for this test. you cannot add new appointment.", "Information", MessageBoxButton.OK, MessageBoxImage.Information); ✅
+// 2. check if the person has passed the test if so show messagebox and return ✅
+// MessageBox.Show("This person already Passed this test before, you can only retake failed Tests.", "Information", MessageBoxButton.OK, MessageBoxImage.Information); ✅
+// Show winScheduleTest ✅
 
 
-// 1. if the Person Failed the Test Lock the Appointmnet 
-// - when scheduled a new appointment 
-// - Enable Retake Test ctrl 
-// - Calculate Total Fees: Retake Test Fees + Schedule Test Fees
-// - When Save the appointment Create an Application for Retake Test(7) Associated with that LocalDrivingLicenseAppID
+// 1. if the Person Failed the Test Lock the Appointmnet ✅
+// - when scheduled a new appointment ✅
+// - Enable Retake Test ctrl ✅
+// - Calculate Total Fees: Retake Test Fees + Schedule Test Fees ✅
+// - When Save the appointment Create an Application for Retake Test(7) Associated with that LocalDrivingLicenseAppID ✅
 
 
 

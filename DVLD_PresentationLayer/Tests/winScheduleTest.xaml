@@ -3,10 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DVLD_PresentationLayer.Tests"
-        mc:Ignorable="d"
-        Title="winScheduleTest" Height="450" Width="800">
-    <Grid>
+        xmlns:local="clr-namespace:DVLD_PresentationLayer.Tests.Controls"
         
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="winScheduleTest" Height="600" Width="500">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="489*"/>
+            <ColumnDefinition Width="11*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <local:ctrlScheduleTest x:Name="ctrlScheduleTest1"/>
+
     </Grid>
 </Window>

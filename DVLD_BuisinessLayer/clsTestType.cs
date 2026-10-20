@@ -9,7 +9,7 @@ namespace DVLD_BuisinessLayer
     {
         enum enMode { AddNew, Update };
         enMode _Mode;
-        public enum enTestType { VisionTest = 1, WrittenTest = 2, PracticalTest = 3 };
+        public enum enTestType { VisionTest = 1, WrittenTest = 2, StreetTest = 3 };
 
         public enTestType ID;
         public string Title;
@@ -64,6 +64,11 @@ namespace DVLD_BuisinessLayer
                 return new clsTestType(TestTypeID, Title, Description, Fees);
             }
             return null;
+        }
+
+        static public float GetTestTypeFees(int TestTypeID)
+        {
+            return clsTestTypeData.GetTestTypeFees(TestTypeID); 
         }
 
         public bool Save()

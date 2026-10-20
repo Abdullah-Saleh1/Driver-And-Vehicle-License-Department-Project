@@ -43,9 +43,11 @@
   <ItemGroup>
     <Compile Include="ApplicationData.cs" />
     <Compile Include="ApplicationTypeData.cs" />
+    <Compile Include="TestData.cs" />
     <Compile Include="LicenseClassData.cs" />
     <Compile Include="LicenseData.cs" />
     <Compile Include="LocalDrivingLicenseApplicationData.cs" />
+    <Compile Include="TestAppointmentData.cs" />
     <Compile Include="TestTypeData.cs" />
     <Compile Include="CountryData.cs" />
     <Compile Include="DataAccessSettings.cs" />

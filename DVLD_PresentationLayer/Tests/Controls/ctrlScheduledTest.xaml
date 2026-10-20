@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="DVLD_PresentationLayer.Tests.Controls.ctrlScheduledTest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DVLD_PresentationLayer.Tests.Controls"
+             mc:Ignorable="d" 
+                      Width="400" Height="Auto" Background="White">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Sheduled Test" x:Name="lblTitle" Style="{StaticResource MainLbl}" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="D.L.AppI.ID:" Grid.Row="0" Style="{StaticResource lblStyle}" HorizontalContentAlignment="Right"/>
+            <Label Content="D.Class:" Grid.Row="1" Style="{StaticResource lblStyle}" HorizontalContentAlignment="Right"/>
+            <Label Content="Name:" Grid.Row="2" Style="{StaticResource lblStyle}" HorizontalContentAlignment="Right"/>
+            <Label Content="Trial:" Grid.Row="3" Style="{StaticResource lblStyle}" HorizontalContentAlignment="Right"/>
+            <Label Content="Date:" Grid.Row="4" Style="{StaticResource lblStyle}" HorizontalContentAlignment="Right"/>
+            <Label Content="Fees:" Grid.Row="5" Style="{StaticResource lblStyle}" HorizontalContentAlignment="Right"/>
+            <Label Content="TestID:" Grid.Row="6" Style="{StaticResource lblStyle}" HorizontalContentAlignment="Right"/>
+
+            <Label Content="???" x:Name="lblLocalAppID" Grid.Row="0" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+            <Label Content="???" x:Name="lblClassName" Grid.Row="1" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+            <Label Content="???" x:Name="lblPersonName" Grid.Row="2" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+            <Label Content="???" x:Name="lblTrial" Grid.Row="3" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+            <Label Content="???" x:Name="lblDate" Grid.Row="4" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+            <Label Content="???" x:Name="lblFees" Grid.Row="5" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+            <Label Content="Not Take Yet" x:Name="lblTestID" Grid.Row="6" Grid.Column="2" Style="{StaticResource lblStyle}"/>
+
+        </Grid>
+
+    </Grid>
+</UserControl>

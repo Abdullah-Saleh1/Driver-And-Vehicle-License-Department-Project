@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DVLD_BuisinessLayer;
+using DVLD_PresentationLayer.Tests.Controls;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DVLD_PresentationLayer.Tests
 {
-    /// <summary>
-    /// Interaction logic for winScheduleTest.xaml
-    /// </summary>
     public partial class winScheduleTest : Window
     {
-        public winScheduleTest()
+
+        public event Action OnAppointmentScheduled;
+        public winScheduleTest(int LocalAppID, clsTestType.enTestType TestType, int AppointmentID = -1)
         {
             InitializeComponent();
+
+            ctrlScheduleTest1.TestType = TestType; 
+            ctrlScheduleTest1.LoadAppointmentInfo(LocalAppID, AppointmentID);
+            ctrlScheduleTest1.OnAppoinmentScheduled += () =>
+            {
+                OnAppointmentScheduled?.Invoke();
+            }; 
         }
     }
 }

@@ -140,6 +140,38 @@ namespace DVLD_DataAccessLayer
             }
         }
 
+        public static float GetTestTypeFees(int TestTypeID)
+        {
+            float Fees = 0; 
 
+            string query = @"SELECT TestTypeFees 
+                         FROM TestTypes 
+                         WHERE TestTypeID = @TestTypeID";
+
+            using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+
+                    try
+                    {
+                        connection.Open();
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && float.TryParse(result.ToString(), out float fees))
+                        {
+                            Fees = fees; 
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Fees = 0; 
+                    }
+                }
+            }
+
+            return Fees;
+        }
     }
 }
