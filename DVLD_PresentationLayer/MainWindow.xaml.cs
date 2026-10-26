@@ -1,4 +1,5 @@
-﻿using DVLD_PresentationLayer.Applications.ApplicationTypes;
+﻿using DVLD_BuisinessLayer;
+using DVLD_PresentationLayer.Applications.ApplicationTypes;
 using DVLD_PresentationLayer.Applications.InternationalApplications;
 using DVLD_PresentationLayer.Applications.LocalApplications;
 using DVLD_PresentationLayer.Applications.ReleaseDetainedLicense;
@@ -11,7 +12,6 @@ using DVLD_PresentationLayer.Login;
 using DVLD_PresentationLayer.People;
 using DVLD_PresentationLayer.Tests.Test_Types;
 using DVLD_PresentationLayer.Users;
-using System;
 using System.Windows;
 
 
@@ -27,7 +27,13 @@ namespace DVLD_PresentationLayer
 
         private void _LoadStatistics()
         {
+            int TotalDrivers = 0, ActiveLicenses = 0, PendingApps = 0, DetainedLicenses = 0; 
+            clsDashboard.GetDashboardStats(ref TotalDrivers, ref ActiveLicenses, ref PendingApps, ref DetainedLicenses);
 
+            lblTotalDrivers.Text = TotalDrivers.ToString(); 
+            lblActiveLicenses.Text = ActiveLicenses.ToString(); 
+            lblPendingApps.Text = PendingApps.ToString(); 
+            lblDetainedLicenses.Text = DetainedLicenses.ToString(); 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
