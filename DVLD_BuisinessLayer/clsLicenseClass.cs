@@ -7,11 +7,14 @@ namespace DVLD_BuisinessLayer
     public class clsLicenseClass
     {
 
+        enum enMode { Add, Update}
+        enMode _Mode; 
+
         public int LicenseClassID;
         public string ClassName;
         public string ClassDescription;
-        public int MinimumAllowedAge;
-        public int DefaultValidityLength;
+        public byte MinimumAllowedAge;
+        public byte DefaultValidityLength;
         public float ClassFees;
 
         public clsLicenseClass()
@@ -19,9 +22,11 @@ namespace DVLD_BuisinessLayer
             this.LicenseClassID = -1;
             this.ClassName = "";
             this.ClassDescription = "";
-            this.MinimumAllowedAge = 18;
-            this.DefaultValidityLength = 10;
+            this.MinimumAllowedAge = 0;
+            this.DefaultValidityLength = 0;
             this.ClassFees = 0;
+
+            _Mode = enMode.Add; 
         }
 
         private clsLicenseClass(int LicenseClassID, string ClassName, string ClassDescription, byte MinimumAllowedAge, byte DefaultValidityLength, float ClassFees)
@@ -32,6 +37,8 @@ namespace DVLD_BuisinessLayer
             this.MinimumAllowedAge = MinimumAllowedAge;
             this.DefaultValidityLength = DefaultValidityLength;
             this.ClassFees = ClassFees;
+
+            _Mode = enMode.Update; 
         }
 
         public static bool IsAgeAllowedForClass(DateTime DateOfBirth, int licenseClassID)
@@ -54,8 +61,8 @@ namespace DVLD_BuisinessLayer
         public static clsLicenseClass Find(int LicenseClassID)
         {
             string ClassName = "", ClassDescription = "";
-            byte MinimumAllowedAge = 18;
-            byte DefaultValidityLength = 10;
+            byte MinimumAllowedAge = 0;
+            byte DefaultValidityLength = 0;
             float ClassFees = 0;
 
             if (clsLicenseClassData.GetLicenseClassInfoByID(LicenseClassID, ref ClassName, ref ClassDescription, ref MinimumAllowedAge, ref DefaultValidityLength, ref ClassFees))
@@ -64,6 +71,57 @@ namespace DVLD_BuisinessLayer
             }
 
             return null;
+        }
+
+        public static clsLicenseClass Find(string ClassName)
+        {
+            int LicenseClassID = -1; 
+            string ClassDescription = "";
+            byte MinimumAllowedAge = 0;
+            byte DefaultValidityLength = 0;
+            float ClassFees = 0;
+
+            if (clsLicenseClassData.GetLicenseClassInfoByClassName(ClassName, ref LicenseClassID, ref ClassDescription, ref MinimumAllowedAge, ref DefaultValidityLength, ref ClassFees))
+            {
+                return new clsLicenseClass(LicenseClassID, ClassName, ClassDescription, MinimumAllowedAge, DefaultValidityLength, ClassFees);
+            }
+
+            return null;
+        }
+
+
+        public bool Save()
+        {
+            switch (_Mode)
+            {
+                case enMode.Add:
+
+                    if (_AddNewLicenseClass())
+                    {
+                        _Mode = enMode.Update;
+                        return true;
+                    }
+                    return false;
+
+
+                case enMode.Update:
+                    return _UpdateLicenseClass();
+
+                default:
+                    return false;
+            }
+        }
+
+        private bool _UpdateLicenseClass()
+        {
+            return clsLicenseClassData.UpdateLicenseClass(LicenseClassID, ClassName, ClassDescription, MinimumAllowedAge, DefaultValidityLength, ClassFees); 
+        }
+
+        private bool _AddNewLicenseClass()
+        {
+            LicenseClassID = clsLicenseClassData.AddNewLicenseClass(ClassName, ClassDescription, MinimumAllowedAge, DefaultValidityLength, ClassFees);
+
+            return LicenseClassID != -1; 
         }
     }
 }

@@ -73,6 +73,12 @@
     <Compile Include="Applications\Controls\ctrlLocalDrivinLicenseApplicationInfo.xaml.cs">
       <DependentUpon>ctrlLocalDrivinLicenseApplicationInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Applications\InternationalApplications\winManageInternationalLicenseApplications.xaml.cs">
+      <DependentUpon>winManageInternationalLicenseApplications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\InternationalApplications\winNewInternationalLicenseApplication.xaml.cs">
+      <DependentUpon>winNewInternationalLicenseApplication.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Applications\LocalApplications\winLocalDrivingLicenseApplicationInfo.xaml.cs">
       <DependentUpon>winLocalDrivingLicenseApplicationInfo.xaml</DependentUpon>
     </Compile>
@@ -82,7 +88,49 @@
     <Compile Include="Applications\LocalApplications\winAddUpdateLocalDrivingLilcenseApplication.xaml.cs">
       <DependentUpon>winAddUpdateLocalDrivingLilcenseApplication.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Applications\ReleaseDetainedLicense\winManageDetainedLicenses.xaml.cs">
+      <DependentUpon>winManageDetainedLicenses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\ReleaseDetainedLicense\winReleaseDetainedLicenseApplication.xaml.cs">
+      <DependentUpon>winReleaseDetainedLicenseApplication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\RenewLocalLicenseApplications\winRenewLocalLicenseApplication.xaml.cs">
+      <DependentUpon>winRenewLocalLicenseApplication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\ReplaceDamagedOrLostLicense\winReplaceLostOrDamagedLicenseApplication.xaml.cs">
+      <DependentUpon>winReplaceLostOrDamagedLicenseApplication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Drivers\winManageDrivers.xaml.cs">
+      <DependentUpon>winManageDrivers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Global Classes\clsGlobal.cs" />
+    <Compile Include="Licenses\Controls\ctrlDriverLicenses.xaml.cs">
+      <DependentUpon>ctrlDriverLicenses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\Detain License\winDetainLicenseApplication.xaml.cs">
+      <DependentUpon>winDetainLicenseApplication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\InternationalLicenses\Controls\ctrlDriverInternationalLicenseInfo.xaml.cs">
+      <DependentUpon>ctrlDriverInternationalLicenseInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\InternationalLicenses\winShowInternationalDriverLicenseInfo.xaml.cs">
+      <DependentUpon>winShowInternationalDriverLicenseInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\LocalLicenses\Controls\ctrlDriverLicenseInfo.xaml.cs">
+      <DependentUpon>ctrlDriverLicenseInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\LocalLicenses\Controls\ctrlDriverLicenseInfoWithFilters.xaml.cs">
+      <DependentUpon>ctrlDriverLicenseInfoWithFilters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\LocalLicenses\winIssueLicenseFirstTime.xaml.cs">
+      <DependentUpon>winIssueLicenseFirstTime.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\LocalLicenses\winShowDriverLicenseInfo.xaml.cs">
+      <DependentUpon>winShowDriverLicenseInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\winShowPersonLicenseHistory.xaml.cs">
+      <DependentUpon>winShowPersonLicenseHistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tests\Controls\ctrlScheduledTest.xaml.cs">
       <DependentUpon>ctrlScheduledTest.xaml</DependentUpon>
     </Compile>
@@ -131,6 +179,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Applications\InternationalApplications\winManageInternationalLicenseApplications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\InternationalApplications\winNewInternationalLicenseApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Applications\LocalApplications\winLocalDrivingLicenseApplicationInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +196,62 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Applications\LocalApplications\winAddUpdateLocalDrivingLilcenseApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\ReleaseDetainedLicense\winManageDetainedLicenses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\ReleaseDetainedLicense\winReleaseDetainedLicenseApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\RenewLocalLicenseApplications\winRenewLocalLicenseApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\ReplaceDamagedOrLostLicense\winReplaceLostOrDamagedLicenseApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Drivers\winManageDrivers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licenses\Controls\ctrlDriverLicenses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licenses\Detain License\winDetainLicenseApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licenses\InternationalLicenses\Controls\ctrlDriverInternationalLicenseInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licenses\InternationalLicenses\winShowInternationalDriverLicenseInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licenses\LocalLicenses\Controls\ctrlDriverLicenseInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licenses\LocalLicenses\Controls\ctrlDriverLicenseInfoWithFilters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licenses\LocalLicenses\winIssueLicenseFirstTime.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licenses\LocalLicenses\winShowDriverLicenseInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licenses\winShowPersonLicenseHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,98 @@
+﻿<Window x:Class="DVLD_PresentationLayer.Licenses.Detain_License.winDetainLicenseApplication"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DVLD_PresentationLayer.Licenses.Detain_License"
+        xmlns:uc="clr-namespace:DVLD_PresentationLayer.Licenses.LocalLicenses.Controls"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Detain License Application" Height="600" Width="850" Loaded="Window_Loaded">
+    <Grid Margin="10" HorizontalAlignment="Center">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="47"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Detain License" Style="{StaticResource MainLbl}" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+
+        <uc:ctrlDriverLicenseInfoWithFilters Grid.Row="1" x:Name="ctrlDriverLicenseInfoWithFilters1"/>
+
+
+        <!-- Application Info -->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- عنوان الـ Application Info -->
+            <Label Content="Detain Application Info" Style="{StaticResource lblStyle}" Grid.Row="0" Margin="0,0,0,10" FontWeight="Bold" FontSize="16"/>
+
+            <!-- محتوى البيانات مقسم لعمودين -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="30"/>
+                    <!-- مسافة فاصلة -->
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- الصف الأول -->
+                <Label Content="Detain ID:" Style="{StaticResource lblStyle}" FontWeight="Bold" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <Label x:Name="lblDetainID" Content="" Style="{StaticResource lblStyle}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5,0"/>
+
+                <Label Content="License ID:" Style="{StaticResource lblStyle}" FontWeight="Bold" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"/>
+                <Label x:Name="lblLicenseID" Content="" Style="{StaticResource lblStyle}" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" Margin="5,0"/>
+
+                <!-- الصف الثاني -->
+                <Label Content="Detain Date:" Style="{StaticResource lblStyle}" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <Label x:Name="lblDetainDate" Content="" Style="{StaticResource lblStyle}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5,0"/>
+
+                <Label Content="Created By:" Style="{StaticResource lblStyle}" FontWeight="Bold" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"/>
+                <Label x:Name="lblCreatedBy" Content="" Style="{StaticResource lblStyle}" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Margin="5,0"/>
+
+                <!-- الصف الخامس -->
+
+                <Label Content="Fine Fees:" Style="{StaticResource lblStyle}" FontWeight="Bold" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtFineFees" Style="{StaticResource ModernTextBox}" Grid.Row="5"  Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Center" Margin="5,0" PreviewTextInput="txtFineFees_PreviewTextInput"/>
+            </Grid>
+        </Grid>
+
+
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button x:Name="btnShowLicenseHistory" IsEnabled="False" Content="Show License History" Style="{StaticResource Btn}" VerticalAlignment="Center" Click="btnShowLicenseHistory_Click"/>
+                <Button x:Name="btnShowLicenseInfo" IsEnabled="False" Content="Show License Info" Style="{StaticResource Btn}" VerticalAlignment="Center" Click="btnShowLicenseInfo_Click"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="btnClose" Content="Close" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0, 0, 10, 0" Click="CloseWindow" IsCancel="True"/>
+                <Button x:Name="btnDetain" IsEnabled="False" Content="Detain" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Margin="0" IsDefault="True" Click="Detain"/>
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+</Window>

@@ -1,0 +1,86 @@
+﻿<Window x:Class="DVLD_PresentationLayer.Applications.InternationalApplications.winManageInternationalLicenseApplications"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.com/icons/fonts"
+        xmlns:local="clr-namespace:DVLD_PresentationLayer.Applications.InternationalApplications"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Manage International License Applications" Height="600" Width="1000" Loaded="Window_Loaded">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="International Driving License Applications" Style="{StaticResource TitleLabelStyle}"/>
+
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal">
+
+                <ComboBox Style="{StaticResource ModernComboBoxStyle}" Margin="5, 0, 0, 5" x:Name="cbInternationalApplicationsFilter" SelectionChanged="cbInternationalApplicationsFilter_SelectionChanged">
+                    <ComboBoxItem Content="All"/>
+                    <ComboBoxItem Content="Int License ID"/>
+                    <ComboBoxItem Content="ApplicationID"/>
+                    <ComboBoxItem Content="DriverID"/>
+                    <ComboBoxItem Content="Local License ID"/>
+                    <ComboBoxItem Content="IsActive"/>
+                </ComboBox>
+
+
+                <ComboBox x:Name="cbActiveFilter" Style="{StaticResource ModernComboBoxStyle}" Margin="5, 0, 0, 5" Visibility="Collapsed" SelectionChanged="cbActiveFilter_SelectionChanged">
+                    <ComboBoxItem Content="All"/>
+                    <ComboBoxItem Content="Yes"/>
+                    <ComboBoxItem Content="No"/>
+                </ComboBox>
+
+                <TextBox Style="{StaticResource ModernSearchTextBox}" Width="150" Margin="5, 0, 0, 5" x:Name="txtSearch" Visibility="Hidden" TextChanged="txtSearch_TextChanged" PreviewTextInput="txtSearch_PreviewTextInput"/>
+
+
+            </StackPanel>
+
+            <Button x:Name="btnAddInternationalApplication" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{StaticResource Btn}" Click="btnAddInternationalApplication_Click">
+                <fa:FontAwesome Icon="Solid_Plus"
+                    FontSize="20"
+                    Foreground="White"
+                    />
+            </Button>
+
+        </Grid>
+
+        <DataGrid Grid.Row="1" ColumnWidth="Auto" x:Name="dgInternationalDrivingLicenseApplicaions" Style="{StaticResource ModernDataGrid}" AutoGenerateColumns="True" MouseDoubleClick="dgInternationalDrivingLicenseApplicaions_MouseDoubleClick">
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Show Person Details" x:Name="btnShowPersonDetails" Click="ShowPersonDetails"/>
+                    <MenuItem Header="Show License Details" x:Name="btnShowLicenseDetails" Click="ShowLicenseDetails"/>
+                    <MenuItem Header="Show Person License History" x:Name="btnShowPersonLicenseHistory" Click="ShowPersonLicenseHistory"/>
+
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" >Records:</Label>
+            <Label VerticalAlignment="Center" HorizontalAlignment="Right" x:Name="lblRecordsCount" FontSize="14">5</Label>
+            <Button x:Name="btnClose" Grid.Column="2" Content="Close" Width="70" Click="btnClose_Click" Style="{StaticResource Btn}" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Center"/>
+        </Grid>
+
+    </Grid>
+</Window>

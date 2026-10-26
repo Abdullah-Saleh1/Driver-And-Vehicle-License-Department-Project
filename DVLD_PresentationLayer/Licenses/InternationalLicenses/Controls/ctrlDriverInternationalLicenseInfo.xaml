@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="DVLD_PresentationLayer.Licenses.InternationalLicenses.Controls.ctrlDriverInternationalLicenseInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DVLD_PresentationLayer.Licenses.InternationalLicenses.Controls"
+             mc:Ignorable="d" 
+             Width="800" Height="Auto">
+    <Border Background="White" Padding="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.7*"/>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.ColumnSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="Name: " Style="{StaticResource lblStyle}"/>
+                    <Label x:Name="lblName" Style="{StaticResource lblStyle}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="Int.License ID: " Style="{StaticResource lblStyle}"/>
+                    <Label Style="{StaticResource lblStyle}" x:Name="lblInternationalLicenseID"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="License ID: " Style="{StaticResource lblStyle}"/>
+                    <Label x:Name="lblLicenseID" Style="{StaticResource lblStyle}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="National No: " Style="{StaticResource lblStyle}"/>
+                    <Label Style="{StaticResource lblStyle}" x:Name="lblNationalNo"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="Gender: " Style="{StaticResource lblStyle}"/>
+                    <Label x:Name="lblGender" Style="{StaticResource lblStyle}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="Issue Date: " Style="{StaticResource lblStyle}"/>
+                    <Label x:Name="lblIssueDate" Style="{StaticResource lblStyle}"/>
+                </StackPanel>
+                
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="Applicaiton ID: " Style="{StaticResource lblStyle}"/>
+                    <Label  Style="{StaticResource lblStyle}" x:Name="lblApplicationID"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="Is Active: " Style="{StaticResource lblStyle}"/>
+                    <Label x:Name="lblIsActive" Style="{StaticResource lblStyle}"/>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="Date Of Birth: " Style="{StaticResource lblStyle}"/>
+                    <Label x:Name="lblDateOfBirth" Style="{StaticResource lblStyle}"/>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="Driver ID: " Style="{StaticResource lblStyle}"/>
+                    <Label x:Name="lblDriverID" Style="{StaticResource lblStyle}"/>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Label Content="Expiration Date: " Style="{StaticResource lblStyle}"/>
+                    <Label x:Name="lblExpirationDate" Style="{StaticResource lblStyle}"/>
+                </StackPanel>
+
+
+            </StackPanel>
+
+            <Image Grid.Column="2" x:Name="imgPerson" Source="/Images/Male 512.png" Width="210" Height="210" Stretch="Fill"></Image>
+
+
+        </Grid>
+
+
+
+    </Border>
+</UserControl>

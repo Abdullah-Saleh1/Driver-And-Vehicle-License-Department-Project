@@ -1,4 +1,7 @@
 ﻿using DVLD_BuisinessLayer;
+using DVLD_PresentationLayer.Global_Classes;
+using DVLD_PresentationLayer.Licenses;
+using DVLD_PresentationLayer.Licenses.LocalLicenses;
 using DVLD_PresentationLayer.Tests;
 using DVLD_PresentationLayer.Users;
 using System;
@@ -239,17 +242,33 @@ namespace DVLD_PresentationLayer.Applications.LocalApplications
 
         private void IssueDrivingLicenseForFirstTime(object sender, RoutedEventArgs e)
         {
+            int LocalAppID = Convert.ToInt32((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["LDLAppID"]);
+
+
+            winIssueLicenseFirstTime issueLicenseFirstTime = new winIssueLicenseFirstTime(LocalAppID);
+            issueLicenseFirstTime.ShowDialog(); 
 
         }
 
         private void ShowLicense(object sender, RoutedEventArgs e)
         {
+            int LocalAppID = Convert.ToInt32((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["LDLAppID"]);
+
+            int LicenseID = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalAppID).GetActiveLicenseID();
+
+            winShowDriverLicenseInfo showDriverLicenseInfo = new winShowDriverLicenseInfo(LicenseID);
+            showDriverLicenseInfo.ShowDialog();
 
         }
 
         private void ShowPersonLicenseHistory(object sender, RoutedEventArgs e)
         {
+            int LocalAppID = Convert.ToInt32((dgLocalDrivingLicenseApplicaions.SelectedItem as DataRowView)["LDLAppID"]);
 
+            clsLocalDrivingLicenseApplication LocalApp = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalAppID);
+
+            winShowPersonLicenseHistory showPersonLicenseHistory = new winShowPersonLicenseHistory(LocalApp.ApplicantPersonID);
+            showPersonLicenseHistory.ShowDialog(); 
         }
 
         private void dgLocalDrivingLicenseApplicaions_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -276,6 +295,7 @@ namespace DVLD_PresentationLayer.Applications.LocalApplications
 
 
             btnShowLicense.IsEnabled = LicenseExists;
+            btnShowPersonLicenseHistory.IsEnabled = LicenseExists; 
             btnIssueDrivingLicenseForFirstTime.IsEnabled = (TotalTestPassed == 3) && !LicenseExists; 
             btnEditApplication.IsEnabled = !LicenseExists && (LocalApp.Status == clsApplication.enStatus.New);
             btnCancelApplication.IsEnabled = LocalApp.Status == clsApplication.enStatus.New;

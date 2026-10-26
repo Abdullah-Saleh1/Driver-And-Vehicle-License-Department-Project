@@ -24,7 +24,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Manage Local Driving License Applications" Style="{StaticResource TitleLabelStyle}"/>
+            <Label Content="Local Driving License Applications" Style="{StaticResource TitleLabelStyle}"/>
 
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal">
 

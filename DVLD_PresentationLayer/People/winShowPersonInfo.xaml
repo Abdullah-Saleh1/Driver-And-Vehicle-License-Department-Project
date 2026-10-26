@@ -21,6 +21,6 @@
 
         <local:ctrlPersonCard Grid.Row="1" x:Name="ctrlPersonCard1" Margin="10"/>
 
-        <Button Grid.Row="2" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="100" Height="30" Click="CloseWindow">Close</Button>
+        <Button Grid.Row="2" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Height="30" Click="CloseWindow">Close</Button>
     </Grid>
 </Window>

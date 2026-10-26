@@ -19,6 +19,13 @@ namespace DVLD_PresentationLayer.Applications.Controls
         private int _LicenseID;
 
 
+        public int LicenseID
+        {
+            set { _LicenseID = value; }
+            get { return _LicenseID; }
+        }
+
+
         // Expose the LocalDrivingLicenseApplicationID as a public property
         public int LocalDrivingLicenseApplicationID
         {
@@ -91,6 +98,7 @@ namespace DVLD_PresentationLayer.Applications.Controls
         {
             //winShowLicenseInfo winLicenseInfo = new winShowLicenseInfo(_LicenseID);
             //winLicenseInfo.ShowDialog();
+            MessageBox.Show("This Window Is not Implemented yet"); 
         }
 
         private void btnViewPersonInfo_Click(object sender, RoutedEventArgs e)

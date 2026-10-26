@@ -67,24 +67,24 @@
                                     <MenuItem Header="Driving Licenses Services">
                                         <MenuItem Header="New Driving License">
                                             <MenuItem x:Name="btnNewLocalDrivingLisenceApplication" Header="Local License" Click="btnNewLocalDrivingLisenceApplication_Click"/>
-                                            <MenuItem Header="International License"/>
+                                            <MenuItem x:Name="btnNewInternationalApplication" Header="International License" Click="btnNewInternationalApplication_Click" />
                                         </MenuItem>
 
-                                        <MenuItem Header="Renew Driving License"/>
-                                        <MenuItem Header="Replace for Lost or Damaged"/>
-                                        <MenuItem Header="Release Detained License"/>
-                                        <MenuItem Header="Retake Test"/>
+                                        <MenuItem Header="Renew Driving License" x:Name="btnRenewDrivingLicense" Click="btnRenewDrivingLicense_Click"/>
+                                        <MenuItem Header="Replace for Lost or Damaged" x:Name="btnReplaceLostOrDamangedLicense" Click="btnReplaceLostOrDamangedLicense_Click"/>
+                                        <MenuItem Header="Release Detained License" Click="btnReleaseDetainedLicense_Click"/>
+                                        <MenuItem x:Name="btnRetakeTest" Header="Retake Test" Click="btnRetakeTest_Click"/>
                                     </MenuItem>
 
                                     <MenuItem Header="Manage Applications">
                                         <MenuItem Header="Local Driving License Applications" x:Name="btnManageLocalDrivingLicenseApplication" Click="btnManageLocalDrivingLicenseApplication_Click" />
-                                        <MenuItem Header="International Driving License Applications"/>
+                                        <MenuItem Header="International Driving License Applications" x:Name="btnManageInternationalDrivingLicenseApplication" Click="btnManageInternationalDrivingLicenseApplication_Click"/>
                                     </MenuItem>
 
                                     <MenuItem Header="Detained Licenses">
-                                        <MenuItem Header="Manage Detained Licenses"/>
-                                        <MenuItem Header="Detained License"/>
-                                        <MenuItem Header="Release Detained License"/>
+                                        <MenuItem Header="Manage Detained Licenses" x:Name="btnManageDetainedLicenses" Click="btnManageDetainedLicenses_Click"/>
+                                        <MenuItem Header="Detaine License" x:Name="btnDetainLicense" Click="btnDetainLicense_Click"/>
+                                        <MenuItem Header="Release Detained License" x:Name="btnReleaseDetainedLicense" Click="btnReleaseDetainedLicense_Click"/>
                                     </MenuItem>
 
                                     <MenuItem Header="Manage Application Types" x:Name="btnManageApplicationTypes" Click="btnManageApplicationTypes_Click"/>
@@ -118,7 +118,7 @@
                     </Button>
 
                     <Button x:Name="btnDrivers"
-                            Style="{StaticResource ModernTopButtonStyle}">
+                            Style="{StaticResource ModernTopButtonStyle}" Click="btnDrivers_Click">
 
                         <StackPanel Orientation="Horizontal">
 

@@ -2,9 +2,6 @@
 using DVLD_PresentationLayer.Global_Classes;
 using System;
 using System.Data;
-using System.Data.Common;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
