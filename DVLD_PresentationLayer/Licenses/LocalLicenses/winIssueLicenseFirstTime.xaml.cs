@@ -9,6 +9,8 @@ namespace DVLD_PresentationLayer.Licenses.LocalLicenses
     public partial class winIssueLicenseFirstTime : Window
     {
 
+        public event Action OnLicenseIssued; 
+
         private int _LocaAppID;
         private clsLocalDrivingLicenseApplication _LocalApp; 
         public winIssueLicenseFirstTime(int LocalAppID)
@@ -62,7 +64,8 @@ namespace DVLD_PresentationLayer.Licenses.LocalLicenses
                 MessageBox.Show($"License Issued Successfully with LicenseID = {LicneseID}");
 
                 ctrlLocalDrivingLicenseApplicationInfo1.LicenseID = LicneseID; 
-                ctrlLocalDrivingLicenseApplicationInfo1.btnShowLicenseInfo.IsEnabled = true; 
+                ctrlLocalDrivingLicenseApplicationInfo1.btnShowLicenseInfo.IsEnabled = true;
+                OnLicenseIssued?.Invoke(); 
             } else
             {
                 MessageBox.Show("Error: the License is not Issued"); 

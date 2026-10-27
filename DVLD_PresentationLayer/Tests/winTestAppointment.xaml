@@ -19,7 +19,7 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="{StaticResource CircuitPatternBrush}" Grid.Row="2"/>
+        <Rectangle Fill="{StaticResource CircuitPatternBrush}" Grid.RowSpan="3"/>
 
         <Label Content="Schedule Test" x:Name="lblTitle" Style="{StaticResource MainLbl}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         

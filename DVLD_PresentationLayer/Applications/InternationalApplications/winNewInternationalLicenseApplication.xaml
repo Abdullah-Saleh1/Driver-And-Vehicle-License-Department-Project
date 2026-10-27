@@ -7,7 +7,7 @@
         xmlns:uc="clr-namespace:DVLD_PresentationLayer.Licenses.LocalLicenses.Controls"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="New International License Application" Height="730" Width="850" Loaded="Window_Loaded">
+        Title="New International License Application" Height="630" Width="850" Loaded="Window_Loaded">
     <Grid Margin="10" HorizontalAlignment="Center">
 
         <Grid.RowDefinitions>

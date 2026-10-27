@@ -111,6 +111,7 @@ namespace DVLD_PresentationLayer
         private void btnManageLocalDrivingLicenseApplication_Click(object sender, RoutedEventArgs e)
         {
             winManageLocalDrivingLicenseApplications winLocalApplications = new winManageLocalDrivingLicenseApplications();
+            winLocalApplications.OnWindowClosed += _LoadStatistics; 
             winLocalApplications.ShowDialog(); 
         }
 
@@ -122,12 +123,14 @@ namespace DVLD_PresentationLayer
         private void btnNewLocalDrivingLisenceApplication_Click(object sender, RoutedEventArgs e)
         {
             winAddUpdateLocalDrivingLilcenseApplication winNewLocalApplication = new winAddUpdateLocalDrivingLilcenseApplication();
+            winNewLocalApplication.OnLocalApplicationSaved += _LoadStatistics; 
             winNewLocalApplication.ShowDialog();
         }
 
         private void btnRetakeTest_Click(object sender, RoutedEventArgs e)
         {
             winManageLocalDrivingLicenseApplications winManageLocalApps = new winManageLocalDrivingLicenseApplications();
+            winManageLocalApps.OnWindowClosed += _LoadStatistics; 
             winManageLocalApps.ShowDialog(); 
         }
 
@@ -171,20 +174,42 @@ namespace DVLD_PresentationLayer
         private void btnDetainLicense_Click(object sender, RoutedEventArgs e)
         {
             winDetainLicenseApplication detainLicenseApplication = new winDetainLicenseApplication();
+            detainLicenseApplication.OnLicenseDetained += _LoadStatistics; 
             detainLicenseApplication.ShowDialog(); 
         }
 
         private void btnManageDetainedLicenses_Click(object sender, RoutedEventArgs e)
         {
             winManageDetainedLicenses detainedLicenses = new winManageDetainedLicenses();
+            detainedLicenses.OnWidnowClosed += _LoadStatistics; 
             detainedLicenses.ShowDialog(); 
         }
 
         private void btnReleaseDetainedLicense_Click(object sender, RoutedEventArgs e)
         {
             winReleaseDetainedLicenseApplication releaseDetainedLicenseApplication = new winReleaseDetainedLicenseApplication();
+            releaseDetainedLicenseApplication.OnLicenseReleased += _LoadStatistics; 
             releaseDetainedLicenseApplication.ShowDialog(); 
         }
 
+        private void BtnTotalDrivers_Click(object sender, RoutedEventArgs e)
+        {
+            btnDrivers_Click(null, null); 
+        }
+
+        private void BtnActiveLicenses_Click(object sender, RoutedEventArgs e)
+        {
+            btnManageLocalDrivingLicenseApplication_Click(null, null);
+        }
+
+        private void BtnPendingApps_Click(object sender, RoutedEventArgs e)
+        {
+            btnManageLocalDrivingLicenseApplication_Click(null, null); 
+        }
+
+        private void BtnDetainedLicenses_Click(object sender, RoutedEventArgs e)
+        {
+            btnManageDetainedLicenses_Click(null, null); 
+        }
     }
 }

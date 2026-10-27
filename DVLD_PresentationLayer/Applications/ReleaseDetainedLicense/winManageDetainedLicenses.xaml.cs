@@ -15,6 +15,8 @@ namespace DVLD_PresentationLayer.Applications.ReleaseDetainedLicense
 {
     public partial class winManageDetainedLicenses : Window
     {
+
+        public event Action OnWidnowClosed; 
         public winManageDetainedLicenses()
         {
             InitializeComponent();
@@ -129,6 +131,10 @@ namespace DVLD_PresentationLayer.Applications.ReleaseDetainedLicense
 
         private void dgDetainedLicenses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (dgDetainedLicenses.SelectedIndex < 0) return;
+
+            if (dgDetainedLicenses.SelectedItem == null) return;
+
             bool IsReleased = Convert.ToBoolean((dgDetainedLicenses.SelectedItem as DataRowView)["IsReleased"]);
 
             btnReleaseDetainedLicense.IsEnabled = !IsReleased;
@@ -183,6 +189,7 @@ namespace DVLD_PresentationLayer.Applications.ReleaseDetainedLicense
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            OnWidnowClosed?.Invoke(); 
         }
 
         private void btnDetainLicense_Click(object sender, RoutedEventArgs e)

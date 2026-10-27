@@ -246,7 +246,7 @@ namespace DVLD_BuisinessLayer
             return -1;
         }
 
-        public bool ReleaseDetainedLicense(int DetainID, int CreatedByUserID, ref int ApplicationID)
+        public bool ReleaseDetainedLicense(int DetainID, int CreatedByUserID, ref int AppID)
         {
             clsApplication Application = new clsApplication();
             Application.ApplicantPersonID = this.DriverInfo.PersonID;
@@ -257,13 +257,12 @@ namespace DVLD_BuisinessLayer
             Application.PaidFees = clsApplicationType.GetApplicationFees((int)clsApplication.enApplicationType.ReleaseDetainedDrivingLicsense);
             Application.CreatedByUserID = CreatedByUserID;
 
-            ApplicationID = Application.ApplicationID; 
-
-
             if (!Application.Save())
             {
                 return false; 
             }
+
+            AppID = Application.ApplicationID;
 
             if (clsDetainedLicense.ReleaseLicense(DetainID, CreatedByUserID, Application.ApplicationID))
             {

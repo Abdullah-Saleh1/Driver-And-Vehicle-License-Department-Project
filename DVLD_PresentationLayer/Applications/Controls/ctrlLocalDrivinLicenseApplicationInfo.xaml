@@ -70,13 +70,13 @@
 
                     <!-- ID -->
                     <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                        <Label Content="ID:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label Content="ID:" Style="{StaticResource lblStyle}" Width="100" Margin="0, 5"/>
                         <Label x:Name="lblApplicationID" Content="[???]" Style="{StaticResource lblStyle}"/>
                     </StackPanel>
 
                     <!-- Date -->
                     <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                        <Label Content="Date:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label Content="Date:" Style="{StaticResource lblStyle}" Width="100" Margin="0, 5"/>
                         <Label x:Name="lblDate" Content="[???]" Style="{StaticResource lblStyle}"/>
                     </StackPanel>
 
@@ -88,31 +88,31 @@
 
                     <!-- Status Date -->
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                        <Label Content="Status Date:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label Content="Status Date:" Style="{StaticResource lblStyle}" Width="100" Margin="0, 5"/>
                         <Label x:Name="lblStatusDate" Content="[???]" Style="{StaticResource lblStyle}"/>
                     </StackPanel>
 
                     <!-- Fees -->
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                        <Label Content="Fees:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label Content="Fees:" Style="{StaticResource lblStyle}" Width="100" Margin="0, 5"/>
                         <Label x:Name="lblFees" Content="[???]" Style="{StaticResource lblStyle}"/>
                     </StackPanel>
 
                     <!-- Created By -->
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-                        <Label Content="Created By:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label Content="Created By:" Style="{StaticResource lblStyle}" Width="100" Margin="0, 5"/>
                         <Label x:Name="lblCreatedByUser" Content="[???]" Style="{StaticResource lblStyle}"/>
                     </StackPanel>
 
                     <!-- Type -->
                     <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
-                        <Label Content="Type:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label Content="Type:" Style="{StaticResource lblStyle}" Width="100" Margin="0, 5"/>
                         <Label x:Name="lblType" Content="[???]" Style="{StaticResource lblStyle}"/>
                     </StackPanel>
 
                     <!-- Applicant -->
                     <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
-                        <Label Content="Applicant:" Style="{StaticResource lblStyle}" Width="100"/>
+                        <Label Content="Applicant:" Style="{StaticResource lblStyle}" Width="100" Margin="0, 5"/>
                         <Label x:Name="lblApplicant" Content="[???]" Style="{StaticResource lblStyle}"/>
                     </StackPanel>
 

@@ -19,6 +19,8 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
+        <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
+
         <local:ctrlScheduledTest x:Name="ctrlScheduledTest1"/>
 
         <Grid Grid.Row="1" Margin="30, 0">

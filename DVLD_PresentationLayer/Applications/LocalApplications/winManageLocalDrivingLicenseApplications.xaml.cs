@@ -1,9 +1,7 @@
 ﻿using DVLD_BuisinessLayer;
-using DVLD_PresentationLayer.Global_Classes;
 using DVLD_PresentationLayer.Licenses;
 using DVLD_PresentationLayer.Licenses.LocalLicenses;
 using DVLD_PresentationLayer.Tests;
-using DVLD_PresentationLayer.Users;
 using System;
 using System.Data;
 using System.Text.RegularExpressions;
@@ -18,6 +16,8 @@ namespace DVLD_PresentationLayer.Applications.LocalApplications
         {
             InitializeComponent();
         }
+
+        public event Action OnWindowClosed; 
 
         private DataTable _LocalApplicationData;
 
@@ -52,7 +52,8 @@ namespace DVLD_PresentationLayer.Applications.LocalApplications
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close(); 
+            this.Close();
+            OnWindowClosed?.Invoke(); 
         }
 
         // Filter and Search Functionality
@@ -246,6 +247,7 @@ namespace DVLD_PresentationLayer.Applications.LocalApplications
 
 
             winIssueLicenseFirstTime issueLicenseFirstTime = new winIssueLicenseFirstTime(LocalAppID);
+            issueLicenseFirstTime.OnLicenseIssued += _LoadLocalApplications; 
             issueLicenseFirstTime.ShowDialog(); 
 
         }

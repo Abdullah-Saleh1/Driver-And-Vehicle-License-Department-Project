@@ -9,6 +9,8 @@
         mc:Ignorable="d"
         Title="winScheduleTest" Height="600" Width="500">
     <Grid Margin="10">
+
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="489*"/>
             <ColumnDefinition Width="11*"/>
@@ -19,6 +21,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
+
+        <Rectangle Grid.RowSpan="3" Fill="{StaticResource CircuitPatternBrush}"/>
 
         <local:ctrlScheduleTest x:Name="ctrlScheduleTest1"/>
 

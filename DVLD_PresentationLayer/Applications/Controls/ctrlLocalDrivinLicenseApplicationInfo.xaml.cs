@@ -1,4 +1,5 @@
 ﻿using DVLD_BuisinessLayer;
+using DVLD_PresentationLayer.Licenses.LocalLicenses;
 using DVLD_PresentationLayer.People;
 using System;
 using System.Runtime.InteropServices;
@@ -96,9 +97,8 @@ namespace DVLD_PresentationLayer.Applications.Controls
 
         private void btnShowLicenseInfo_Click(object sender, RoutedEventArgs e)
         {
-            //winShowLicenseInfo winLicenseInfo = new winShowLicenseInfo(_LicenseID);
-            //winLicenseInfo.ShowDialog();
-            MessageBox.Show("This Window Is not Implemented yet"); 
+            winShowDriverLicenseInfo showDriverLicenseInfo = new winShowDriverLicenseInfo(_LicenseID);
+            showDriverLicenseInfo.ShowDialog();
         }
 
         private void btnViewPersonInfo_Click(object sender, RoutedEventArgs e)
