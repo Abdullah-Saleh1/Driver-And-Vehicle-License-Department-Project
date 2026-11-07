@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DVLD_PresentationLayer.People.Controls"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        
         Title="winShowPersonInfo" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
 
@@ -21,6 +23,6 @@
 
         <local:ctrlPersonCard Grid.Row="1" x:Name="ctrlPersonCard1" Margin="10"/>
 
-        <Button Grid.Row="2" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Height="30" Click="CloseWindow">Close</Button>
+        <Button Grid.Row="2" Style="{StaticResource Btn}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="70" Height="30" IsCancel="True" Click="CloseWindow">Close</Button>
     </Grid>
 </Window>

@@ -67,13 +67,26 @@
             </StackPanel>
 
 
-            <StackPanel Grid.Column="2">
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
                 <Button Width="Auto" HorizontalAlignment="Center" Style="{StaticResource Btn}" Click="EditPerson">Edit Person Info</Button>
 
-                <Image x:Name="imgPerson" Source="/Images/Male 512.png" Width="210" Height="210" Stretch="Fill"></Image>
-                
-            </StackPanel>
+                <Image x:Name="imgPerson" Source="/Images/Male 512.png" Visibility="Collapsed"/>
+
+                <Viewbox Grid.Row="1" Margin="8,6,8,0" StretchDirection="DownOnly"
+                         HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Border Width="210" Height="210" Style="{StaticResource PersonPhotoFrame}">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding Source, ElementName=imgPerson}"
+                                        Stretch="Uniform"/>
+                        </Border.Background>
+                    </Border>
+                </Viewbox>
+            </Grid>
 
         </Grid>
         

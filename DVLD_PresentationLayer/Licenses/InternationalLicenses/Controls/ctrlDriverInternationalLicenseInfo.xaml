@@ -82,7 +82,15 @@
 
             </StackPanel>
 
-            <Image Grid.Column="2" x:Name="imgPerson" Source="/Images/Male 512.png" Width="210" Height="210" Stretch="Fill"></Image>
+            <Image x:Name="imgPerson" Source="/Images/Male 512.png" Visibility="Collapsed"/>
+            <Viewbox Grid.Column="2" Margin="8" StretchDirection="DownOnly"
+                     HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border Width="210" Height="210" Style="{StaticResource PersonPhotoFrame}">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding Source, ElementName=imgPerson}" Stretch="Uniform"/>
+                    </Border.Background>
+                </Border>
+            </Viewbox>
 
 
         </Grid>

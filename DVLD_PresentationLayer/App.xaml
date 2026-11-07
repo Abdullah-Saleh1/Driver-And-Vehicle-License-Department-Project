@@ -189,6 +189,75 @@
         <SolidColorBrush x:Key="BrushWarning" Color="{StaticResource ColorWarning}"/>
         <SolidColorBrush x:Key="BrushDanger" Color="{StaticResource ColorDanger}"/>
 
+        <Style x:Key="ModernTabItem" TargetType="TabItem">
+            <Setter Property="Foreground" Value="{StaticResource BrushTextMain}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="TabSurface" CornerRadius="9" Padding="16,8"
+                                Margin="0,0,6,0" Background="Transparent"
+                                BorderBrush="Transparent" BorderThickness="1">
+                            <ContentPresenter ContentSource="Header" RecognizesAccessKey="True"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="TabSurface" Property="Background" Value="{StaticResource BrushPrimary}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="TabSurface" Property="Background" Value="{StaticResource BrushAccent}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="TabSurface" Property="BorderBrush" Value="{StaticResource BrushAccentLight}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.55"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernTabControl" TargetType="TabControl">
+            <Setter Property="ItemContainerStyle" Value="{StaticResource ModernTabItem}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabControl">
+                <Grid KeyboardNavigation.TabNavigation="Local">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border HorizontalAlignment="Left" Padding="5"
+                            Background="{StaticResource BrushSecondary}"
+                            BorderBrush="{StaticResource BrushComponents}"
+                            BorderThickness="1" CornerRadius="12">
+                        <TabPanel IsItemsHost="True" KeyboardNavigation.TabIndex="1"/>
+                    </Border>
+                    <Border Grid.Row="1" Margin="0,8,0,0"
+                            Background="{StaticResource BrushSecondary}"
+                            BorderBrush="{StaticResource BrushComponents}"
+                            BorderThickness="1" CornerRadius="12">
+                        <ContentPresenter x:Name="PART_SelectedContentHost"
+                                          ContentSource="SelectedContent"
+                                          KeyboardNavigation.TabIndex="2"/>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PersonPhotoFrame" TargetType="Border">
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BrushComponents}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
 
 
 

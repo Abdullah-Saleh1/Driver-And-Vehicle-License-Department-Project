@@ -71,7 +71,7 @@
     <Grid Margin="10">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.8*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
@@ -80,8 +80,8 @@
 
         <Label Content="New Local Driving License Application" x:Name="txtTitle" Style="{StaticResource TitleLabelStyle}"/>
 
-        <TabControl Grid.Row="1" x:Name="tcApplicationTabs">
-            <TabItem Header="Personal Info" Padding="5">
+        <TabControl Grid.Row="1" x:Name="tcApplicationTabs" Style="{StaticResource ModernTabControl}">
+            <TabItem Header="Personal Info">
 
                 <StackPanel>
                     <uc:ctrlPersonCardWithFilter x:Name="ctrlPersonCardWithFilter1"/>

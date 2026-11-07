@@ -7,7 +7,7 @@
         xmlns:uc="clr-namespace:DVLD_PresentationLayer.Licenses.LocalLicenses.Controls"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Release Detain License Application" Height="600" Width="850" Loaded="Window_Loaded">
+        Title="Release Detain License Application" Height="620" Width="850" Loaded="Window_Loaded">
     <Grid Margin="10" HorizontalAlignment="Center">
 
         <Grid.RowDefinitions>

@@ -15,7 +15,7 @@
 
         <Rectangle Fill="{StaticResource CircuitPatternBrush}"/>
 
-        <local:ctrlPersonCard x:Name="ctrlPersonCard1" Grid.Row="1"/>
+        <local:ctrlPersonCard x:Name="ctrlPersonCard1" Grid.Row="1" Width="Auto"/>
 
 
         <StackPanel x:Name="spFilters" Orientation="Horizontal" VerticalAlignment="Center">

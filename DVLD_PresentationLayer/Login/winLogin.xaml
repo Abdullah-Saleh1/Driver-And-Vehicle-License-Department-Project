@@ -1,32 +1,53 @@
-﻿<Window x:Class="DVLD_PresentationLayer.Login.winLogin"
+<Window x:Class="DVLD_PresentationLayer.Login.winLogin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DVLD_PresentationLayer.Login"
-        mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="winLogin" Height="450" Width="800" Loaded="Window_Loaded">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        Title="DVLD | Sign In" Height="560" Width="800"
+        MinHeight="535" MinWidth="440"
+        Background="{StaticResource BrushPrimary}"
+        FontFamily="Segoe UI"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Rectangle Fill="{StaticResource CircuitPatternBrush}" IsHitTestVisible="False"/>
 
+        <Grid Width="380" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border Background="{StaticResource BrushSecondary}" CornerRadius="16">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="24" ShadowDepth="4" Opacity="0.10"
+                                      Color="Black" Direction="270"/>
+                </Border.Effect>
+            </Border>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+            <StackPanel Margin="32,28">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Images/DVLD Logo.png" Width="40" Height="40"/>
+                </StackPanel>
 
-        <StackPanel Grid.Column="1" Orientation="Vertical">
-            <TextBox x:Name="txtUserName" Tag="Username" Width="200" Height="30" Margin="0,0,0,10" Style="{StaticResource ModernTextBox}"/>
-            <PasswordBox x:Name="txtPassword" Tag="Password" Width="200" Height="30" Margin="0,0,0,10" 
-             Style="{StaticResource ModernPasswordBox}" 
-             PasswordChanged="txtPassword_PasswordChanged"/>
+                <TextBlock Text="Welcome Back " FontSize="28" FontWeight="SemiBold"
+                           HorizontalAlignment="Center" Margin="0,12,0,4"
+                           Foreground="{StaticResource BrushTextMain}"/>
+                <TextBlock Text="Driver License And Vehicle Department System" FontSize="14"
+                           HorizontalAlignment="Center" Margin="0,0,0,22"
+                           Foreground="{StaticResource BrushTextMuted}"/>
 
-            <Button x:Name="btnLogin" Style="{StaticResource Btn}" Click="btnLogin_Click" IsDefault="True">Login</Button>
+                <Label Content="Username" Target="{Binding ElementName=txtUserName}"
+                       Padding="0" Margin="0,0,0,6" FontWeight="SemiBold"
+                       Foreground="{StaticResource BrushTextMain}"/>
+                <TextBox x:Name="txtUserName" Tag="Username" Height="42" Margin="0,0,0,14"
+                         Style="{StaticResource ModernTextBox}"/>
 
-            <CheckBox x:Name="chkRememberMe" Content="Remember Me" Grid.Column="1" Margin="0,10,0,0" VerticalAlignment="Top"/>
-        </StackPanel>
-       
+                <Label Content="Password" Target="{Binding ElementName=txtPassword}"
+                       Padding="0" Margin="0,0,0,6" FontWeight="SemiBold"
+                       Foreground="{StaticResource BrushTextMain}"/>
+                <PasswordBox x:Name="txtPassword" Tag="Password" Height="42"
+                             Style="{StaticResource ModernPasswordBox}"
+                             PasswordChanged="txtPassword_PasswordChanged"/>
 
-
+                <CheckBox x:Name="chkRememberMe" Content="Remember Me" Margin="0,14,0,18"
+                          Foreground="{StaticResource BrushTextMain}"/>
+                <Button x:Name="btnLogin" Content="Sign In" Height="44" Margin="0"
+                        Style="{StaticResource Btn}" Click="btnLogin_Click" IsDefault="True"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
