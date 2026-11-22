@@ -113,27 +113,27 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- D.L. Application ID -->
-                    <TextBlock Text="D.L.Application ID:" Grid.Row="0" Grid.Column="0" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Foreground="Black" Text="D.L.Application ID:" Grid.Row="0" Grid.Column="0" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
                     <fa:FontAwesome Icon="Solid_Hashtag" Grid.Row="0" Grid.Column="1" FontSize="16" Foreground="{StaticResource BrushAccent}" Margin="10,5" VerticalAlignment="Center"/>
                     <TextBlock x:Name="lblApplicationID" Grid.Row="0" Grid.Column="2" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
 
                     <!-- Application Date -->
-                    <TextBlock Text="Application Date:" Grid.Row="1" Grid.Column="0" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Foreground="Black" Text="Application Date:" Grid.Row="1" Grid.Column="0" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
                     <fa:FontAwesome Icon="Solid_CalendarDays" Grid.Row="1" Grid.Column="1" FontSize="16" Foreground="{StaticResource BrushAccent}" Margin="10,5" VerticalAlignment="Center"/>
                     <TextBlock x:Name="lblApplicationDate" FontWeight="Bold" Grid.Row="1" Grid.Column="2" FontSize="14" Margin="5" VerticalAlignment="Center"/>
 
                     <!-- License Class -->
-                    <TextBlock Text="License Class:" Grid.Row="2" Grid.Column="0" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Foreground="Black" Text="License Class:" Grid.Row="2" Grid.Column="0" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
                         <fa:FontAwesome Icon="Solid_IdCard" Grid.Row="2" Grid.Column="1" FontSize="16" Foreground="{StaticResource BrushAccent}" Margin="10,5" VerticalAlignment="Center"/>
                     <ComboBox x:Name="cbLicenseClasses" Style="{StaticResource ModernComboBoxStyle}" Grid.Row="2" Grid.Column="2" Width="250" Margin="5" VerticalAlignment="Center"/>
 
                     <!-- Application Fees -->
-                    <TextBlock Text="Application Fees:" Grid.Row="3" Grid.Column="0" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Foreground="Black" Text="Application Fees:" Grid.Row="3" Grid.Column="0" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
                             <fa:FontAwesome Icon="Solid_MoneyBill" Grid.Row="3" Grid.Column="1" FontSize="16" Foreground="{StaticResource BrushAccent}" Margin="10,5" VerticalAlignment="Center"/>
                     <TextBlock x:Name="lblApplicationFees" FontWeight="Bold" Grid.Row="3" Grid.Column="2" FontSize="14" Margin="5" VerticalAlignment="Center"/>
 
                     <!-- Created By -->
-                    <TextBlock Text="Created By:" Grid.Row="4" Grid.Column="0" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Foreground="Black" Text="Created By:" Grid.Row="4" Grid.Column="0" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
                             <fa:FontAwesome Icon="Solid_User" Grid.Row="4" Grid.Column="1" FontSize="16" Foreground="{StaticResource BrushAccent}" Margin="10,5" VerticalAlignment="Center"/>
                     <TextBlock x:Name="lblCreatedBy" Grid.Row="4" Grid.Column="2" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"/>
                 </Grid>
