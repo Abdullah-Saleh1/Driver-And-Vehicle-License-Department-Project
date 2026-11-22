@@ -88,9 +88,6 @@ namespace DVLD_PresentationLayer.Login
 
         private void _LoadCredentials()
         {
-
-            //Registry.GetValue(Name,,)
-
             try
             {
 
@@ -109,16 +106,6 @@ namespace DVLD_PresentationLayer.Login
             {
                 MessageBox.Show($"Error: {ex}"); 
             }
-
-            //string[] lines = File.ReadAllLines(CredentialsPath);
-
-            //if (lines.Length >= 2)
-            //{
-            //    txtUserName.Text = lines[0].Trim();
-            //    txtPassword.Password = lines[1].Trim();
-
-            //    chkRememberMe.IsChecked = true; // Set the checkbox to checked if credentials are loaded
-            //}
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
