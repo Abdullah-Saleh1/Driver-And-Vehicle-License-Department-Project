@@ -416,9 +416,6 @@
   <ItemGroup>
     <Resource Include="Images\DVLD Logo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Login\Credentials.txt" />
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
