@@ -1,15 +1,19 @@
 ﻿using DVLD_BuisinessLayer; 
-using System;
-using System.IO;
 using System.Windows;
-using DVLD_PresentationLayer.Global_Classes; 
+using DVLD_PresentationLayer.Global_Classes;
+using Microsoft.Win32;
+using System;
+using System.Reflection;
 
 
 namespace DVLD_PresentationLayer.Login
 {
     public partial class winLogin : Window
     {
-        static string CredentialsPath = "D:\\C#\\Course 19 DVLD\\DVLD\\DVLD_PresentationLayer\\Login\\Credentials.txt"; 
+        static string KeyPath = @"HKEY_CURRENT_USER\SOFTWARE\DVLD";
+        static string UserNameKey = "UserName";
+        static string PasswordKey = "Password"; 
+
         public winLogin()
         {
             InitializeComponent();
@@ -20,15 +24,33 @@ namespace DVLD_PresentationLayer.Login
             util.HandlePasswordBoxPlaceHolder(sender, e);
         }
 
+        public static void DeleteRegistryValue(string FullKeyPath, string ValueName)
+        {
+            string subFullKeyPath = FullKeyPath.Replace(@"HKEY_CURRENT_USER\", "");
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(subFullKeyPath, writable: true))
+            {
+                key?.DeleteValue(ValueName, throwOnMissingValue: false);
+            }
+        }
+
         private void _HandleRememberMe()
         {
-            if (chkRememberMe.IsChecked == true)
+
+            try
             {
-                File.WriteAllLines(CredentialsPath, new string[] { txtUserName.Text, txtPassword.Password });
+                if (chkRememberMe.IsChecked == true)
+                {
+                    Registry.SetValue(KeyPath, UserNameKey, txtUserName.Text, RegistryValueKind.String);
+                    Registry.SetValue(KeyPath, PasswordKey, txtPassword.Password, RegistryValueKind.String);
+                } else
+                {
+                    DeleteRegistryValue(KeyPath, UserNameKey);
+                    DeleteRegistryValue(KeyPath, PasswordKey); 
+                }
             }
-            else
+            catch (Exception ex)
             {
-                File.WriteAllText(CredentialsPath, string.Empty);
+                MessageBox.Show($"Errro: {ex}");
             }
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -66,15 +88,37 @@ namespace DVLD_PresentationLayer.Login
 
         private void _LoadCredentials()
         {
-            string[] lines = File.ReadAllLines(CredentialsPath);
 
-            if (lines.Length >= 2)
+            //Registry.GetValue(Name,,)
+
+            try
             {
-                txtUserName.Text = lines[0].Trim();
-                txtPassword.Password = lines[1].Trim();
 
-                chkRememberMe.IsChecked = true; // Set the checkbox to checked if credentials are loaded
+                string UserName = Registry.GetValue(KeyPath, UserNameKey, null) as string;
+                string Password = Registry.GetValue(KeyPath, PasswordKey, null) as string;
+
+                if (UserName != null && Password != null)
+                {
+                    txtUserName.Text = UserName;
+                    txtPassword.Password = Password;
+
+                    chkRememberMe.IsChecked = true; 
+                }
+
+            } catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex}"); 
             }
+
+            //string[] lines = File.ReadAllLines(CredentialsPath);
+
+            //if (lines.Length >= 2)
+            //{
+            //    txtUserName.Text = lines[0].Trim();
+            //    txtPassword.Password = lines[1].Trim();
+
+            //    chkRememberMe.IsChecked = true; // Set the checkbox to checked if credentials are loaded
+            //}
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
