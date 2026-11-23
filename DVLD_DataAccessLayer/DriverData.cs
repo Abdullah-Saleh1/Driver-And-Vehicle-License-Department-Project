@@ -41,7 +41,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);
             }
 
             return dt;
@@ -79,7 +79,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log error
+                clsLogger.LogError(ex);
                 IsFound = false;
             }
 
@@ -118,7 +118,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log error
+                clsLogger.LogError(ex); 
                 IsFound = false;
             }
 
@@ -152,7 +152,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log error
+                clsLogger.LogError(ex); 
                 DriverID = -1;
             }
 
@@ -182,7 +182,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log error
+                clsLogger.LogError(ex); 
                 return false; 
             }
         }

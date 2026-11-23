@@ -38,7 +38,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log exception
+                clsLogger.LogError(ex);
                 isFound = false;
             }
 

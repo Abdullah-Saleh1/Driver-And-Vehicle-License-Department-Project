@@ -37,7 +37,7 @@ namespace DVLD_DataAccessLayer
                     }
                     catch (Exception ex)
                     {
-                        // Catch or log exception
+                        clsLogger.LogError(ex);
                     }
                 }
             }
@@ -79,7 +79,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 IsFound = false;
             }
 
@@ -120,7 +120,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 IsFound = false;
             }
 
@@ -153,6 +153,7 @@ namespace DVLD_DataAccessLayer
                     }
                     catch (Exception ex)
                     {
+                        clsLogger.LogError(ex);
                         Age = 0;
                     }
                 }
@@ -200,7 +201,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex);
                 LicenseClassID = -1;
             }
 
@@ -245,7 +246,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 return false; 
             }
         }

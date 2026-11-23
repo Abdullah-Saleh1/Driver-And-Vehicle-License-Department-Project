@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FontAwesome6.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=150287d219411f04, processorArchitecture=MSIL">
       <HintPath>packages\FontAwesome6.Fonts.2.5.1\lib\net472\FontAwesome6.Core.dll</HintPath>
@@ -385,6 +388,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

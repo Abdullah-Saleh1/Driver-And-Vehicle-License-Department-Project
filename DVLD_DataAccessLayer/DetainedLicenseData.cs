@@ -38,7 +38,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex);
             }
 
             return dt;
@@ -76,7 +76,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 DetainID = -1;
             }
 
@@ -112,7 +112,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 return false;
             }
 
@@ -159,7 +159,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 isFound = false;
             }
 
@@ -206,7 +206,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 isFound = false;
             }
 
@@ -235,7 +235,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error    
+                clsLogger.LogError(ex);     
                 isFound = false;
             }
             return isFound;
@@ -269,7 +269,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 return false;
             }
 

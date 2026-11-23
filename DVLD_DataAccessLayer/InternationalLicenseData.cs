@@ -31,7 +31,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex);
             }
 
             return dt;
@@ -72,7 +72,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 return false;
             }
 
@@ -120,7 +120,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 InternationalLicenseID = -1;
             }
 
@@ -149,7 +149,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 return false;
             }
 
@@ -187,7 +187,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
             }
 
             return dt;
@@ -231,7 +231,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex); 
                 isFound = false;
             }
 
@@ -267,7 +267,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log Error
+                clsLogger.LogError(ex);
                 InternationalLicenseID = -1;
             }
 
@@ -293,7 +293,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);
                 isFound = false;
             }
             return isFound;

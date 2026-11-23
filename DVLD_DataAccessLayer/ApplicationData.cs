@@ -48,8 +48,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error
-                IsFound = false;
+                clsLogger.LogError(ex); 
             }
 
             return IsFound;
@@ -78,7 +77,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error
+                clsLogger.LogError(ex);
                 return null; 
             }
 
@@ -118,7 +117,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log Error ex
+                clsLogger.LogError(ex);
                 return -1;
             }
 
@@ -159,7 +158,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log Error ex
+                clsLogger.LogError(ex);
                 return false;
             }
 
@@ -184,7 +183,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Logging error later
+                clsLogger.LogError(ex);
                 return false;
             }
         }
@@ -210,7 +209,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);
                 isFound = false;
             }
 
@@ -248,7 +247,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);
                 return ActiveApplicationID;
             }
 
@@ -284,7 +283,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);
                 return ActiveApplicationID;
             }
 
@@ -317,7 +316,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log Error ex
+                clsLogger.LogError(ex);
                 return false;
             }
 

@@ -59,7 +59,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);
             }
 
             return dt;
@@ -97,7 +97,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error
+                clsLogger.LogError(ex);
                 IsFound = false;
             }
 
@@ -136,7 +136,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error
+                clsLogger.LogError(ex); 
                 IsFound = false;
             }
 
@@ -172,7 +172,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log Error ex
+                clsLogger.LogError(ex);
                 return -1;
             }
 
@@ -202,7 +202,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Logging error later
+                clsLogger.LogError(ex);
                 return false;
             }
         }
@@ -225,7 +225,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Logging error later
+                clsLogger.LogError(ex); 
                 return false;
             }
         }
@@ -263,7 +263,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Log the error
+                clsLogger.LogError(ex);
                 totalTrials = 0;
             }
 
@@ -294,7 +294,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);    
                 isFound = false;
             }
             return isFound;
@@ -325,7 +325,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);    
                 isFound = false;
             }
             return isFound;
@@ -360,7 +360,7 @@ namespace DVLD_DataAccessLayer
                     }
                     catch (Exception ex)
                     {
-                        // Console.WriteLine("Error: " + ex.Message);
+                        clsLogger.LogError(ex);
                         isFound = false;
                     }
                 }

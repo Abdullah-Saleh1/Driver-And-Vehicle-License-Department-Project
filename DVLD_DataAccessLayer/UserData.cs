@@ -45,7 +45,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);
                 IsFound = false;
             }
             return IsFound;
@@ -86,7 +86,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);     
                 IsFound = false;
             }
             return IsFound;
@@ -123,7 +123,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);     
                 IsFound = false;
             }
             return IsFound;
@@ -158,7 +158,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error    
+                clsLogger.LogError(ex);     
             }
 
             return dt;
@@ -196,7 +196,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Logging error later
+                clsLogger.LogError(ex);
                 return UserID; // هترجع -1 لو حصلت مشكلة
             }
 
@@ -230,7 +230,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Logging error later
+                clsLogger.LogError(ex); 
                 return false;
             }
         }
@@ -253,7 +253,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Logging error later
+                clsLogger.LogError(ex); 
                 return false;
             }
         }
@@ -278,7 +278,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Logging error later
+                clsLogger.LogError(ex); 
                 return false;
             }
         }
@@ -303,7 +303,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Logging error later
+                clsLogger.LogError(ex); 
                 return false;
             }
         }
@@ -328,7 +328,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Logging error later
+                clsLogger.LogError(ex); 
                 return false;
             }
         }
@@ -351,7 +351,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // Logging error later
+                clsLogger.LogError(ex); 
                 return false;
             }
 

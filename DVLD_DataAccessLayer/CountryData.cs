@@ -28,7 +28,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error
+                clsLogger.LogError(ex);
             }
             return dt;
         }
@@ -57,7 +57,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error
+                clsLogger.LogError(ex); 
             }
             return false;
         }
@@ -88,7 +88,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                // log the error
+                clsLogger.LogError(ex); 
             }
             return false;
         }
