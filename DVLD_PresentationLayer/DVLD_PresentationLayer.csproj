@@ -48,6 +48,7 @@
       <HintPath>packages\FontAwesome6.Fonts.2.5.1\lib\net472\FontAwesome6.Shared.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
