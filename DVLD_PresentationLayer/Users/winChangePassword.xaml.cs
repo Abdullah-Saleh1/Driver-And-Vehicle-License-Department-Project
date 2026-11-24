@@ -39,7 +39,7 @@ namespace DVLD_PresentationLayer.Users
         {
             if (string.IsNullOrWhiteSpace(txtCurrentPassword.Password)) return;
 
-            if (txtCurrentPassword.Password != _User.Password)
+            if (clsUser.ComputeHash(txtCurrentPassword.Password) != _User.Password)
             {
                 txtCurrentPassword.Clear();
                 txtCurrentPassword.Focus();
@@ -71,7 +71,6 @@ namespace DVLD_PresentationLayer.Users
                 return false;
             }
 
-
             if (txtNewPassword.Password != txtConfirmPassword.Password)
             {
                 MessageBox.Show("New password and confirmation do not match.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -89,7 +88,7 @@ namespace DVLD_PresentationLayer.Users
 
             if (!_ValidateFields()) return;
 
-            _User.Password = txtNewPassword.Password;
+            _User.Password = clsUser.ComputeHash(txtNewPassword.Password);
 
             if (clsUser.ChangePassword(_UserID, _User.Password))
             {

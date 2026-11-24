@@ -10,7 +10,7 @@ namespace DVLD_DataAccessLayer
 {
     public static class clsUserData
     {
-        public static bool GetUserByUsernameAndPassword(string UserName, string Password, ref int UserID, ref int PersonID, ref bool IsActive)
+        public static bool GetUserByUsernameAndPassword(string UserName, string PasswordHash, ref int UserID, ref int PersonID, ref bool IsActive)
         {
 
             bool IsFound = false;
@@ -24,7 +24,7 @@ namespace DVLD_DataAccessLayer
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@UserName", UserName);
-                    command.Parameters.AddWithValue("@Password", Password);
+                    command.Parameters.AddWithValue("@Password", PasswordHash);
                     conn.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {

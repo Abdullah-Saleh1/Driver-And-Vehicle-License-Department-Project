@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
+using System.Security.Cryptography;
+using System.Text;
 using DVLD_DataAccessLayer; 
 
 namespace DVLD_BuisinessLayer
@@ -53,17 +55,24 @@ namespace DVLD_BuisinessLayer
             this.UserName = UserName;
             this.Password = Password;
             this.IsActive = IsActive;
-
-            //this.PersonInfo = clsPerson.Find(PersonID);  
         }
 
+        public static string ComputeHash(string input)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] HashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+                return BitConverter.ToString(HashBytes).Replace("-", "").ToLower();
+            }
+        }
 
         static public clsUser FindByUsernameAndPassword(string UserName, string Password) 
         {
             int UserID = -1, PersonID = -1;
             bool IsActive = false;
 
-            if (clsUserData.GetUserByUsernameAndPassword(UserName, Password, ref UserID, ref PersonID, ref IsActive))
+            if (clsUserData.GetUserByUsernameAndPassword(UserName, ComputeHash(Password), ref UserID, ref PersonID, ref IsActive))
             {
                 return new clsUser(UserID, PersonID, UserName, Password, IsActive);
             }
@@ -122,14 +131,14 @@ namespace DVLD_BuisinessLayer
 
         public bool AddNewUser()
         {
-            this.UserID = clsUserData.AddNewUser(PersonID, UserName, Password, IsActive);
+            this.UserID = clsUserData.AddNewUser(PersonID, UserName, ComputeHash(Password), IsActive);
 
             return this.UserID != -1; 
         }
 
         public bool UpdateUser()
         {
-            return clsUserData.UpdateUser(UserID, PersonID, UserName, Password, IsActive);
+            return clsUserData.UpdateUser(UserID, PersonID, UserName, ComputeHash(Password), IsActive);
         }
 
         static public bool Delete(int UserID) 
